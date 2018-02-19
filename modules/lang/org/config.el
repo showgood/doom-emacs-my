@@ -251,8 +251,8 @@ between the two."
         :ni "C-S-k" #'org-metaup
         :ni "C-S-j" #'org-metadown
 
-        :n  [tab]     #'+org/toggle-fold
-        :i  [tab]     #'+org/indent-or-next-field-or-yas-expand
+        ;; :n  [tab]     #'+org/toggle-fold
+        ;; :i  [tab]     #'+org/indent-or-next-field-or-yas-expand
         :i  [backtab] #'+org/dedent-or-prev-field
 
         :ni [M-return]   (λ! (+org/insert-item 'below))
