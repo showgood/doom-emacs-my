@@ -74,15 +74,30 @@ melodramatic ex-vimmer disappointed with the text-editor status quo."
 (setq-default buffer-file-coding-system 'utf-8) ; with sugar on top
 
 (setq-default
- ad-redefinition-action 'accept   ; silence advised function warnings
- apropos-do-all t                 ; make `apropos' more useful
- compilation-always-kill t        ; kill compilation process before starting another
- compilation-ask-about-save nil   ; save all buffers on `compile'
+ ad-redefinition-action 'accept         ; silence advised function warnings
+ apropos-do-all t                       ; make `apropos' more useful
+ compilation-always-kill t    ; kill compilation process before starting another
+ compilation-ask-about-save nil         ; save all buffers on `compile'
  compilation-scroll-output t
  confirm-nonexistent-file-or-buffer t
- enable-recursive-minibuffers nil
+
+ ;; allow to select from kill-ring history while in minibuffer
+ enable-recursive-minibuffers t
+
+ ;; https://writequit.org/articles/working-with-logs-in-emacs.html
+ auto-revert-tail-mode t
+ ;; http://emacs.stackexchange.com/questions/15208/using-tramp-for-logs?rq=1
+ ;; auto-revert-tail-mode is great, but it has its limits. therefore
+ ;; i prefer to use an asynchronous shell command. open the remote
+ ;; directory in dired, position the cursor to the file you want to
+ ;; watch, and apply ! tail -f * &.
+
+ ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/password-handling.html
+ ;; store the password for a period of time, helpful in the tramp case
+ password-cache-expiry nil
+
  debug-on-error (and (not noninteractive) doom-debug-mode)
- idle-update-delay 2              ; update ui less often
+ idle-update-delay 2                    ; update ui less often
  load-prefer-newer (or noninteractive doom-debug-mode)
  ;; keep the point out of the minibuffer
  minibuffer-prompt-properties '(read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)

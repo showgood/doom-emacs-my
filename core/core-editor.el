@@ -214,8 +214,11 @@ extension, try to guess one."
 (def-package! avy
   :commands (avy-goto-char-2 avy-goto-line)
   :config
-  (setq avy-all-windows nil
-        avy-background t))
+  (setq
+   ;; set this so search is performed on all buffers,
+   ;; not just current buffer
+   avy-all-windows t
+   avy-background t))
 
 (def-package! command-log-mode
   :commands (command-log-mode global-command-log-mode)
