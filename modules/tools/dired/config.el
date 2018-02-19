@@ -16,7 +16,16 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
-(require 'dired+)
+ ;;http://irreal.org/blog/?p=3341
+ ;; display file details for dired
+ ;; this needs to happen before loading dired+
+(setq diredp-hide-details-initially-flag nil)
+
+(use-package dired+
+  :ensure t
+  :config
+  (diredp-make-find-file-keys-reuse-dirs)
+  )
 
 (setq ;; Always copy/delete recursively
  dired-recursive-copies  'always
@@ -38,11 +47,6 @@
 
  ;; try suggesting dired targets
  dired-dwim-target t
-
- ;;http://irreal.org/blog/?p=3341
- ;; display file details for dired
- ;; this needs to happen before loading dired+
- diredp-hide-details-initially-flag nil
 
  ;; files
  image-dired-dir (concat doom-cache-dir "image-dired/")
@@ -83,8 +87,6 @@
           :n "c" #'find-file
           :n "d" #'dired-do-delete
           :n "r" #'dired-do-rename)))
-
-(diredp-make-find-file-keys-reuse-dirs)
 
 (require 'dired-sidebar)
 (require 'all-the-icons-dired)
@@ -140,4 +142,10 @@
  "C-j" '(evil-window-down :which-key "down window")
  "C-k" '(evil-window-up :which-key "up window")
  "C-l" '(evil-window-right :which-key "right window")
+)
+
+;; https://stackoverflow.com/questions/4076360/error-in-dired-sorting-on-os-x
+(when IS-MAC
+    (require 'ls-lisp)
+    (setq ls-lisp-use-insert-directory-program nil)
 )
