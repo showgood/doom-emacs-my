@@ -506,5 +506,10 @@ DEFAULT is non-nil, set the default mode-line for all buffers."
             (buffer-local-value 'mode-line-format (current-buffer)))
           modeline)))
 
+(setq doom-font (font-spec :family "Fira Code" :size 16)
+      doom-variable-pitch-font (font-spec :family "Fira Code")
+      doom-unicode-font (font-spec :family "Fira Code")
+      doom-big-font (font-spec :family "Fira Code" :size 19))
+
 (provide 'core-ui)
 ;;; core-ui.el ends here
