@@ -8,23 +8,29 @@
   (package! org-plus-contrib
     :recipe (:fetcher github :repo "emacsmirror/org" :files (:defaults "contrib/lisp/*.el"))))
 
-(package! org-bullets :recipe (:fetcher github :repo "hlissner/org-bullets"))
+(package! org-bullets)
 (package! toc-org)
+(package! evil-org)
 
 (when (featurep! +attach)
-  (package! org-download))
+  (package! org-download)
+  (package! org-attach-screenshot)
+)
 
 (when (featurep! +babel)
   (package! ob-go)
-  (package! ob-mongo)
-  (package! ob-redis)
+  ;(package! ob-mongo)
+  ;(package! ob-redis)
   (package! ob-restclient)
-  (package! ob-rust)
+  ;(package! ob-rust)
   (package! ob-sql-mode)
-  (package! ob-translate))
+  (package! ob-ipython))
+  ;(package! ob-translate))
 
 (when (featurep! +export)
-  (package! ox-pandoc))
+  (package! ox-pandoc)
+  (package! ox-gfm)
+)
 
 (when (featurep! +present)
   (package! centered-window-mode)

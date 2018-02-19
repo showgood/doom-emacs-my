@@ -15,13 +15,19 @@
           (mathjax . t)
           (parse-raw . t))))
 
-;;
 (after! org
-  (add-transient-hook! #'org-export-dispatch (require 'ox-pandoc))
+  ;; (add-transient-hook! #'org-export-dispatch (require 'ox-pandoc))
+  (add-transient-hook! #'org-export-dispatch (require 'ox-gfm))
 
-  (setq org-export-directory (expand-file-name ".export" +org-dir)
+  (setq org-export-directory (expand-file-name "export" +org-dir)
         org-export-backends '(ascii html latex md)
+        org-html-table-default-attributes
+      '(:border "2" :rules "all" :frame "border")
         org-export-with-toc t
+        org-export-with-properties t
+        org-export-with-clocks t
+        org-html-validation-link nil
+        org-export-with-sub-superscripts '{}
         org-export-with-author t)
 
   ;; Always export to a central location

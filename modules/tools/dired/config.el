@@ -1,17 +1,61 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
+(use-package dired-quick-sort
+  :ensure t
+  :config
+  (dired-quick-sort-setup))
+
+(use-package peep-dired
+  :ensure t
+  :defer t ; don't access `dired-mode-map' until `peep-dired' is loaded
+  :bind (:map dired-mode-map
+              ("P" . peep-dired)))
+
+(use-package dired-narrow
+  :ensure t
+  :bind (:map dired-mode-map
+              ("/" . dired-narrow)))
+
+(require 'dired+)
+
 (setq ;; Always copy/delete recursively
-      dired-recursive-copies  'always
-      dired-recursive-deletes 'top
-      ;; Auto refresh dired, but be quiet about it
-      global-auto-revert-non-file-buffers t
-      auto-revert-verbose nil
-      ;; files
-      image-dired-dir (concat doom-cache-dir "image-dired/")
-      image-dired-db-file (concat image-dired-dir "image-dired/db.el")
-      image-dired-gallery-dir (concat image-dired-dir "gallery/")
-      image-dired-temp-image-file (concat image-dired-dir "temp-image")
-      image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image"))
+ dired-recursive-copies  'always
+ dired-recursive-deletes 'always
+
+ ;; Auto refresh dired, but be quiet about it
+ global-auto-revert-non-file-buffers t
+ auto-revert-verbose nil
+
+ ;; when using find-dired, also list the result with size etc
+ find-ls-option '("-print0 | xargs -0 ls -alh" . "")
+
+ ;; delete file permanently, do not move to trash bin
+ delete-by-moving-to-trash nil
+
+ ;; https://www.reddit.com/r/emacs/comments/1493oa/emacsmovies_season_2_dired/
+ ;; make df output in dired buffers easier to read
+ dired-free-space-args "-pm"
+
+ ;; try suggesting dired targets
+ dired-dwim-target t
+
+ ;;http://irreal.org/blog/?p=3341
+ ;; display file details for dired
+ ;; this needs to happen before loading dired+
+ diredp-hide-details-initially-flag nil
+
+ ;; files
+ image-dired-dir (concat doom-cache-dir "image-dired/")
+ image-dired-db-file (concat image-dired-dir "image-dired/db.el")
+ image-dired-gallery-dir (concat image-dired-dir "gallery/")
+ image-dired-temp-image-file (concat image-dired-dir "temp-image")
+ image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image"))
+
+;; understand .zip the way it does tarballs, letting the z key decompress it:
+;; handle zip compression
+(eval-after-load "dired-aux"
+  '(add-to-list 'dired-compress-file-suffixes
+                '("\\.zip\\'" ".zip" "unzip")))
 
 (defun +dired|sort-directories-first ()
   "List directories first in dired buffers."
@@ -40,6 +84,18 @@
           :n "d" #'dired-do-delete
           :n "r" #'dired-do-rename)))
 
+(diredp-make-find-file-keys-reuse-dirs)
+
+(require 'dired-sidebar)
+(require 'all-the-icons-dired)
+
+(all-the-icons-dired-mode)
+(setq dired-sidebar-subtree-line-prefix " .")
+
+(when IS-MAC
+    (if (display-graphic-p)
+        (setq dired-sidebar-theme 'icons)
+      (setq dired-sidebar-theme 'nerd)))
 
 ;;
 ;; Packages
@@ -59,3 +115,29 @@
   (add-hook 'dired-initial-position-hook #'dired-k)
   (add-hook 'dired-after-readin-hook #'dired-k-no-revert))
 
+(def-package! stripe-buffer
+  :commands stripe-buffer-mode
+  :init (add-hook 'dired-mode-hook #'stripe-buffer-mode))
+
+;; https://oremacs.com/2015/01/21/dired-shortcuts/
+(general-define-key
+:states '(normal visual insert emacs)
+:keymaps 'dired-mode-map
+:prefix ","
+:non-normal-prefix "M-SPC"
+"f" '(find-name-dired :which-key "find name dired")
+
+;; this will go to parent folder using existing dired buffer
+"a" '(lambda ()
+      (interactive)
+      (find-alternate-file "..") :which-key "go to parent folder")
+)
+
+(general-define-key
+:states '(normal visual insert emacs)
+:keymaps 'dired-mode-map
+ "C-h" '(evil-window-left :which-key "left window")
+ "C-j" '(evil-window-down :which-key "down window")
+ "C-k" '(evil-window-up :which-key "up window")
+ "C-l" '(evil-window-right :which-key "right window")
+)

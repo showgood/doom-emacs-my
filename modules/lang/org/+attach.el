@@ -18,7 +18,6 @@
 (defvar +org-attach-dir ".attach/"
   "Where to store attachments (relative to current org file).")
 
-
 (def-package! org-download
   :commands (org-download-dnd org-download-dnd-base64)
   :init
@@ -66,7 +65,17 @@
   (push (car (last (split-string +org-attach-dir "/" t)))
         projectile-globally-ignored-directories)
 
+  (require 'org-attach-screenshot)
+
   (after! recentf
     (push (format "%s.+$" (regexp-quote org-attach-directory))
           recentf-exclude)))
 
+;; ==== smooth workflow for capturing screenshot into org-mode {{{ ====
+(setq org-attach-screenshot-command-line
+      "screencapture -i %f")
+
+(setq org-attach-screenshot-dirfunction
+		(lambda ()
+		  (concat +org-dir "/files/")))
+;; ==== END smooth workflow for capturing screenshot into org-mode }}} ====

@@ -1,12 +1,12 @@
 ;;; lang/org/config.el -*- lexical-binding: t; -*-
 
-(defvar +org-dir (expand-file-name "~/work/org/")
+(defvar +org-dir (expand-file-name "~/org/")
   "The directory where org files are kept.")
 
 ;; Ensure ELPA org is prioritized above built-in org.
-(when-let* ((path (locate-library "org" nil doom--package-load-path)))
-  (setq load-path (delete path load-path))
-  (push (file-name-directory path) load-path))
+;; (when-let* ((path (locate-library "org" nil doom--package-load-path)))
+;;   (setq load-path (delete path load-path))
+;;   (push (file-name-directory path) load-path))
 
 ;; Sub-modules
 (if (featurep! +attach)  (load! +attach))
@@ -16,8 +16,6 @@
 (if (featurep! +present) (load! +present))
 ;; TODO (if (featurep! +publish) (load! +publish))
 
-
-;;
 ;; Plugins
 ;;
 
@@ -33,8 +31,6 @@
 (def-package! org-bullets
   :commands org-bullets-mode)
 
-
-;;
 ;; Bootstrap
 ;;
 
@@ -47,6 +43,7 @@
   (defvaralias 'org-directory '+org-dir)
 
   (org-crypt-use-before-save-magic)
+  (+org-init)
   (+org-init-ui)
   (+org-init-keybinds)
   (+org-hacks))
@@ -65,8 +62,6 @@
      +org|show-paren-mode-compatibility
      ))
 
-
-;;
 ;; Config hooks
 ;;
 
@@ -114,8 +109,66 @@ unfold to point on startup."
 `org-indent-mode', so we simply turn off show-paren-mode altogether."
   (set (make-local-variable 'show-paren-mode) nil))
 
+(defun +org-init ()
+  ;; always use relative path link, very important
+  ;; https://emacs.stackexchange.com/questions/16652/change-the-behavior-of-org-mode-auto-expand-relative-path-in-link
+  (setq org-link-file-path-type 'relative)
+  (setq org-directory "~/org")
+  (setq org-default-notes-file "~/org/Inbox.org")
+  (setq org-archive-location "~/org/logbook.org::* Archived")
+  (require 'evil-org)
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys)
 
-;;
+    ;; https://emacs.stackexchange.com/questions/5889/how-to-highlight-text-permanently-in-org-mode
+    ;; for some reason, this line has to be kept last otherwise
+    ;; will get symbol org-emphasis-alist is void error
+    (add-to-list 'org-emphasis-alist
+                '("*" (:emphasis t :foreground "red")
+                ))
+
+  ;; ==== org agenda settings {{{ ====
+  (setq org-agenda-files '("~/org/gtd/"
+                           "~/org/Inbox.org" ))
+
+  (setq org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
+                            (sequence "⚑ WAITING(w)" "|")
+                            (sequence "|" "✘ CANCELED(c)")))
+
+  (setq org-agenda-start-on-weekday 0)
+  ;; make agenda show on current window
+  (setq org-agenda-window-setup 'current-window)
+  ;; highlight current in agenda
+  (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+
+                                        ; Targets include this file and any file contributing to the agenda - up to 9
+                                        ; levels deep
+  (setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                   (org-agenda-files :maxlevel . 9))))
+  (setq org-refile-use-outline-path 'file)
+
+  (setq org-todo-keyword-faces
+	    (quote (("TODO"      :foreground "lightblue"    :weight bold)
+		        ("NEXT"      :foreground "red"          :weight bold)
+		        ("STARTED"   :foreground "red"          :weight bold)
+		        ("DONE"      :foreground "forest green" :weight bold)
+		        ("WAITING"   :foreground "orange"       :weight bold)
+		        ("TEAM"      :foreground "orange"       :weight bold)
+		        ("SOMEDAY"   :foreground "magenta"      :weight bold)
+		        ("CANCELLED" :foreground "forest green" :weight bold)
+		        ("QUOTE"     :foreground "red"          :weight bold)
+		        ("QUOTED"    :foreground "magenta"      :weight bold)
+		        ("APPROVED"  :foreground "forest green" :weight bold)
+		        ("EXPIRED"   :foreground "forest green" :weight bold)
+		        ("REJECTED"  :foreground "forest green" :weight bold)
+		        ("OPEN"      :foreground "blue"         :weight bold)
+		        ("CLOSED"    :foreground "forest green" :weight bold)
+		        ("PHONE"     :foreground "forest green" :weight bold))))
+;;;; ==== end org agenda settings }}} ====
+  )
+
 (defun +org-init-ui ()
   "Configures the UI for `org-mode'."
   (setq-default
@@ -127,7 +180,7 @@ unfold to point on startup."
    org-cycle-include-plain-lists t
    org-cycle-separator-lines 1
    org-entities-user '(("flat"  "\\flat" nil "" "" "266D" "♭") ("sharp" "\\sharp" nil "" "" "266F" "♯"))
-   ;; org-ellipsis " ... "
+   org-ellipsis "⤵"
    org-fontify-done-headline t
    org-fontify-quote-and-verse-blocks t
    org-fontify-whole-heading-line t
@@ -147,7 +200,7 @@ unfold to point on startup."
      (?c . ,(face-foreground 'success)))
    org-startup-folded t
    org-startup-indented t
-   org-startup-with-inline-images nil
+   org-startup-with-inline-images t
    org-tags-column 0
    org-todo-keywords
    '((sequence "[ ](t)" "[-](p)" "[?](m)" "|" "[X](d)")
@@ -263,3 +316,19 @@ between the two."
                :key #'file-truename
                :test #'equal))
     (add-to-list 'recentf-exclude #'+org-is-agenda-file)))
+
+(general-define-key
+:states '(normal)
+:keymaps 'org-mode-map
+:prefix ","
+"ji" '(counsel-org-goto :which-key "counsel-org-goto")
+"jI" '(counsel-org-goto-all :which-key "counsel-org-goto-all")
+"c" '(org-ctrl-c-ctrl-c :which-key "org-ctrl-c-ctrl-c")
+"o" '(org-attach-open-in-emacs :which-key "open attachment")
+"a" '(org-attach-attach :which-key "attach file")
+"l" '(org-store-link :which-key "store link")
+"p" '(org-insert-link :which-key "insert link")
+"e" '(org-export-dispatch :which-key "export")
+"ti" '(org-clock-in :which-key "clock in")
+"to" '(org-clock-out :which-key "clock out")
+)

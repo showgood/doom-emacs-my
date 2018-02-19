@@ -30,6 +30,8 @@
 (package! editorconfig)
 (package! expand-region)
 (package! help-fns+)
+(package! help-fns+ :recipe (:fetcher github :repo "emacsmirror/help-fns-plus"))
+
 (package! pcre2el)
 (package! smart-forward)
 (package! smartparens)
@@ -42,3 +44,4 @@
 ;; core-keybinds.el
 (package! which-key)
 (package! hydra)
+(package! general)
