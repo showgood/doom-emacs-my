@@ -10,10 +10,8 @@ is loaded.")
 (defvar-local +python-current-version nil
   "The currently active pyenv version.")
 
-
-;;
-;; Plugins
-;;
+(def-package! pip-requirements
+  :mode ("/requirements.txt$" . pip-requirements-mode))
 
 (def-package! python
   :commands python-mode
@@ -66,63 +64,31 @@ environment variables."
     (add-hook 'python-mode-hook #'+python|detect-pyenv-version))
 
   (define-key python-mode-map (kbd "DEL") nil) ; interferes with smartparens
-  (sp-with-modes 'python-mode
-    (sp-local-pair "'" nil :unless '(sp-point-before-word-p sp-point-after-word-p sp-point-before-same-p))))
+  (after! smartparens
+    (sp-with-modes 'python-mode
+    (sp-local-pair "'" nil :unless '(sp-point-before-word-p sp-point-after-word-p sp-point-before-same-p)))
+    )
+  )
 
+(require 'elpy)
+(elpy-enable)
 
-(def-package! anaconda-mode
-  :after python
-  :hook python-mode
-  :init
-  (setq anaconda-mode-installation-directory (concat doom-etc-dir "anaconda/")
-        anaconda-mode-eldoc-as-single-line t)
-  :config
-  (add-hook 'anaconda-mode-hook #'anaconda-eldoc-mode)
-  (set! :popup "*anaconda-mode*" :size 10 :noselect t :autoclose t :autokill t)
-  (map! :map anaconda-mode-map :m "gd" #'anaconda-mode-find-definitions)
-  (advice-add #'anaconda-mode-doc-buffer :after #'doom*anaconda-mode-doc-buffer))
+;; NOTE: do NOT set to jupyter, otherwise ob-ipython would break
+;; set to ipython
+;; (setq python-shell-interpreter "jupyter"
+;;       python-shell-interpreter-args "console --simple-prompt")
 
+(setq elpy-rpc-python-command (format "/Users/%s/anaconda2/bin/python" user-login-name))
 
-(def-package! company-anaconda
-  :when (featurep! :completion company)
-  :after anaconda-mode
-  :config
-  (set! :company-backend 'python-mode '(company-anaconda))
-  (set! :jump 'python-mode
-    :definition #'anaconda-mode-find-definitions
-    :references #'anaconda-mode-find-referenences
-    :documentation #'anaconda-mode-show-doc)
-  (map! :map python-mode-map
-        :localleader
-        :prefix "f"
-        :nv "d" #'anaconda-mode-find-definitions
-        :nv "h" #'anaconda-mode-show-doc
-        :nv "a" #'anaconda-mode-find-assignments
-        :nv "f" #'anaconda-mode-find-file
-        :nv "u" #'anaconda-mode-find-references))
-
-
-(def-package! pip-requirements
-  :mode ("/requirements.txt$" . pip-requirements-mode))
-
-
-(def-package! nose
-  :commands nose-mode
-  :preface
-  (defvar nose-mode-map (make-sparse-keymap))
-  :init
-  (associate! nose-mode :match "/test_.+\\.py$" :modes (python-mode))
-  :config
-  (set! :popup "*nosetests*" :size 0.4 :noselect t)
-  (set! :yas-minor-mode 'nose-mode)
-  (map! :map nose-mode-map
-        :localleader
-        :prefix "t"
-        :n "r" #'nosetests-again
-        :n "a" #'nosetests-all
-        :n "s" #'nosetests-one
-        :n "v" #'nosetests-module
-        :n "A" #'nosetests-pdb-all
-        :n "O" #'nosetests-pdb-one
-        :n "V" #'nosetests-pdb-module))
-
+(general-define-key
+ :prefix ","
+ :states '(normal visual)
+ :keymaps 'elpy-mode-map
+ "d" '(elpy-goto-definition :which-key "elpy-goto-definition")
+ "D" '(elpy-doc :which-key "elpy-doc")
+ "f" '(elpy-format-code :which-key "elpy-format-code")
+ "r" '(xref-find-references :which-key "xref-find-references")
+ "m" '(elpy-multiedit :which-key "elpy-multiedit")
+ "M" '(elpy-multiedit-stop :which-key "elpy-multiedit-stop")
+ "t" '(elpy-test :which-key "elpy-test")
+)
