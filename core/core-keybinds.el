@@ -296,5 +296,12 @@ Example
        (t (user-error "Invalid key %s" key))))
     `(progn ,@(nreverse forms))))
 
+(def-package! general
+  :demand t
+  :config
+  (general-evil-setup t)
+  (general-override-mode)
+)
+
 (provide 'core-keybinds)
 ;;; core-keybinds.el ends here
