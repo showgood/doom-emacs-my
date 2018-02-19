@@ -29,8 +29,9 @@
 (package! command-log-mode)
 (package! editorconfig)
 (package! expand-region)
-(package! help-fns+)
+
 (package! help-fns+ :recipe (:fetcher github :repo "emacsmirror/help-fns-plus"))
+(package! bookmark+ :recipe (:fetcher github :repo "emacsmirror/bookmark-plus"))
 
 (package! pcre2el)
 (package! smart-forward)
