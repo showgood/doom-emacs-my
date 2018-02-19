@@ -18,10 +18,7 @@ compilation database.")
   "A list of default compiler options for the C family. These are ignored if a
 compilation database is present in the project.")
 
-
-;;
 ;; Plugins
-;;
 
 (def-package! cc-mode
   :commands (c-mode c++-mode objc-mode java-mode)
@@ -51,16 +48,16 @@ compilation database is present in the project.")
 
   :config
   (set! :electric '(c-mode c++-mode objc-mode java-mode)
-        :chars '(?\n ?\}))
+    :chars '(?\n ?\}))
   (set! :company-backend
-        '(c-mode c++-mode objc-mode)
-        '(company-irony-c-headers company-irony))
+    '(c-mode c++-mode objc-mode)
+    '(company-irony-c-headers company-irony))
 
-  ;;; Style/formatting
+;;; Style/formatting
   ;; C/C++ style settings
   (c-toggle-electric-state -1)
   (c-toggle-auto-newline -1)
-  (c-set-offset 'substatement-open '0) ; don't indent brackets
+  (c-set-offset 'substatement-open '0)  ; don't indent brackets
   (c-set-offset 'inline-open       '+)
   (c-set-offset 'block-open        '+)
   (c-set-offset 'brace-list-open   '+)
@@ -71,7 +68,7 @@ compilation database is present in the project.")
   ;; Indent privacy keywords at same level as class properties
   ;; (c-set-offset 'inclass #'+cc-c-lineup-inclass)
 
-  ;;; Better fontification (also see `modern-cpp-font-lock')
+;;; Better fontification (also see `modern-cpp-font-lock')
   (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode)
   (add-hook! (c-mode c++-mode) #'highlight-numbers-mode)
   (add-hook! (c-mode c++-mode) #'+cc|fontify-constants)
@@ -79,7 +76,7 @@ compilation database is present in the project.")
   ;; Improve indentation of inline lambdas in C++11
   (advice-add #'c-lineup-arglist :around #'+cc*align-lambda-arglist)
 
-  ;;; Keybindings
+;;; Keybindings
   ;; Completely disable electric keys because it interferes with smartparens and
   ;; custom bindings. We'll do this ourselves.
   (setq c-tab-always-indent nil
@@ -94,17 +91,18 @@ compilation database is present in the project.")
         :i ">" #'+cc/autoclose->-maybe)
 
   ;; ...and leave it to smartparens
-  (sp-with-modes '(c-mode c++-mode objc-mode java-mode)
+  (after! smartparens
+    (sp-with-modes '(c-mode c++-mode objc-mode java-mode)
     (sp-local-pair "<" ">" :when '(+cc-sp-point-is-template-p +cc-sp-point-after-include-p))
     (sp-local-pair "/*" "*/" :post-handlers '(("||\n[i]" "RET") ("| " "SPC")))
     ;; Doxygen blocks
     (sp-local-pair "/**" "*/" :post-handlers '(("||\n[i]" "RET") ("||\n[i]" "SPC")))
-    (sp-local-pair "/*!" "*/" :post-handlers '(("||\n[i]" "RET") ("[d-1]< | " "SPC")))))
-
+    (sp-local-pair "/*!" "*/" :post-handlers '(("||\n[i]" "RET") ("[d-1]< | " "SPC"))))
+    )
+  )
 
 (def-package! modern-cpp-font-lock
   :hook (c++-mode . modern-c++-font-lock-mode))
-
 
 (def-package! irony
   :after cc-mode
@@ -199,7 +197,8 @@ compilation database is present in the project.")
   :config
   (setq rtags-autostart-diagnostics t
         rtags-use-bookmarks nil
-        rtags-completions-enabled nil
+        rtags-completions-enabled t
+        rtags-socket-file (expand-file-name "~/.rdm")
         ;; If not using ivy or helm to view results, use a pop-up window rather
         ;; than displaying it in the current window...
         rtags-results-buffer-other-window t
@@ -235,7 +234,14 @@ compilation database is present in the project.")
         (delete-file elc-file))))
   :config (setq rtags-display-result-backend 'ivy))
 
-(def-package! helm-rtags
-  :when (featurep! :completion helm)
-  :after rtags
-  :config (setq rtags-display-result-backend 'helm))
+(evil-add-command-properties #'rtags-find-symbol-at-point :jump t)
+(evil-add-command-properties #'rtags-find-references-at-point :jump t)
+
+(use-package clang-format
+  :ensure t
+  :config
+  (setq clang-format-style-option "llvm")
+)
+
+;; (global-set-key (kbd "c-c i") 'clang-format-region)
+;; (global-set-key (kbd "c-c u") 'clang-format-buffer)
