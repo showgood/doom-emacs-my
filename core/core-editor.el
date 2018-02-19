@@ -10,12 +10,14 @@ modes are active and the buffer is read-only.")
     doc-view-mode doc-view-mode-maybe ebrowse-tree-mode pdf-view-mode)
   "Major modes that `doom|check-large-file' will ignore.")
 
+(require 'bookmark+)
+
 (setq-default
  vc-follow-symlinks t
  ;; Save clipboard contents into kill-ring before replacing them
  save-interprogram-paste-before-kill t
  ;; Bookmarks
- bookmark-default-file (concat doom-etc-dir "bookmarks")
+ bookmark-default-file (expand-file-name "~/bookmarks")
  bookmark-save-flag t
  ;; Formatting
  delete-trailing-lines nil
