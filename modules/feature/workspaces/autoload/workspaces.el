@@ -508,3 +508,20 @@ Ensures the scratch (or dashboard) buffers are CDed into the project's root."
       (setq default-directory (car args))))
   (apply orig-fn args))
 
+
+;; +workspace/new does NOT take the name from user input,
+;; this solve that issue
+;;;###autoload
+(defun +workspace/me/new (name)
+    (interactive "sEnter workspace name: ")
+    (+workspace/new name)
+)
+
+;;;###autoload
+(defun doom/jump-to-last-workspace ()
+  "Open the previously selected workspace, if it exists."
+  (interactive)
+  (unless (eq 'non-existent
+              (gethash doom-last-selected-workspace
+                       *persp-hash* 'non-existent))
+    (persp-switch doom-last-selected-workspace)))
