@@ -85,7 +85,8 @@ melodramatic ex-vimmer disappointed with the text-editor status quo."
  enable-recursive-minibuffers t
 
  ;; https://writequit.org/articles/working-with-logs-in-emacs.html
- auto-revert-tail-mode t
+ ;; disable it since it seems caused some undesired side effect
+ auto-revert-tail-mode nil
  ;; http://emacs.stackexchange.com/questions/15208/using-tramp-for-logs?rq=1
  ;; auto-revert-tail-mode is great, but it has its limits. therefore
  ;; i prefer to use an asynchronous shell command. open the remote
