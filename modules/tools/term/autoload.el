@@ -25,3 +25,10 @@ current project's root."
   "Open a terminal popup window in the root of the current project."
   (interactive)
   (+term/open-popup t))
+
+;;;###autoload
+(defun me/paste-in-term-mode()
+  (interactive)
+  (term-paste)
+  (evil-emacs-state)
+)
