@@ -92,3 +92,50 @@
 (def-package! git-link
   :commands (git-link git-link-commit git-link-homepage))
 
+;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
+(eval-after-load 'git-timemachine
+  '(progn
+     (evil-make-overriding-map git-timemachine-mode-map 'normal)
+     ;; force update evil keymaps after git-timemachine-mode loaded
+     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
+
+(defhydra hydra-git
+  (:body-pre (git-gutter-mode 1)
+   ;; :post (progn (kill-diff-buffers)
+   ;;              (message "killed diff buffers"))
+   :hint nil)
+  "
+^NAV^               ^HUNK^            ^FILES^        ^ACTIONS^
+  _n_: next hunk    _s_tage hunk      _S_tage        _c_ommit
+  _p_: prev hunk    _r_evert hunk     _R_evert       _b_lame
+  _g_: first hunk   _P_opup hunk      _d_iff         _C_heckout
+  _G_: last hunk    _R_evision start  _t_imemachine
+"
+  ("n" git-gutter:next-hunk)
+  ("p" git-gutter:previous-hunk)
+  ("g" (progn (goto-char (point-min)) (git-gutter:next-hunk 1)))
+  ("G" (progn (goto-char (point-min)) (git-gutter:previous-hunk 1)))
+  ("j" my-goto-git-gutter)
+  ("s" git-gutter:stage-hunk)
+  ("r" git-gutter:revert-hunk)
+  ("P" git-gutter:popup-hunk)
+  ("R" git-gutter:set-start-revision)
+  ("S" magit-stage-file)
+  ("R" magit-revert)
+  ("d" magit-diff-unstaged :color blue)
+  ("t" git-timemachine :color blue)
+  ("c" magit-commit :color blue)
+  ("b" magit-blame)
+  ("C" magit-checkout)
+  ("v" magit-status "status" :color blue)
+  ("q" nil "quit" :color blue)
+  ("Q" (progn
+         (git-gutter-mode -1)
+         ;; git-gutter-fringe doesn't seem to
+         ;; clear the markup right away
+         (sit-for 0.1)
+         (git-gutter:clear))
+   "quit git-gutter"
+   :color blue))
+
+(require 'evil-magit)
