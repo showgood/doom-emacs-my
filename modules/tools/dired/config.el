@@ -1,18 +1,15 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
 (use-package dired-quick-sort
-  :ensure t
   :config
   (dired-quick-sort-setup))
 
 (use-package peep-dired
-  :ensure t
   :defer t ; don't access `dired-mode-map' until `peep-dired' is loaded
   :bind (:map dired-mode-map
               ("P" . peep-dired)))
 
 (use-package dired-narrow
-  :ensure t
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
@@ -22,7 +19,6 @@
 (setq diredp-hide-details-initially-flag nil)
 
 (use-package dired+
-  :ensure t
   :config
   (diredp-make-find-file-keys-reuse-dirs)
   )
@@ -88,11 +84,14 @@
           :n "d" #'dired-do-delete
           :n "r" #'dired-do-rename)))
 
-(require 'dired-sidebar)
-(require 'all-the-icons-dired)
+(use-package dired-sidebar
+  :commands (dired-sidebar-toggle-sidebar)
+  :config
+  (use-package all-the-icons-dired
+    ;; M-x all-the-icons-install-fonts
+    :commands (all-the-icons-dired-mode)))
 
-(all-the-icons-dired-mode)
-(setq dired-sidebar-subtree-line-prefix " .")
+;; (setq dired-sidebar-subtree-line-prefix " .")
 
 (when IS-MAC
     (if (display-graphic-p)

@@ -51,3 +51,11 @@
 (def-project-mode! +web-phaser-mode
   :modes (+javascript-npm-mode)
   :when (+javascript-npm-dep-p '(or phaser phaser-ce)))
+
+(general-define-key
+ :states '(normal)
+ :keymaps 'web-mode-map
+ "<tab>" '(web-mode-fold-or-unfold :which-key "fold")
+ "<backtab>" '(web-mode-element-children-fold-or-unfold :which-key "fold child")
+ ",e" '(web-mode-element-content-select :which-key "mark element content")
+)

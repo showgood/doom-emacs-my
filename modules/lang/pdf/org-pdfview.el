@@ -45,6 +45,7 @@
   (org-add-link-type "pdfview" 'org-pdfview-open)
   (add-hook 'org-store-link-functions 'org-pdfview-store-link))
 
+;;;###autoload
 (defun org-pdfview-open (link)
   "Open LINK in pdf-view-mode."
   (cond ((string-match "\\(.*\\)::\\([0-9]*\\)\\+\\+\\([[0-9]\\.*[0-9]*\\)"  link)

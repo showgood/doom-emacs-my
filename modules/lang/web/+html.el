@@ -8,6 +8,9 @@
   :mode "\\.as[cp]x$"
   :mode "\\.mustache$"
   :mode "\\.tsx$"
+  ;; use web-mode instead of nxml for xml
+  :mode "\\.xml$"
+  :mode "\\.xsd$"
   :mode "wp-content/themes/.+/.+\\.php$"
   :config
   (add-hook 'web-mode-hook #'turn-off-smartparens-mode)

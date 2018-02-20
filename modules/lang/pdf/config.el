@@ -1,26 +1,37 @@
 ;;; tools/pdf/config.el -*- lexical-binding: t; -*-
 
-(load! org-pdfview)
-(load! pdf-tools-org)
-
 (use-package pdf-tools
   :magic ("%PDF" . pdf-view-mode)
   :init (load "pdf-tools-autoloads" nil t)
-  :config (pdf-tools-install)
+  :config
+  (pdf-tools-install)
+  ;; automatically annotate highlights
+  (setq pdf-annot-activate-created-annotations t)
+  ;; turn off cua so copy works
+  (add-hook 'pdf-view-mode-hook (lambda () (cua-mode 0)))
+  ;; more fine-grained zooming
+  (setq pdf-view-resize-factor 1.1)
+  (setq-default pdf-view-display-size 'fit-page))
+
+(use-package pdf-tools-org
+  :load-path "~/.emacs.d/modules/lang/pdf"
+  :commands (pdf-tools-org-export-to-org pdf-tools-org-import-from-org)
+  :after (org)
 )
 
-(require 'interleave)
+(use-package org-pdfview
+  :load-path "~/.emacs.d/modules/lang/pdf"
+  :commands (org-pdfview-open)
+  :after (org)
+  :config
+  (add-to-list 'org-file-apps
+     '("\\.pdf\\'" . (lambda (file link)
+      (org-pdfview-open link)))))
 
-(eval-after-load 'org '(require 'org-pdfview))
-(eval-after-load 'org '(require 'pdf-tools-org))
-
-;; automatically annotate highlights
-(setq pdf-annot-activate-created-annotations t)
-;; turn off cua so copy works
-(add-hook 'pdf-view-mode-hook (lambda () (cua-mode 0)))
-;; more fine-grained zooming
-(setq pdf-view-resize-factor 1.1)
-(setq-default pdf-view-display-size 'fit-page)
+(use-package interleave
+  :commands (interleave)
+  :after (org)
+)
 
 (general-define-key
  :keymaps 'pdf-view-mode-map

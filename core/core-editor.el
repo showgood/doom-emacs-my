@@ -10,8 +10,6 @@ modes are active and the buffer is read-only.")
     doc-view-mode doc-view-mode-maybe ebrowse-tree-mode pdf-view-mode)
   "Major modes that `doom|check-large-file' will ignore.")
 
-(require 'bookmark+)
-
 (setq-default
  vc-follow-symlinks t
  ;; Save clipboard contents into kill-ring before replacing them
@@ -243,6 +241,10 @@ extension, try to guess one."
 (def-package! wgrep
   :commands (wgrep-setup wgrep-change-to-wgrep-mode)
   :config (setq wgrep-auto-save-buffer t))
+
+(use-package bookmark+
+  :commands (bookmark-jump bookmark-set)
+)
 
 (provide 'core-editor)
 ;;; core-editor.el ends here
