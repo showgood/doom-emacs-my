@@ -122,3 +122,7 @@
 (def-project-mode! +emacs-lisp-ert-mode
   :modes (emacs-lisp-mode)
   :match "/test[/-].+\\.el$")
+
+(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+(add-hook 'lisp-mode-hook (lambda () (lispy-mode 1)))
+(add-hook 'lispy-mode-hook #'lispyville-mode)
