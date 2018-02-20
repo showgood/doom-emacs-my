@@ -18,3 +18,7 @@
 (package! evil-surround)
 (package! evil-vimish-fold)
 (package! evil-visualstar)
+
+(package! evil-ediff)
+(package! evil-replace-with-register)
+(package! evil-visual-mark-mode)

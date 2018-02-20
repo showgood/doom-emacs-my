@@ -231,7 +231,7 @@ across windows."
   :init
   (setq evil-escape-excluded-states '(normal visual multiedit emacs motion)
         evil-escape-excluded-major-modes '(neotree-mode)
-        evil-escape-key-sequence "jk"
+        evil-escape-key-sequence "jf"
         evil-escape-delay 0.25)
   (add-hook 'doom-post-init-hook #'evil-escape-mode)
   :config
@@ -442,3 +442,7 @@ the new algorithm is confusing, like in python or ruby."
   (add-hook 'rectangular-region-mode-hook '+evil|mc-evil-compat-rect-switch-state)
 
   (defvar mc--default-cmds-to-run-once nil))
+
+(use-package evil-numbers
+  :commands (evil-numbers/inc-at-pt evil-numbers/dec-at-pt)
+)
