@@ -66,3 +66,24 @@
     ("r" smerge-resolve)
     ("R" smerge-kill-current)
     ("q" nil :color blue)))
+
+(add-hook  'vc-dir-mode-hook
+             (lambda ()
+               ;; hide up-to-date and unregistered files.
+               (define-key vc-dir-mode-map
+                 (kbd "x") #'leuven-vc-dir-hide-up-to-date-and-unregistered)
+               (define-key vc-dir-mode-map
+                 (kbd "e") #'vc-ediff)
+               (define-key vc-dir-mode-map
+                 (kbd "#") #'vc-ediff-ignore-whitespace)
+                                         ; ediff-windows-wordwise?
+               ))
+
+(add-hook  'vc-svn-log-view-mode-hook
+           (lambda ()
+             (define-key vc-svn-log-view-mode-map
+               (kbd "e") #'vc-ediff)
+             (define-key vc-svn-log-view-mode-map
+               (kbd "#") #'vc-ediff-ignore-whitespace)
+                                        ; ediff-windows-wordwise?
+             ))
