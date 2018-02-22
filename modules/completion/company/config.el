@@ -26,12 +26,17 @@ MODES should be one major-mode symbol or a list of them."
   :commands (company-mode global-company-mode company-complete
              company-complete-common company-manual-begin company-grab-line)
   :config
-  (setq company-idle-delay nil
+  (setq company-idle-delay 0.1
         company-tooltip-limit 10
+        company-minimum-prefix-length 3
+        company-show-numbers t
         company-dabbrev-downcase nil
         company-dabbrev-ignore-case nil
         company-dabbrev-code-other-buffers t
         company-tooltip-align-annotations t
+        ;; need this to complete something like berlin-crazy-cold-jupiter
+        ;; or fifteen_mountain_massachusetts_nineteen
+        company-dabbrev-char-regexp "\\(\\sw\\|\\s_\\|_\\|-\\)"
         company-require-match 'never
         company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
         company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
@@ -69,6 +74,31 @@ MODES should be one major-mode symbol or a list of them."
       (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))))
   (add-hook 'doom-project-hook #'+company|enable-project-dicts))
 
+(defun ora-company-number ()
+  "Forward to `company-complete-number'.
+Unless the number is potentially part of the candidate.
+In that case, insert the number."
+  (interactive)
+  (let* ((k (this-command-keys))
+         (re (concat "^" company-prefix k)))
+    (if (cl-find-if (lambda (s) (string-match re s))
+                    company-candidates)
+        (self-insert-command 1)
+      (company-complete-number
+       (if (equal k "0")
+           10
+         (string-to-number k))))))
+
+(after! company
+(let ((map company-active-map))
+  (mapc (lambda (x) (define-key map (format "%d" x) 'ora-company-number))
+        (number-sequence 0 9))
+  (define-key map " " (lambda ()
+                        (interactive)
+                        (company-abort)
+                        (self-insert-command 1)))
+  (define-key map (kbd "<return>") nil))
+)
 
 ;;
 ;; Autoloads
@@ -83,4 +113,3 @@ MODES should be one major-mode symbol or a list of them."
 (autoload 'company-files "company-files")
 (autoload 'company-gtags "company-gtags")
 (autoload 'company-ispell "company-ispell")
-
