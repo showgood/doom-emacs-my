@@ -167,3 +167,10 @@ module to be loaded."
   (when (+eshell--outside-prompt-p)
     (goto-char eshell-last-output-end))
   (call-interactively #'evil-change-line))
+
+;;;###autoload
+(defun eshell/clear ()
+  "clear the eshell buffer."
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))

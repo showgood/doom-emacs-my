@@ -69,10 +69,15 @@ redefines its keys every time `eshell-mode' is enabled."
 
   ;; Aliases
   (setq eshell-command-aliases-list
-        '(("q"   "exit")
-          ("l"   "ls -1")
-          ("ll"  "ls -l")
-          ("la"  "ls -la")
-          ("g"   "hub")
-          ("gs"  "hub status --short ."))))
-
+        '(("q"      "exit")
+          ("l"      "ls -1")
+          ("ll"     "ls -l")
+          ("la"     "ls -la")
+          ("ff"     "find-file $1")
+          ("d"      "'dired $1'")
+          ("gsu"    "git status -uno")
+          ("gcmsg"  "git commit -m $1")
+          ("glum"   "git pull upstream master")
+          ("ga"     "git add $1")
+          ("gp"     "git push")
+          ("gst"    "git status $1"))))
