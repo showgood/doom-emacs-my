@@ -6,6 +6,8 @@
 (package! macrostep)
 (package! overseer)
 (package! slime)
+(package! lispy)
+(package! lispyville)
 
 (when (featurep! :feature syntax-checker)
   (package! flycheck-cask))
