@@ -30,6 +30,9 @@ immediately runs it on the current candidate (ending the ivy session)."
   (setq ivy-height 12
         ivy-do-completion-in-region nil
         ivy-wrap t
+        ivy-count-format "(%d/%d) "
+        ;; http://oremacs.com/2017/11/30/ivy-0.10.0/
+        ivy-use-selectable-prompt t
         ivy-fixed-height-minibuffer t
         projectile-completion-system 'ivy
         smex-completion-method 'ivy
@@ -81,6 +84,10 @@ immediately runs it on the current candidate (ending the ivy session)."
   :config
   (require 'counsel-projectile)
   (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)")
+
+  ;; http://oremacs.com/2017/04/09/ivy-0.9.0/
+  (setq counsel-yank-pop-separator "\n-------------------------------------------------------\n")
+  (setq counsel-bookmark-avoid-dired nil)
 
   ;; Configure `counsel-rg', `counsel-ag' & `counsel-pt'
   (set! :popup 'ivy-occur-grep-mode :size (+ 2 ivy-height) :regexp t :autokill t)

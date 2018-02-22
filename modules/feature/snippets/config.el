@@ -10,6 +10,11 @@
   :preface
   (defvar yas-minor-mode-map (make-sparse-keymap))
 
+  ;; this doesn't work, needs to put in (after! yasnippet)
+  ;; :general
+  ;; (general-iemap :keymaps 'yas-minor-mode-map "<tab>" yas-maybe-expand)
+  ;; (general-vmap :keymaps 'yas-minor-mode-map "<tab>" '+snippets/expand-on-region)
+
   :init
   ;; Ensure `yas-reload-all' is called as late as possible. Other modules could
   ;; have additional configuration for yasnippet. For example, file-templates.
@@ -42,6 +47,14 @@
 
 (def-package! auto-yasnippet
   :commands (aya-create aya-expand aya-open-line aya-persist-snippet)
+  :general
+  (general-nvmap "C-<tab>" 'aya-create)
+  (general-iemap "C-<tab>" 'aya-expand)
+
   :config
   (setq aya-persist-snippets-dir (concat doom-local-dir "auto-snippets/")))
 
+(after! yasnippet
+  (general-iemap :keymaps 'yas-minor-mode-map "<tab>" yas-maybe-expand)
+  (general-vmap :keymaps 'yas-minor-mode-map "<tab>" '+snippets/expand-on-region)
+)

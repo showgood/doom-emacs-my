@@ -335,7 +335,7 @@ instead)."
 ;; Line numbers
 ;;
 
-(defvar doom-line-numbers-style t
+(defvar doom-line-numbers-style nil
   "The style to use for the line number display.
 
 Accepts the same arguments as `display-line-numbers', which are:

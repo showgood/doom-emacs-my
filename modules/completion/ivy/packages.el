@@ -7,3 +7,5 @@
 (package! smex)
 (package! swiper)
 (package! ivy-hydra)
+(package! counsel-etags)
+(package! counsel-dash)
