@@ -99,7 +99,8 @@ immediately runs it on the current candidate (ending the ivy session)."
   ;; 1. Remove character limit from `counsel-ag-function'
   ;; 2. This may need to be updated frequently, to meet changes upstream
   ;; 3. counsel-ag, counsel-rg and counsel-pt all use this function
-  (advice-add #'counsel-ag-function :override #'+ivy*counsel-ag-function))
+  ;; (advice-add #'counsel-ag-function :override #'+ivy*counsel-ag-function)
+)
 
 
 ;; Used by `counsel-M-x'
