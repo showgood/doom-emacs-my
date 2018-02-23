@@ -131,7 +131,7 @@ melodramatic ex-vimmer disappointed with the text-editor status quo."
   (setq inhibit-startup-message t
         inhibit-startup-echo-area-message user-login-name
         inhibit-default-init t
-        initial-major-mode 'fundamental-mode
+        initial-major-mode 'org-mode
         initial-scratch-message nil
         mode-line-format nil))
 
