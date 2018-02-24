@@ -123,6 +123,17 @@
   :modes (emacs-lisp-mode)
   :match "/test[/-].+\\.el$")
 
+(use-package lispy
+  :init
 (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 (add-hook 'lisp-mode-hook (lambda () (lispy-mode 1)))
-(add-hook 'lispy-mode-hook #'lispyville-mode)
+)
+
+(use-package lispyville
+  :init
+    (add-hook 'lispy-mode-hook #'lispyville-mode)
+)
+
+;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+;; (add-hook 'lisp-mode-hook (lambda () (lispy-mode 1)))
+;; (add-hook 'lispy-mode-hook #'lispyville-mode)
