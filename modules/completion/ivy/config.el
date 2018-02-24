@@ -158,3 +158,23 @@ immediately runs it on the current candidate (ending the ivy session)."
     ("t" (setq truncate-lines (not truncate-lines)))
     ("C" ivy-toggle-case-fold)
     ("o" ivy-occur :exit t)))
+
+(after! ivy
+  (general-define-key
+   :keymaps 'ivy-occur-grep-mode-map
+   "d" #'ivy-occur-delete-candidate
+   "g" #'beginning-of-buffer
+   "r" #'ivy-occur-revert-buffer
+   "q" #'+workspace/close-window-or-workspace
+   "x" #'doom/popup-close-maybe
+   "G" #'end-of-buffer
+   "j" '(lambda () (interactive) (progn
+                 (ivy-occur-next-line)
+                 (ivy-occur-press)
+                ))
+   "k" '(lambda () (interactive) (progn
+                 (ivy-occur-previous-line 1)
+                 (ivy-occur-press)
+                ))
+   )
+)
