@@ -9,3 +9,4 @@
 (package! dired-quick-sort)
 (package! peep-dired)
 (package! dired-hacks-utils)
+(package! ranger)
