@@ -116,9 +116,10 @@
   (add-hook 'dired-initial-position-hook #'dired-k)
   (add-hook 'dired-after-readin-hook #'dired-k-no-revert))
 
-(def-package! stripe-buffer
-  :commands stripe-buffer-mode
-  :init (add-hook 'dired-mode-hook #'stripe-buffer-mode))
+;; it looks really ugly when the theme is light one like doom-one-light
+;; (def-package! stripe-buffer
+;;   :commands stripe-buffer-mode
+;;   :init (add-hook 'dired-mode-hook #'stripe-buffer-mode))
 
 ;; https://oremacs.com/2015/01/21/dired-shortcuts/
 (general-define-key
@@ -135,12 +136,14 @@
 )
 
 (general-define-key
-:states '(normal visual insert emacs)
-:keymaps 'dired-mode-map
+ :states '(normal visual insert emacs)
+ :keymaps 'dired-mode-map
  "C-h" '(evil-window-left :which-key "left window")
  "C-j" '(evil-window-down :which-key "down window")
  "C-k" '(evil-window-up :which-key "up window")
  "C-l" '(evil-window-right :which-key "right window")
+ "Y" '(ora-dired-rsync :which-key "dired rsync")
+ ;; "s" '(dired-get-size :which-key "dired get size")
 )
 
 ;; https://stackoverflow.com/questions/4076360/error-in-dired-sorting-on-os-x
