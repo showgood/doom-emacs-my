@@ -1,6 +1,14 @@
 ;; -*- origami-fold-style: triple-braces -*-
 
-(setq debug-on-error t)
+;; do NOT turn on it
+;; if a search in evil (using /) failed to find match,
+;; with debug-on-error set to t will trigger debugger
+;; and after that evil will behave really weird. for eg:
+;; d (instead of dd) will delete the whole line
+;; also using v to select a region and yank will alway copy the whole
+;; line, not just the selected region. basically evil will be unusable
+;; once it gets into that state.
+;; (setq debug-on-error t)
 
 (load! +alias)  ; emacs alias
 (load! +commands)  ; my custom ex commands
