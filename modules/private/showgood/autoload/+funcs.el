@@ -362,3 +362,42 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
         (message "saved to kill-ring: %s" result)
         (message "no match found!"))
 ))
+
+;; inspired by:
+;; https://emacs.stackexchange.com/questions/3499/how-to-wrap-given-text-around-region
+;; but the function from that link has issue if there is newline in the text-begin or text-end
+;; and region is marked from bottom to up
+;;;###autoload
+(defun me/surround-region-or-word (text-begin text-end)
+  "Surround current word or region with given text."
+  (interactive "sStart text: \nsEnd text: ")
+  (if (use-region-p)
+        (save-restriction
+          (narrow-to-region (region-beginning) (region-end))
+          (progn
+            (goto-char (point-min))
+            (insert text-begin)
+            (goto-char (point-max))
+            (insert text-end)
+            ))
+        (progn
+        (setq bds (bounds-of-thing-at-point 'symbol))
+        (goto-char (cdr bds))
+        (insert text-end)
+        (goto-char (car bds))
+        (insert text-begin))
+    )
+)
+
+;;;###autoload
+(defun me/surround-org-src-block-from-clipboard (lang)
+  "Surround clipboard content with org src block by prompting the language."
+  (interactive "slanguage: ")
+  (let* ((buf (current-buffer)))
+    (with-temp-buffer
+      (switch-to-buffer (current-buffer) nil t)
+      (insert (get-kill-ring))
+      (mark-whole-buffer)
+      (me/surround-region-or-word (concat "\n#+BEGIN_SRC " lang "\n") "#+END_SRC\n")
+      (append-to-buffer buf (point-min) (point-max))
+      )))
