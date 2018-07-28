@@ -962,7 +962,7 @@
   "bb" '(persp-switch-to-buffer :which-key "Switch workspace buffer")
   "bB" '(switch-to-buffer :which-key "Switch to buffer")
   "br" '(rename-buffer :which-key "rename buffer")
-  "bk" '(kill-this-buffer :which-key "kill buffer")
+  "bk" '(doom/kill-this-buffer :which-key "kill buffer")
   "bs" '(open-scratch :which-key "open scratch")
 
   "e" '(:ignore t :which-key "Errors")
@@ -982,6 +982,7 @@
 
   "g" '(:ignore t :which-key "Git")
   "gs" '(magit-status :which-key "Git status")
+  "gS" '(magit-stage-file :which-key "stage this file")
   "gb" '(magit-blame :which-key "Git blame")
   "gt" '(my-git-timemachine :which-key "Git time machine")
   "gg" '(hydra-git/body :which-key "Git gutter")
@@ -1061,6 +1062,8 @@
   "ww" '(ace-window :which-key "ace window")
   "w TAB" '(aw-flip-window :which-key "select previous window")
   "wh" '(hydra-window/body :which-key "Window Hydra")
+  "ws" '(ace-swap-window :which-key "swap window")
+  "w=" '(balance-windows :which-key "balance windows")
 
    "z" '(:ignore t :which-key "folding")
    "zt" '(origami-toggle-all-nodes :which-key "origami-toggle-all-nodes")
@@ -1100,7 +1103,7 @@
  "C-s" '(counsel-grep-or-swiper :which-key "swiper")
  "M-y" '(counsel-yank-pop :which-key "counsel yank pop")
 
- "C-h" '(evil-window-left :which-key "left window")
+ ;; "C-h" '(evil-window-left :which-key "left window")
  "C-j" '(evil-window-down :which-key "down window")
  "C-k" '(evil-window-up :which-key "up window")
  "C-l" '(evil-window-right :which-key "right window")
@@ -1222,11 +1225,35 @@
  "xp" '(jsons-print-path :which-key "xpath")
 )
 
+(general-define-key
+ :states '(insert normal)
+ :keymaps 'wgrep-mode-map
+ ":" '(evil-ex :which-key "xpath")
+ "M-x" '(counsel-M-x :which-key "xpath")
+ "C-;" #'evil-normal-state
+)
+
 ;; NOTE: need to use 'override to make M-y works in evil-ex-map
 (general-define-key
  :keymaps 'override
  "M-y" '(counsel-yank-pop :which-key "counsel-yank-pop")
 )
+
+;; (general-define-key
+;;  :states '(normal ivy-occur-grep-mode-map)
+;;  :keymaps '(occur-mode-map )
+;;  "r" '(occur-rename-buffer :which-key "rename buffer")
+;;  "c" '(clone-buffer :which-key "clone buffer")
+;;  "C-x C-q" '(occur-edit-mode :which-key "edit mode")
+;;  "M-x" '(counsel-M-x :which-key "M-x")
+;;  )
+
+;; (general-define-key
+;;  :states '(normal)
+;;  :keymaps 'occur-edit-mode-map
+;;  "C-x C-q" '(occur-cease-edit :which-key "quit edit")
+;;  )
+
 ;; (define-key ivy-minibuffer-map (kbd "M-y") 'counsel-yank-pop)
 ;; (define-key evil-ex-map "\M-y" #'counsel-yank-pop)
 
@@ -1273,11 +1300,11 @@
 ;;  :textobj "J" #'evil-indent-plus-i-indent-up-down #'evil-indent-plus-a-indent-up-down
 
 (general-define-key
-:states '(normal)
-:keymaps 'slime-mode-indirect-map
-:prefix ","
-"cc" '(slime-compile-defun :which-key "slime-compile-defun")
-)
+ :states '(normal)
+ :keymaps 'slime-mode-indirect-map
+ :prefix ","
+ "cc" '(slime-compile-defun :which-key "slime-compile-defun")
+ )
 
 ;; keyboard shortcuts
 ;; (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
