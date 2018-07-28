@@ -4,7 +4,7 @@
 (def-package! doom-themes
   :config
   (unless doom-theme
-    (setq doom-theme 'doom-one-light)
+    (setq doom-theme 'doom-one)
     (after! solaire-mode
       (add-hook 'doom-init-ui-hook #'solaire-mode-swap-bg t)))
 
