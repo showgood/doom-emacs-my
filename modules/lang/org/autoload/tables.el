@@ -51,3 +51,58 @@ re-align the table if necessary. (Necessary because org-mode has a
   (interactive)
   (if (org-at-table-p) (org-shiftmetaright) (org-shiftmetaleft)))
 
+;;;###autoload
+(defun me/org-append-formula (cell formula)
+  (interactive)
+  (let ((formulas (org-table-get-stored-formulas)))
+    (setq formulas (cons (cons cell formula) formulas))
+        (org-table-store-formulas formulas)
+        (org-table-iterate)
+    )
+)
+
+;;;###autoload
+(defun me/org-sum-rows (begin-row)
+  "insert a org-table formula for sum all the rows for current column
+    at the cell under cursor"
+  (interactive "p")
+  (cond ((or (<= begin-row 0)
+             (>= begin-row (org-table-current-dline)) )
+         (error "invalid row!"))
+        (t
+         (let ((cell (format "@%d$%d" (org-table-current-dline) (org-table-current-column))))
+           (if (= begin-row 1)
+               (me/org-append-formula cell
+                                      (format "vsum(@2..@%d)" (- (org-table-current-dline) 1)))
+             (me/org-append-formula cell
+                                    (format "vsum(@%d..@%d)" begin-row (- (org-table-current-dline) 1)))
+             )
+           )
+         )
+        ))
+
+;;;###autoload
+(defun me/org-sum-cols (begin-column)
+  "insert a org-table formula for sum columns begin-column -- current-column -1
+   for current row at the cell under cursor"
+  (interactive "p")
+  (cond ((or (<= begin-column 0)
+             (>= begin-column (org-table-current-column)) )
+         (error "invalid column!"))
+        (t
+         (let (
+               (cell (format "@%d$%d" (org-table-current-dline) (org-table-current-column)) )
+               (sum-formula (format "vsum($%d..$%d)" begin-column (- (org-table-current-column) 1) )))
+           (me/org-append-formula cell sum-formula)
+           )
+         )
+        )
+  )
+
+;;;###autoload
+(defun me/org-add-index-row ()
+  (interactive)
+  (org-table-goto-column 1)
+  (org-table-insert-column)
+  (me/org-append-formula "$1" "@#-1")
+)

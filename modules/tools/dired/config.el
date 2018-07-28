@@ -151,3 +151,13 @@
     (require 'ls-lisp)
     (setq ls-lisp-use-insert-directory-program nil)
 )
+
+(use-package ranger
+  :config
+  (setq ranger-override-dired-mode t
+        ranger-preview-file t
+        ranger-hide-cursor nil
+        ranger-cleanup-on-disable t
+        ranger-dont-show-binary t
+        ranger-max-preview-size 5)
+  )
