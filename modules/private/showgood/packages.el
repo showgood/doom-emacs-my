@@ -30,6 +30,8 @@
 (package! atomic-chrome)
 (package! paperless)
 
+(package! langtool)
+
 ;; (package! solarized-theme)
 ;; (package! color-theme-sanityinc-tomorrow)
 ;; (package! zenburn-theme)
