@@ -149,22 +149,6 @@ Version 2015-06-12"
   (interactive)
   (doom-popup-buffer (get-buffer-create  "*scratch*")))
 
-;; create an org mode link
-;;;###autoload
-(defun bbg-link(link-name)
-  (interactive "sEnter link name: ")
-  (insert (format "[[bbg: %s][%s]]"
-                  (get-kill-ring) link-name))
-)
-
-;;;###autoload
-(defun bbg-bookmark()
-  (interactive)
-  "create a bookmark for bb function"
-  (bmkp-url-target-set (format "bbg://screens/%s" (get-kill-ring))
-                       nil (bmkp-completing-read-lax "Bookmark name"))
-)
-
 ;; from prelude
 ;;;###autoload
 (defun switch-to-previous-buffer ()
@@ -401,3 +385,10 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
       (me/surround-region-or-word (concat "\n#+BEGIN_SRC " lang "\n") "#+END_SRC\n")
       (append-to-buffer buf (point-min) (point-max))
       )))
+
+
+;;;###autoload
+(defun me/clear-term ()
+  (interactive)
+  (delete-region (point-min) (point-max))
+  (comint-send-input))

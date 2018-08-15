@@ -13,7 +13,7 @@
 (load! +alias)  ; emacs alias
 (load! +commands)  ; my custom ex commands
 (load! +myabbrev)
-;; (load! evil-occur)
+(load! site-lisp/ox-reveal)
 
 ; proper line wrapping
 (global-visual-line-mode 1)
@@ -235,6 +235,29 @@
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+;; prevent elpy because too sluggish
+(setq eldoc-idle-delay 2)
+
+(setq org-table-convert-region-max-lines 5000)
+
+(require 'counsel-etags)
+(setq tags-revert-without-query t)
+;; Don't warn when TAGS files are large
+(setq large-file-warning-threshold nil)
+;; Setup auto update now
+(add-hook 'prog-mode-hook
+  (lambda ()
+    (add-hook 'after-save-hook
+              'counsel-etags-virtual-update-tags 'append 'local)))
+
+(setq org-ditaa-jar-path "~/tools/ditaa0_9.jar")
+(setq org-plantuml-jar-path
+      (expand-file-name "~/tools/plantuml.1.2018.5.jar"))
+
+(require 'ox-reveal)
+(setq Org-Reveal-root "file:///~/reveal.js")
+(setq Org-Reveal-title-slide nil)
 
 ;; ONLY turn on this when local repository for package needs to be updated
 ;; then run: M-x elpamr-create-mirror-for-installed
