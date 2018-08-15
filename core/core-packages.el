@@ -90,9 +90,15 @@ base by `doom!' and for calculating how many packages exist.")
 (setq package--init-file-ensured t
       package-user-dir (expand-file-name "elpa" doom-packages-dir)
       package-enable-at-startup nil
-      package-archives
-      '(("gnu"   . "https://elpa.gnu.org/packages/")
-        ("melpa" . "https://melpa.org/packages/"))
+
+      ;; turn on this to use local repository
+      package-archives '(("myelpa" . "~/myelpa/"))
+
+      ;; use this to install new packages or update packages
+      ;package-archives
+      ;'(("gnu"   . "https://elpa.gnu.org/packages/")
+      ;  ("melpa" . "https://melpa.org/packages/"))
+
       ;; I omit Marmalade because its packages are manually submitted rather
       ;; than pulled, so packages are often out of date with upstream.
 

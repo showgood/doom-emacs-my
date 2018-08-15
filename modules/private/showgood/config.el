@@ -240,6 +240,3 @@
 ;; then run: M-x elpamr-create-mirror-for-installed
 ;; (require 'elpa-mirror)
 ;; (setq elpamr-default-output-directory "~/myelpa")
-
-;; turn on this to use local repository
-(setq package-archives '(("myelpa" . "~/myelpa/")))
