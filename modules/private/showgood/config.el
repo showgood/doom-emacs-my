@@ -15,10 +15,7 @@
 (load! +myabbrev)
 ;; (load! evil-occur)
 
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/modules/private/showgood/evil-collection/"))
-;; (with-eval-after-load 'dired (require 'evil-collection-dired) (evil-collection-dired-setup))
-
- ; proper line wrapping
+; proper line wrapping
 (global-visual-line-mode 1)
 
 (fset 'evil-visual-update-x-selection 'ignore)
@@ -128,6 +125,7 @@
 (setq eshell-aliases-file (concat +showgood-dir "eshell_alias"))
 
 ;; support large file size
+(require 'tramp)
 (setq tramp-inline-compress-start-size 10000000)
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 
@@ -165,9 +163,6 @@
   :commands (fancy-narrow-to-region
              fancy-widen)
 )
-
-;; (require 'engine-mode)
-;; (require 'lentic)
 
 ;; ==== deft settings {{{ ====
 (require 'deft)
@@ -214,13 +209,6 @@
 
 (load! +bindings) ; my key bindings
 
-(use-package paperless
-  :commands (paperless)
-  :config
-  (setq paperless-capture-directory "~/scan"
-        paperless-root-directory "~/docs")
-)
-
 (toggle-frame-maximized)
 
 (when (executable-find "hunspell")
@@ -238,20 +226,20 @@
                                 "COMMA_PARENTHESIS_WHITESPACE"
                                 "EN_QUOTES"))
 
-(load! grammarly)
 (require 'org-mac-link)
 
 (require 'ox-latex)
-;; (add-to-list 'org-latex-packages-alist '("" "minted"))
-;; (setq org-latex-listings 'minted)
-
-;; (setq org-latex-pdf-process
-;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+;; ONLY turn on this when local repository for package needs to be updated
+;; then run: M-x elpamr-create-mirror-for-installed
+;; (require 'elpa-mirror)
+;; (setq elpamr-default-output-directory "~/myelpa")
+
+;; turn on this to use local repository
+(setq package-archives '(("myelpa" . "~/myelpa/")))

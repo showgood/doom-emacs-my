@@ -8,41 +8,19 @@
 (package! dash-at-point)
 (package! json-snatcher)
 (package! hl-anything)
-(package! logview)
 (package! origami)
-(package! lentic)
-(package! nov)
 (package! move-text)
-(package! wand)
 (package! deft)
 (package! suggest)
-;; (package! counsel-etags)
-;; (package! counsel-dash)
+(package! counsel-etags)
+(package! counsel-dash)
 (package! yankpad)
-
-;; (package! esup)
-
-;; (package! ox-clip)
-;; (package! ox-ipynb)
 (package! tldr)
 (package! visual-regexp)
 (package! visual-regexp-steroids)
 (package! atomic-chrome)
-(package! paperless)
-
 (package! langtool)
-
-;; (package! solarized-theme)
-;; (package! color-theme-sanityinc-tomorrow)
-;; (package! zenburn-theme)
-;; (package! monokai-theme)
-;; https://github.com/bmag/emacs-purpose
-
-;; https://github.com/abo-abo/make-it-so
-;; https://github.com/realgud/realgud
-;; https://github.com/ionrock/pytest-el
-
-;; https://github.com/google/yapf
+(package! elpa-mirror)
 
 ;; not very useful, buffer disappeared after window close and can't get back
 ;; (package! scratch-el :recipe (:fetcher github :repo "ieure/scratch-el"))
@@ -53,9 +31,6 @@
 ;; https://github.com/millejoh/emacs-ipython-notebook
 ;; (package! ein)
 
-;; this does not work..
-;;(package! org-ehtml)
-
 ;; couldn't get it installed on emacs 26
 ;; (package! org-preview-html)
 ;; (package! org-preview-html :recipe (:fetcher github :repo "lujun9972/org-preview-html"))
@@ -65,3 +40,20 @@
 
 ;; elpy seems better suits me
 ;; https://github.com/proofit404/anaconda-mode
+
+;; not very useful
+;; (package! logview)
+
+;; no longer using
+;; (package! paperless)
+
+;; not working for me
+;; (package! esup)
+;; (package! ox-clip)
+;; (package! ox-ipynb)
+;;(package! org-ehtml)
+
+;; to be explored
+;; (package! wand)
+;; (package! lentic)
+;; (package! nov)

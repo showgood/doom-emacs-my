@@ -3,7 +3,7 @@
 
 (package! pass)
 (package! password-store)
-(package! auth-password-store)
+(package! auth-source-pass)
 
 (when (featurep! :completion helm)
   (package! helm-pass))
