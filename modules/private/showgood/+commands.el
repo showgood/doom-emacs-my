@@ -42,6 +42,7 @@
 (ex! "gissues"     #'+vcs/git-browse-issues) ; show github issues
 (ex! "gst"         #'magit-status)           ; open magit status window
 (ex! "gstage"      #'magit-stage)
+(ex! "ga"          #'magit-stage)
 (ex! "gunstage"    #'magit-unstage)
 (ex! "gblame"      #'magit-blame)
 (ex! "grevert"     #'git-gutter:revert-hunk)
@@ -94,3 +95,6 @@
 
 ;; Org-mode
 (ex! "cap"         #'+org-capture/dwim)
+
+;; clear the term-mode buffer
+(ex! "cl"          #'me/clear-term)

@@ -1006,6 +1006,7 @@
   "jr" '(evil-show-registers :which-key "show registers")
   "jo" '(+jump/online :which-key "online search")
   "js" '(+jump/online-select :which-key "Online providers")
+  "jt" '(counsel-etags-find-tag-at-point :which-key "counsel etags")
 
   "l" '(:ignore t :which-key "workspace/layout")
   "ln" '(+workspace/me/new :which-key "New workspace")
@@ -1103,7 +1104,7 @@
  "C-s" '(counsel-grep-or-swiper :which-key "swiper")
  "M-y" '(counsel-yank-pop :which-key "counsel yank pop")
 
- ;; "C-h" '(evil-window-left :which-key "left window")
+ "C-h" '(evil-window-left :which-key "left window")
  "C-j" '(evil-window-down :which-key "down window")
  "C-k" '(evil-window-up :which-key "up window")
  "C-l" '(evil-window-right :which-key "right window")

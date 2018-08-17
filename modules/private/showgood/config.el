@@ -11,6 +11,7 @@
 ;; (setq debug-on-error t)
 
 (load! +alias)  ; emacs alias
+
 (load! +commands)  ; my custom ex commands
 (load! +myabbrev)
 (load! site-lisp/ox-reveal)
