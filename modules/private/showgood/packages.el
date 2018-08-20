@@ -57,3 +57,4 @@
 ;; (package! wand)
 ;; (package! lentic)
 ;; (package! nov)
+(package! aggressive-indent)

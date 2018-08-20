@@ -11,6 +11,7 @@ modes are active and the buffer is read-only.")
   "Major modes that `doom|check-large-file' will ignore.")
 
 (setq-default
+ c-default-style "linux"
  vc-follow-symlinks t
  ;; Save clipboard contents into kill-ring before replacing them
  save-interprogram-paste-before-kill t
@@ -41,7 +42,7 @@ modes are active and the buffer is read-only.")
  whitespace-line-column fill-column
  whitespace-style
  '(face indentation tabs tab-mark spaces space-mark newline newline-mark
-   trailing lines-tail)
+        trailing lines-tail)
  whitespace-display-mappings
  '((tab-mark ?\t [?› ?\t])
    (newline-mark ?\n [?¬ ?\n])

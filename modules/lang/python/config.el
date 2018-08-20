@@ -18,6 +18,7 @@ is loaded.")
   :init
   (setq python-environment-directory doom-cache-dir
         python-indent-guess-indent-offset-verbose nil
+        indent-tabs-mode nil
         python-shell-interpreter "python")
   :config
   (add-hook! 'python-mode-hook #'(flycheck-mode highlight-numbers-mode))
@@ -66,7 +67,7 @@ environment variables."
   (define-key python-mode-map (kbd "DEL") nil) ; interferes with smartparens
   (after! smartparens
     (sp-with-modes 'python-mode
-    (sp-local-pair "'" nil :unless '(sp-point-before-word-p sp-point-after-word-p sp-point-before-same-p)))
+      (sp-local-pair "'" nil :unless '(sp-point-before-word-p sp-point-after-word-p sp-point-before-same-p)))
     )
   )
 
@@ -81,14 +82,14 @@ environment variables."
   :config
   (elpy-enable)
   (setq elpy-rpc-python-command (format "/Users/%s/anaconda2/bin/python" user-login-name))
-)
+  ;; prevent elpy because too sluggish
+  (setq eldoc-idle-delay 2)
+  )
 
 ;; NOTE: do NOT set to jupyter, otherwise ob-ipython would break
 ;; set to ipython
 ;; (setq python-shell-interpreter "jupyter"
 ;;       python-shell-interpreter-args "console --simple-prompt")
-
-;; (setq elpy-rpc-python-command (format "/Users/%s/anaconda2/bin/python" user-login-name))
 
 (general-define-key
  :prefix ","
@@ -101,4 +102,8 @@ environment variables."
  "m" '(elpy-multiedit :which-key "elpy-multiedit")
  "M" '(elpy-multiedit-stop :which-key "elpy-multiedit-stop")
  "t" '(elpy-test :which-key "elpy-test")
-)
+ )
+
+(add-hook 'python-mode-hook
+          ( lambda ()
+            ( define-key python-mode-map ( kbd "RET" ) 'newline-and-indent ) ) )

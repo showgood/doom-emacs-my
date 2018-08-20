@@ -55,16 +55,17 @@ compilation database is present in the project.")
 
 ;;; Style/formatting
   ;; C/C++ style settings
-  (c-toggle-electric-state -1)
-  (c-toggle-auto-newline -1)
-  (c-set-offset 'substatement-open '0)  ; don't indent brackets
-  (c-set-offset 'inline-open       '+)
-  (c-set-offset 'block-open        '+)
-  (c-set-offset 'brace-list-open   '+)
-  (c-set-offset 'case-label        '+)
-  (c-set-offset 'access-label      '-)
-  (c-set-offset 'arglist-intro     '+)
-  (c-set-offset 'arglist-close     '0)
+  ;; (c-toggle-electric-state -1)
+  ;; (c-toggle-auto-newline -1)
+  ;; (c-set-offset 'substatement-open '0)  ; don't indent brackets
+  ;; (c-set-offset 'inline-open       '+)
+  ;; (c-set-offset 'block-open        '+)
+  ;; (c-set-offset 'brace-list-open   '+)
+  ;; (c-set-offset 'case-label        '+)
+  ;; (c-set-offset 'access-label      '-)
+  ;; (c-set-offset 'arglist-intro     '+)
+  ;; (c-set-offset 'arglist-close     '0)
+  (c-set-offset 'innamespace 0)
   ;; Indent privacy keywords at same level as class properties
   ;; (c-set-offset 'inclass #'+cc-c-lineup-inclass)
 
@@ -192,50 +193,50 @@ compilation database is present in the project.")
 ;; Rtags Support
 ;;
 
-(def-package! rtags
-  :after cc-mode
-  :config
-  (setq rtags-autostart-diagnostics t
-        rtags-use-bookmarks nil
-        rtags-completions-enabled t
-        rtags-socket-file (expand-file-name "~/.rdm")
-        ;; If not using ivy or helm to view results, use a pop-up window rather
-        ;; than displaying it in the current window...
-        rtags-results-buffer-other-window t
-        ;; ...and don't auto-jump to first match before making a selection.
-        rtags-jump-to-first-match nil)
+;; (def-package! rtags
+;;   :after cc-mode
+;;   :config
+;;   (setq rtags-autostart-diagnostics t
+;;         rtags-use-bookmarks nil
+;;         rtags-completions-enabled t
+;;         rtags-socket-file (expand-file-name "~/.rdm")
+;;         ;; If not using ivy or helm to view results, use a pop-up window rather
+;;         ;; than displaying it in the current window...
+;;         rtags-results-buffer-other-window t
+;;         ;; ...and don't auto-jump to first match before making a selection.
+;;         rtags-jump-to-first-match nil)
 
-  (let ((bins (cl-remove-if-not #'executable-find '("rdm" "rc"))))
-    (if (/= (length bins) 2)
-        (warn "cc-mode: couldn't find %s, disabling rtags support" bins)
-      (add-hook! (c-mode c++-mode) #'rtags-start-process-unless-running)
-      (set! :jump '(c-mode c++-mode)
-        :definition #'rtags-find-symbol-at-point
-        :references #'rtags-find-references-at-point)))
+;;   (let ((bins (cl-remove-if-not #'executable-find '("rdm" "rc"))))
+;;     (if (/= (length bins) 2)
+;;         (warn "cc-mode: couldn't find %s, disabling rtags support" bins)
+;;       (add-hook! (c-mode c++-mode) #'rtags-start-process-unless-running)
+;;       (set! :jump '(c-mode c++-mode)
+;;         :definition #'rtags-find-symbol-at-point
+;;         :references #'rtags-find-references-at-point)))
 
-  (add-hook 'doom-cleanup-hook #'rtags-cancel-process)
-  (add-hook! kill-emacs (ignore-errors (rtags-cancel-process)))
+;;   (add-hook 'doom-cleanup-hook #'rtags-cancel-process)
+;;   (add-hook! kill-emacs (ignore-errors (rtags-cancel-process)))
 
-  ;; Use rtags-imenu instead of imenu/counsel-imenu
-  (map! :map (c-mode-map c++-mode-map) [remap imenu] #'rtags-imenu)
+;;   ;; Use rtags-imenu instead of imenu/counsel-imenu
+;;   (map! :map (c-mode-map c++-mode-map) [remap imenu] #'rtags-imenu)
 
-  (add-hook 'rtags-jump-hook #'evil-set-jump)
-  (add-hook 'rtags-after-find-file-hook #'recenter))
+;;   (add-hook 'rtags-jump-hook #'evil-set-jump)
+;;   (add-hook 'rtags-after-find-file-hook #'recenter))
 
-(def-package! ivy-rtags
-  :when (featurep! :completion ivy)
-  :after rtags
-  :init
-  ;; NOTE Ivy integration breaks when rtags is byte-compiled with Emacs 26 or
-  ;; later, so we un-byte-compile it before we load it.
-  (eval-when-compile
-    (when (>= emacs-major-version 26)
-      (when-let* ((elc-file (locate-library "rtags.elc" t doom--package-load-path)))
-        (delete-file elc-file))))
-  :config (setq rtags-display-result-backend 'ivy))
+;; (def-package! ivy-rtags
+;;   :when (featurep! :completion ivy)
+;;   :after rtags
+;;   :init
+;;   ;; NOTE Ivy integration breaks when rtags is byte-compiled with Emacs 26 or
+;;   ;; later, so we un-byte-compile it before we load it.
+;;   (eval-when-compile
+;;     (when (>= emacs-major-version 26)
+;;       (when-let* ((elc-file (locate-library "rtags.elc" t doom--package-load-path)))
+;;         (delete-file elc-file))))
+;;   :config (setq rtags-display-result-backend 'ivy))
 
-(evil-add-command-properties #'rtags-find-symbol-at-point :jump t)
-(evil-add-command-properties #'rtags-find-references-at-point :jump t)
+;; (evil-add-command-properties #'rtags-find-symbol-at-point :jump t)
+;; (evil-add-command-properties #'rtags-find-references-at-point :jump t)
 
 (use-package clang-format
   :ensure t

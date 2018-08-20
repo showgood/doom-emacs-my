@@ -91,13 +91,13 @@
 ;; (setq flycheck-c/c++-clang-executable "/opt/bb/bin/clang++")
 (setq flycheck-c/c++-clang-executable "/usr/local/opt/llvm/bin/clang++")
 (setq flycheck-clang-args '("-m32" "-Dlint" "-D_REENTRANT"
-      "-D_THREAD_SAFE" "-DBB_THREADED" "-DBSL_OVERRIDES_STD"))
+                            "-D_THREAD_SAFE" "-DBB_THREADED" "-DBSL_OVERRIDES_STD"))
 
 ;; (defun my-flycheck-setup ()
 ;;   (flycheck-select-checker 'c/c++-clang))
 ;; (add-hook 'c-mode-common-hook #'my-flycheck-setup)
 
-; this does not work, not sure why
+                                        ; this does not work, not sure why
 ;; (require 'flycheck-rtags)
 ;; ;; http://syamajala.github.io/c-ide.html
 ;; (add-hook 'c++-mode-hook 'flycheck-mode)
@@ -111,17 +111,6 @@
 ;; (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup)
 
 ;; ==== flycheck settings }}} ====
-
-(defun bb-c-mode ()
-  (interactive)
-  (c-set-style "bsd")
-  (setq c-basic-offset 4)
-  (setq indent-tabs-mode nil)
-  (modify-syntax-entry ?_ "w")
-  (c-set-offset 'innamespace 0)
-)
-
-(add-hook 'c-mode-common-hook 'bb-c-mode)
 
 (setq eshell-aliases-file (concat +showgood-dir "eshell_alias"))
 
@@ -238,7 +227,7 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;; prevent elpy because too sluggish
-(setq eldoc-idle-delay 2)
+;; (setq eldoc-idle-delay 2)
 
 (setq org-table-convert-region-max-lines 5000)
 
@@ -262,5 +251,9 @@
 
 ;; ONLY turn on this when local repository for package needs to be updated
 ;; then run: M-x elpamr-create-mirror-for-installed
-;; (require 'elpa-mirror)
-;; (setq elpamr-default-output-directory "~/myelpa")
+(require 'elpa-mirror)
+(setq elpamr-default-output-directory "~/myelpa")
+
+(require 'aggressive-indent)
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'python-mode)
