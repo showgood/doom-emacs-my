@@ -257,3 +257,5 @@
 (require 'aggressive-indent)
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
+
+(setq company-lsp-enable-recompletion t)

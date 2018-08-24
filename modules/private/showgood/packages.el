@@ -21,6 +21,9 @@
 (package! atomic-chrome)
 (package! langtool)
 (package! elpa-mirror)
+(package! lsp-mode)
+(package! ccls)
+(package! company-lsp)
 
 ;; not very useful, buffer disappeared after window close and can't get back
 ;; (package! scratch-el :recipe (:fetcher github :repo "ieure/scratch-el"))
