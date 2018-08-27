@@ -1206,9 +1206,9 @@
  :prefix ","
  :states '(normal)
  :keymaps 'c++-mode-map
- "d" '(rtags-find-symbol-at-point :which-key "find definition")
- "r" '(rtags-find-references-at-point :which-key "find references")
-)
+ "d" '(xref-find-definitions :which-key "find definition")
+ "r" '(ccls/callers :which-key "find references")
+ )
 
 (general-define-key
  :prefix ","
