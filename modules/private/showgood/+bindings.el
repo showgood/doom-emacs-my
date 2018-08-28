@@ -34,8 +34,6 @@
 ;;  :nvime "<f3>"  #'org-clock-in
 ;;  :nvime "<f4>"  #'org-clock-out
 ;;  ;; :nvime "<f6>"  #'rtags-find-symbol-at-point
-;;  :nvime "<f6> a"  #'bb/arm-report-status
-;;  :nvime "<f6> r"  #'bb/report-status
 ;;  :nvime "C-;"   #'evil-normal-state
 
 ;; :nvime "<f5> a" #'org-archive-subtree
@@ -395,9 +393,7 @@
 ;;      :desc "New snippet"           :n  "n" #'yas-new-snippet
 ;;      :desc "Insert snippet"        :nv "i" #'yas-insert-snippet
 ;;      :desc "Find snippet for mode" :n  "s" #'yas-visit-snippet-file
-;;      :desc "Find snippet"          :n  "S" #'+hlissner/find-in-snippets
-;;      :desc "switch to nylx"        :n  "n" #'bb/nylx
-;;      :desc "switch to trsl"        :n  "t" #'bb/trsl)
+;;      :desc "Find snippet"          :n  "S" #'+hlissner/find-in-snippets)
 
 ;;    (:desc "toggle" :prefix "t"
 ;;      :desc "Flyspell"                 :n "s" #'flyspell-mode
@@ -941,141 +937,146 @@
  :keymaps 'override
  :prefix "SPC"
  :non-normal-prefix "M-m"
-  "'" '(iterm-focus :which-key "iterm")
-  "?" '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-  "/" '(counsel-rg :wich-key "rg")
-  "TAB" '(switch-to-previous-buffer :which-key "prev buffer")
-  "SPC" '(counsel-M-x :which-key "M-x")
-  "k" '(evil-avy-goto-char-2 :which-key "jump char 2")
-  "q" '(persp-switch-to-buffer :which-key "Switch workspace buffer")
-  "Q" '(switch-to-buffer :which-key "Switch to buffer")
-  "d" '(counsel-git-grep :which-key "git grep")
-  "RET" '(bookmark-jump :which-key "Jump to bookmark")
+ "'" '(iterm-focus :which-key "iterm")
+ "?" '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
+ "/" '(counsel-rg :wich-key "rg")
+ "TAB" '(switch-to-previous-buffer :which-key "prev buffer")
+ "SPC" '(counsel-M-x :which-key "M-x")
+ "k" '(evil-avy-goto-char-2 :which-key "jump char 2")
+ "q" '(persp-switch-to-buffer :which-key "Switch workspace buffer")
+ "Q" '(switch-to-buffer :which-key "Switch to buffer")
+ "d" '(counsel-git-grep :which-key "git grep")
+ "RET" '(bookmark-jump :which-key "Jump to bookmark")
 
-  "a" '(:ignore t :which-key "applications")
-  "ad" '(deft :which-key "deft")
-  "af" '(deft-find-file :which-key "deft-find-file")
-  "ar" '(align-regexp :which-key "align-regexp")
-  "at" '(+term/open :which-key "+term/open")
+ "a" '(:ignore t :which-key "applications")
+ "ad" '(deft :which-key "deft")
+ "af" '(deft-find-file :which-key "deft-find-file")
+ "ar" '(align-regexp :which-key "align-regexp")
+ "at" '(+term/open :which-key "+term/open")
 
-  "b" '(:ignore t :which-key "buffers")
-  "bb" '(persp-switch-to-buffer :which-key "Switch workspace buffer")
-  "bB" '(switch-to-buffer :which-key "Switch to buffer")
-  "br" '(rename-buffer :which-key "rename buffer")
-  "bk" '(doom/kill-this-buffer :which-key "kill buffer")
-  "bs" '(open-scratch :which-key "open scratch")
+ "b" '(:ignore t :which-key "buffers")
+ "bb" '(persp-switch-to-buffer :which-key "Switch workspace buffer")
+ "bB" '(switch-to-buffer :which-key "Switch to buffer")
+ "br" '(rename-buffer :which-key "rename buffer")
+ "bk" '(doom/kill-this-buffer :which-key "kill buffer")
+ "bs" '(open-scratch :which-key "open scratch")
 
-  "e" '(:ignore t :which-key "Errors")
-  "el" '(flycheck-list-errors :which-key "List errors")
-  "en" '(next-error :which-key "next errors")
-  "ep" '(previous-error :which-key "next errors")
+ "e" '(:ignore t :which-key "Errors")
+ "el" '(flycheck-list-errors :which-key "List errors")
+ "en" '(next-error :which-key "next errors")
+ "ep" '(previous-error :which-key "next errors")
 
-  "f" '(:ignore t :which-key "Files/Fold")
-  "fd" '(+evil:delete-this-file :which-key "delete this file")
-  ;; TODO: use 'fe' to open config.el
-  "ff" '(counsel-find-file :which-key "find file")
-  "fj" '(dired-jump :which-key "dired jump")
-  "fn" '(cp-filename-of-current-buffer :which-key "yank filename only")
-  "fp" '(+hlissner/yank-buffer-filename :which-key "yank file full path")
-  "fo" '(hydra-folding/body :which-key "hydra folding")
-  "fr" '(counsel-recentf :which-key "recent file")
+ "f" '(:ignore t :which-key "Files/Fold")
+ "fd" '(+evil:delete-this-file :which-key "delete this file")
+ ;; TODO: use 'fe' to open config.el
+ "ff" '(counsel-find-file :which-key "find file")
+ "fj" '(dired-jump :which-key "dired jump")
+ "fn" '(cp-filename-of-current-buffer :which-key "yank filename only")
+ "fp" '(+hlissner/yank-buffer-filename :which-key "yank file full path")
+ "fo" '(hydra-folding/body :which-key "hydra folding")
+ "fr" '(counsel-recentf :which-key "recent file")
 
-  "g" '(:ignore t :which-key "Git")
-  "gs" '(magit-status :which-key "Git status")
-  "gS" '(magit-stage-file :which-key "stage this file")
-  "gb" '(magit-blame :which-key "Git blame")
-  "gt" '(my-git-timemachine :which-key "Git time machine")
-  "gg" '(hydra-git/body :which-key "Git gutter")
+ "g" '(:ignore t :which-key "Git")
+ "gs" '(magit-status :which-key "Git status")
+ "ga" '(magit-stage-file :which-key "stage this file")
+ "gb" '(magit-blame :which-key "Git blame")
+ "gc" '(magit-commit :which-key "Git commit")
+ "gd" '(magit-diff-buffer-file :which-key "Git diff")
+ ;; list commits affect current function
+ "gf" '(magit-log-trace-definition :which-key "show commits for this function")
+ ;; list commits affect current file
+ "gl" '(magit-log-buffer-file :which-key "show commits for this file")
+ "gg" '(hydra-git/body :which-key "Git gutter")
+ "gp" '(magit-push-current :which-key "Git push")
+ "gt" '(my-git-timemachine :which-key "Git time machine")
 
-  "h" '(:ignore t :which-key "Help/Highlight")
-  "hm" '(describe-mode :which-key "Describe mode")
-  "hf" '(describe-function :which-key "Describe function")
-  "hk" '(describe-key :which-key "Describe key")
-  "hv" '(describe-variable :which-key "Describe variable")
-  "hL" '(hl-highlight-thingatpt-global :which-key "highlight global")
-  "hl" '(hl-highlight-thingatpt-local :which-key "highlight local")
-  "hu" '(hl-unhighlight-all-local :which-key "un highlight local")
-  "hU" '(hl-unhighlight-all-global :which-key "un highlight global")
+ "h" '(:ignore t :which-key "Help/Highlight")
+ "hm" '(describe-mode :which-key "Describe mode")
+ "hf" '(describe-function :which-key "Describe function")
+ "hk" '(describe-key :which-key "Describe key")
+ "hv" '(describe-variable :which-key "Describe variable")
+ "hL" '(hl-highlight-thingatpt-global :which-key "highlight global")
+ "hl" '(hl-highlight-thingatpt-local :which-key "highlight local")
+ "hu" '(hl-unhighlight-all-local :which-key "un highlight local")
+ "hU" '(hl-unhighlight-all-global :which-key "un highlight global")
 
-  "j" '(:ignore t :which-key "Jump")
-  "jd" '(dumb-jump-go :which-key "dumb-jump-go")
-  "ji" '(imenu :which-key "Imenu")
-  "jb" '(avy-pop-mark :which-key "jump back")
-  "jI" '(imenu-anywhere :which-key "Imenu across buffers")
-  "jm" '(evil-show-marks :which-key "show marks")
-  "jr" '(evil-show-registers :which-key "show registers")
-  "jo" '(+jump/online :which-key "online search")
-  "js" '(+jump/online-select :which-key "Online providers")
-  "jt" '(counsel-etags-find-tag-at-point :which-key "counsel etags")
+ "j" '(:ignore t :which-key "Jump")
+ "jd" '(dumb-jump-go :which-key "dumb-jump-go")
+ "ji" '(imenu :which-key "Imenu")
+ "jb" '(avy-pop-mark :which-key "jump back")
+ "jI" '(imenu-anywhere :which-key "Imenu across buffers")
+ "jm" '(evil-show-marks :which-key "show marks")
+ "jr" '(evil-show-registers :which-key "show registers")
+ "jo" '(+jump/online :which-key "online search")
+ "js" '(+jump/online-select :which-key "Online providers")
+ "jt" '(counsel-etags-find-tag-at-point :which-key "counsel etags")
 
-  "l" '(:ignore t :which-key "workspace/layout")
-  "ln" '(+workspace/me/new :which-key "New workspace")
-  "ll" '(+workspace/switch-to :which-key "switch workspace")
-  "l TAB" '(doom/jump-to-last-workspace :which-key "toggle workspace")
+ "l" '(:ignore t :which-key "workspace/layout")
+ "ln" '(+workspace/me/new :which-key "New workspace")
+ "ll" '(+workspace/switch-to :which-key "switch workspace")
+ "l TAB" '(doom/jump-to-last-workspace :which-key "toggle workspace")
 
-  "n" '(:ignore t :which-key "Notes")
-  "nn" '(showgood/find-in-notes :which-key "showgood/find-in-notes")
-  "nN" '(showgood/browse-notes :which-key "showgood/browse-notes")
-  "nd" '(showgood/find-in-docs :which-key "find in docs")
-  "nD" '(showgood/browse-docs :which-key "browse docs")
+ "n" '(:ignore t :which-key "Notes")
+ "nn" '(showgood/find-in-notes :which-key "showgood/find-in-notes")
+ "nN" '(showgood/browse-notes :which-key "showgood/browse-notes")
+ "nd" '(showgood/find-in-docs :which-key "find in docs")
+ "nD" '(showgood/browse-docs :which-key "browse docs")
 
-  "o" '(:ignore t :which-key "bookmark")
-  "om" '(bookmark-set :which-key "set bookmark")
-  "ol" '(bookmark-bmenu-list :which-key "open bookmark buffer")
-  "ou" '(bmkp-url-target-set :which-key "set url bookmark")
-  "os" '(bmkp-set-snippet-bookmark :which-key "set snippet bookmark")
-  "od" '(bmkp-dired-jump :which-key "jump to dired bookmark")
+ "o" '(:ignore t :which-key "bookmark")
+ "om" '(bookmark-set :which-key "set bookmark")
+ "ol" '(bookmark-bmenu-list :which-key "open bookmark buffer")
+ "ou" '(bmkp-url-target-set :which-key "set url bookmark")
+ "os" '(bmkp-set-snippet-bookmark :which-key "set snippet bookmark")
+ "od" '(bmkp-dired-jump :which-key "jump to dired bookmark")
 
-  "p" '(:ignore t :which-key "project")
-  "pp" '(projectile-switch-project :which-key "projectile-switch-project")
-  "pt" '(+ivy/tasks :which-key "+ivy/tasks")
-  "pf" '(counsel-projectile-find-file :which-key "counsel-projectile-find-file")
-  "px" '(projectile-invalidate-cache :which-key "projectile-invalidate-cache")
-  "po" '(+term/open-popup-in-project :which-key "+term/open-popup-in-project")
+ "p" '(:ignore t :which-key "project")
+ "pp" '(projectile-switch-project :which-key "projectile-switch-project")
+ "pt" '(+ivy/tasks :which-key "+ivy/tasks")
+ "pf" '(counsel-projectile-find-file :which-key "counsel-projectile-find-file")
+ "px" '(projectile-invalidate-cache :which-key "projectile-invalidate-cache")
+ "po" '(+term/open-popup-in-project :which-key "+term/open-popup-in-project")
 
-  "s" '(:ignore t :which-key "snippets / switch")
-  "sf" '(yas-new-snippet :which-key "yas-new-snippet")
-  "si" '(yas-insert-snippet :which-key "yas-insert-snippet")
-  "ss" '(yas-visit-snippet-file :which-key "yas-visit-snippet-file")
-  "sS" '(showgood/find-in-snippets :which-key "showgood/find-in-snippets")
-  "sn" '(bb/nylx :which-key "bb/nylx")
-  "st" '(bb/trsl :which-key "bb/trsl")
+ "s" '(:ignore t :which-key "snippets / switch")
+ "sf" '(yas-new-snippet :which-key "yas-new-snippet")
+ "si" '(yas-insert-snippet :which-key "yas-insert-snippet")
+ "ss" '(yas-visit-snippet-file :which-key "yas-visit-snippet-file")
+ "sS" '(showgood/find-in-snippets :which-key "showgood/find-in-snippets")
 
-  "t"  '(:ignore t :which-key "toggle")
-  "td" '(dired-sidebar-toggle-sidebar :which-key "dired-sidebar-toggle-sidebar")
-  "tD" '(dired-sidebar-toggle-with-current-directory :which-key "dired sidebar cur directory")
-  "tv" '(visual-line-mode :which-key "visual-line-mode")
-  "tf" '(visual-fill-column-mode :which-key "visual-fill-column-mode")
-  "ts" '(flyspell-mode :which-key "flyspell-mode")
-  "tc" '(flycheck-mode :which-key "flycheck-mode")
-  "tg" '(+evil-goggles/toggle :which-key "+evil-goggles/toggle")
-  "ti" '(highlight-indentation-mode :which-key "highlight-indentation-mode")
-  "tI" '(highlight-indentation-current-column-mode :which-key "highlight-indentation-current-column-mode")
+ "t"  '(:ignore t :which-key "toggle")
+ "td" '(dired-sidebar-toggle-sidebar :which-key "dired-sidebar-toggle-sidebar")
+ "tD" '(dired-sidebar-toggle-with-current-directory :which-key "dired sidebar cur directory")
+ "tv" '(visual-line-mode :which-key "visual-line-mode")
+ "tf" '(visual-fill-column-mode :which-key "visual-fill-column-mode")
+ "ts" '(flyspell-mode :which-key "flyspell-mode")
+ "tc" '(flycheck-mode :which-key "flycheck-mode")
+ "tg" '(+evil-goggles/toggle :which-key "+evil-goggles/toggle")
+ "ti" '(highlight-indentation-mode :which-key "highlight-indentation-mode")
+ "tI" '(highlight-indentation-current-column-mode :which-key "highlight-indentation-current-column-mode")
 
-  "w"  '(:ignore t :which-key "Windows")
-  "wd" '(delete-window :which-key "delete window")
-  "wD" '(ace-delete-window :which-key "ace delete window")
-  "wF" '(make-frame :which-key "make frame")
-  "w-" '(evil-window-split :which-key "split horizontally")
-  "wv" '(evil-window-vsplit :which-key "split vertically")
-  "wm" '(delete-other-windows :which-key "maximize window")
-  "wt" '(window-split-toggle :which-key "toggle window layout")
-  "ww" '(ace-window :which-key "ace window")
-  "w TAB" '(aw-flip-window :which-key "select previous window")
-  "wh" '(hydra-window/body :which-key "Window Hydra")
-  "ws" '(ace-swap-window :which-key "swap window")
-  "w=" '(balance-windows :which-key "balance windows")
+ "w"  '(:ignore t :which-key "Windows")
+ "wd" '(delete-window :which-key "delete window")
+ "wD" '(ace-delete-window :which-key "ace delete window")
+ "wF" '(make-frame :which-key "make frame")
+ "w-" '(evil-window-split :which-key "split horizontally")
+ "wv" '(evil-window-vsplit :which-key "split vertically")
+ "wm" '(delete-other-windows :which-key "maximize window")
+ "wt" '(window-split-toggle :which-key "toggle window layout")
+ "ww" '(ace-window :which-key "ace window")
+ "w TAB" '(aw-flip-window :which-key "select previous window")
+ "wh" '(hydra-window/body :which-key "Window Hydra")
+ "ws" '(ace-swap-window :which-key "swap window")
+ "w=" '(balance-windows :which-key "balance windows")
 
-   "z" '(:ignore t :which-key "folding")
-   "zt" '(origami-toggle-all-nodes :which-key "origami-toggle-all-nodes")
-   "zo" '(origami-open-node :which-key "origami-open-node")
-   "zc" '(origami-close-node :which-key "origami-close-node")
-   "zO" '(origami-open-node-recursively :which-key "origami-open-node-recursively")
-   "zC" '(origami-close-node-recursively :which-key "origami-close-node-recursively")
-   "za" '(origami-open-all-nodes :which-key "origami-open-all-nodes")
-   "zm" '(origami-close-all-nodes :which-key "origami-close-all-nodes")
-   "zh" '(hydra-zoom/body :which-key "hydra zoom")
-)
+ "z" '(:ignore t :which-key "folding")
+ "zt" '(origami-toggle-all-nodes :which-key "origami-toggle-all-nodes")
+ "zo" '(origami-open-node :which-key "origami-open-node")
+ "zc" '(origami-close-node :which-key "origami-close-node")
+ "zO" '(origami-open-node-recursively :which-key "origami-open-node-recursively")
+ "zC" '(origami-close-node-recursively :which-key "origami-close-node-recursively")
+ "za" '(origami-open-all-nodes :which-key "origami-open-all-nodes")
+ "zm" '(origami-close-all-nodes :which-key "origami-close-all-nodes")
+ "zh" '(hydra-zoom/body :which-key "hydra zoom")
+ )
 
 (general-omap
  :prefix "SPC"
@@ -1125,37 +1126,35 @@
  "<f11>" '(org-agenda :which-key "org-agenda")
  "<f12>" '(org-todo :which-key "org-todo")
 
-;; :nvime "<f9> c" #'cp-filename-of-current-buffer
-;; ;; copy current line
-;; :nvime "<f9> d" #'duplicate-line
-;; :nvime "<f9> e" #'+eshell/open
+ ;; :nvime "<f9> c" #'cp-filename-of-current-buffer
+ ;; ;; copy current line
+ ;; :nvime "<f9> d" #'duplicate-line
+ ;; :nvime "<f9> e" #'+eshell/open
 
-;;  ;; :nvime "<f6>"  #'rtags-find-symbol-at-point
-;;  :nvime "<f6> a"  #'bb/arm-report-status
-;;  :nvime "<f6> r"  #'bb/report-status
+ ;;  ;; :nvime "<f6>"  #'rtags-find-symbol-at-point
 
-;; :nvime "<f5> d" #'ace-delete-window
-;; :nvime "<f5> l" (lambda () (interactive) (list-matching-lines (current-word)))
+ ;; :nvime "<f5> d" #'ace-delete-window
+ ;; :nvime "<f5> l" (lambda () (interactive) (list-matching-lines (current-word)))
 
-;; :nvime "<f7> b" #'counsel-projectile-switch-to-buffer
-;; :nvime "<f7> c" #'projectile-compile-project
-;; :nvime "<f7> d" #'counsel-projectile-find-dir
-;; :nvime "<f7> e" #'eval-region
-;; :nvime "<f7> f" #'counsel-projectile-find-file
-;; ;; open the file under cursor within project (C-c p g)
-;; :nvime "<f7> g" #'projectile-find-file-dwim
-;; :nvime "<f7> o" #'projectile-find-file-dwim-other-window
-;; :nvime "<f7> s" #'counsel-rg
+ ;; :nvime "<f7> b" #'counsel-projectile-switch-to-buffer
+ ;; :nvime "<f7> c" #'projectile-compile-project
+ ;; :nvime "<f7> d" #'counsel-projectile-find-dir
+ ;; :nvime "<f7> e" #'eval-region
+ ;; :nvime "<f7> f" #'counsel-projectile-find-file
+ ;; ;; open the file under cursor within project (C-c p g)
+ ;; :nvime "<f7> g" #'projectile-find-file-dwim
+ ;; :nvime "<f7> o" #'projectile-find-file-dwim-other-window
+ ;; :nvime "<f7> s" #'counsel-rg
 
-;; :nvime "<f7> c" #'projectile-compile-project
-;; :nvime "<f7> d" #'counsel-projectile-find-dir
-;; :nvime "<f7> e" #'eval-region
-;; :nvime "<f7> f" #'counsel-projectile-find-file
-;; ;; open the file under cursor within project (C-c p g)
-;; :nvime "<f7> g" #'projectile-find-file-dwim
-;; :nvime "<f7> o" #'projectile-find-file-dwim-other-window
-;; :nvime "<f7> s" #'counsel-rg
-)
+ ;; :nvime "<f7> c" #'projectile-compile-project
+ ;; :nvime "<f7> d" #'counsel-projectile-find-dir
+ ;; :nvime "<f7> e" #'eval-region
+ ;; :nvime "<f7> f" #'counsel-projectile-find-file
+ ;; ;; open the file under cursor within project (C-c p g)
+ ;; :nvime "<f7> g" #'projectile-find-file-dwim
+ ;; :nvime "<f7> o" #'projectile-find-file-dwim-other-window
+ ;; :nvime "<f7> s" #'counsel-rg
+ )
 
 (general-define-key
  :states '(normal visual)

@@ -43,6 +43,13 @@
 (ex! "gst"         #'magit-status)           ; open magit status window
 (ex! "gstage"      #'magit-stage)
 (ex! "ga"          #'magit-stage)
+(ex! "gd"          #'magit-diff-buffer-file)
+
+;; show all the commits affect current file
+(ex! "gl"          #'magit-log-buffer-file)
+
+;; show all the commits affect a function
+(ex! "gf"          #'magit-log-trace-definition)
 (ex! "gunstage"    #'magit-unstage)
 (ex! "gblame"      #'magit-blame)
 (ex! "grevert"     #'git-gutter:revert-hunk)
