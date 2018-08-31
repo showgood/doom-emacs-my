@@ -127,6 +127,11 @@ file-name => comint.el")
   "Face used for the major-mode segment in the mode-line."
   :group '+doom-modeline)
 
+(defface doom-modeline-buffer-workspace
+  '((t (:inherit (mode-line-emphasis bold))))
+  "Face used for the workspace name segment in the mode-line."
+  :group '+doom-modeline)
+
 (defface doom-modeline-highlight
   '((t (:inherit mode-line-emphasis)))
   "Face for bright segments of the mode-line."
@@ -372,6 +377,17 @@ directory, the file name, and its state (modified, read-only or non-existent)."
                 (format " (%+d)" text-scale-mode-amount)))
    'face (if (active) 'doom-modeline-buffer-major-mode)))
 
+(def-modeline-segment! workspace
+  "The current workspace name"
+  (propertize
+   (concat (format-mode-line (format "%s  " (+workspace-current-name)))
+           (when (stringp mode-line-process)
+             mode-line-process)
+           (and (featurep 'face-remap)
+                (/= text-scale-mode-amount 0)
+                (format " (%+d)" text-scale-mode-amount)))
+   'face (if (active) 'doom-modeline-buffer-workspace)))
+
 ;;
 (def-modeline-segment! vcs
   "Displays the current branch, colored based on its state."
@@ -577,7 +593,7 @@ Returns \"\" to not break --no-window-system."
 
 (def-modeline! main
   (bar matches " " buffer-info "  %l:%c %p  " selection-info)
-  (buffer-encoding major-mode vcs flycheck))
+  (workspace buffer-encoding major-mode vcs flycheck))
 
 (def-modeline! minimal
   (bar matches " " buffer-info)
