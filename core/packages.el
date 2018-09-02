@@ -30,7 +30,7 @@
 (package! editorconfig)
 (package! expand-region)
 
-(package! help-fns+ :recipe (:fetcher github :repo "emacsmirror/help-fns-plus"))
+;; (package! help-fns+ :recipe (:fetcher github :repo "emacsmirror/help-fns-plus"))
 (package! bookmark+ :recipe (:fetcher github :repo "emacsmirror/bookmark-plus"))
 
 (package! pcre2el)
@@ -46,3 +46,4 @@
 (package! which-key)
 (package! hydra)
 (package! general)
+(package! helpful)
