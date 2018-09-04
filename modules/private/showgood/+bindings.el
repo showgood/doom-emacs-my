@@ -969,7 +969,7 @@
 
  "f" '(:ignore t :which-key "Files/Fold")
  "fd" '(+evil:delete-this-file :which-key "delete this file")
- ;; TODO: use 'fe' to open config.el
+ "fe" '(me/open-module-init :which-key "open config.el for my module")
  "ff" '(counsel-find-file :which-key "find file")
  "fj" '(dired-jump :which-key "dired jump")
  "fn" '(cp-filename-of-current-buffer :which-key "yank filename only")

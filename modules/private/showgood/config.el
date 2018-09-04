@@ -377,3 +377,9 @@
       )
     )
   )
+
+
+(defun me/open-module-init ()
+  (interactive)
+  (find-file (format "%s/config.el" +showgood-dir))
+  )
