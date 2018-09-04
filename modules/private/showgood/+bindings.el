@@ -991,10 +991,11 @@
  "gt" '(my-git-timemachine :which-key "Git time machine")
 
  "h" '(:ignore t :which-key "Help/Highlight")
+ "hh" '(helpful-at-point :which-key "helpful-at-point")
  "hm" '(describe-mode :which-key "Describe mode")
- "hf" '(describe-function :which-key "Describe function")
- "hk" '(describe-key :which-key "Describe key")
- "hv" '(describe-variable :which-key "Describe variable")
+ "hf" '(helpful-function :which-key "Describe function")
+ "hk" '(helpful-key :which-key "Describe key")
+ "hv" '(helpful-variable :which-key "Describe variable")
  "hL" '(hl-highlight-thingatpt-global :which-key "highlight global")
  "hl" '(hl-highlight-thingatpt-local :which-key "highlight local")
  "hu" '(hl-unhighlight-all-local :which-key "un highlight local")
@@ -1306,6 +1307,11 @@
  "cc" '(slime-compile-defun :which-key "slime-compile-defun")
  )
 
+(general-define-key
+ :states '(normal)
+ :keymaps 'helpful-mode-map
+ "q" '(+workspace/close-window-or-workspace :which-key "close window")
+ )
 ;; keyboard shortcuts
 ;; (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
 ;; (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
