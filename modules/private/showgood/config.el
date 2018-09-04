@@ -257,6 +257,7 @@
 (require 'aggressive-indent)
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
+(add-to-list 'aggressive-indent-excluded-modes 'lisp-mode)
 
 (setq company-lsp-enable-recompletion t)
 
@@ -365,3 +366,14 @@
 
 (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
 (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
+
+
+(defun me/switch-to-project-term ()
+  (interactive)
+  (let ((buf-name (format "%s-term" (+workspace-current-name))))
+    (if (get-buffer buf-name)
+        (switch-to-buffer buf-name)
+      (message "buffer %s not exist!" buf-name)
+      )
+    )
+  )

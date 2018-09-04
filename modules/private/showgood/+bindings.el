@@ -960,6 +960,7 @@
  "br" '(rename-buffer :which-key "rename buffer")
  "bk" '(doom/kill-this-buffer :which-key "kill buffer")
  "bs" '(open-scratch :which-key "open scratch")
+ "bt" '(me/switch-to-project-term :which-key "open project terminal")
 
  "e" '(:ignore t :which-key "Errors")
  "el" '(flycheck-list-errors :which-key "List errors")
@@ -1080,25 +1081,25 @@
  )
 
 (general-omap
- :prefix "SPC"
+  :prefix "SPC"
   "." 'evil-avy-goto-char-2
   "l" 'evil-avy-goto-line
   "e" 'evil-avy-goto-subword-0 )
 
 (general-omap
-"s"  'evil-surround-edit
-"S"  'evil-Surround-edit
-)
+  "s"  'evil-surround-edit
+  "S"  'evil-Surround-edit
+  )
 
 (general-vmap
-"S"  'evil-surround-region
-)
+  "S"  'evil-surround-region
+  )
 
 (general-define-key
  :states '(normal)
  "TAB" '(origami-toggle-node :which-key "origami-toggle-node")
  "<backtab>" '(origami-toggle-all-nodes :which-key "origami-toggle-all-nodes")
-)
+ )
 
 (general-define-key
  :states '(normal visual insert emacs)
@@ -1168,14 +1169,14 @@
  "gr" '(+eval:region :which-key "+eval:region")
  "gR" '(+eval/buffer :which-key "+eval/buffer")
 
-;;  :v  "gR" #'+eval:replace-region
-)
+ ;;  :v  "gR" #'+eval:replace-region
+ )
 
 (general-define-key
  :states '(visual)
  "v" '(er/expand-region :which-key "expand region")
  "V" '(er/contract-region :which-key "contract region")
-)
+ )
 
 (general-define-key
  :states '(normal visual)
@@ -1184,7 +1185,7 @@
  "+" '(evil-numbers/inc-at-pt :which-key "evil-numbers/inc-at-pt")
  "-" '(evil-numbers/dec-at-pt :which-key "evil-numbers/dec-at-pt")
  "c" '(counsel-git-grep-complete-line :which-key "counsel-git-grep-complete-line")
-)
+ )
 
 ;; # TODO: define them for insert, emacs state
 ;; :nvime "C-c +" #'evil-numbers/inc-at-pt
@@ -1215,7 +1216,7 @@
  :states '(normal)
  :keymaps 'nxml-mode-map
  "xp" '(nxml-where :which-key "xpath")
-)
+ )
 
 ;; another way to print json path is to
 ;; switch to js2-mode, then use js2-print-json-path
@@ -1224,7 +1225,7 @@
  :states '(normal)
  :keymaps 'json-mode-map
  "xp" '(jsons-print-path :which-key "xpath")
-)
+ )
 
 (general-define-key
  :states '(insert normal)
@@ -1232,13 +1233,13 @@
  ":" '(evil-ex :which-key "xpath")
  "M-x" '(counsel-M-x :which-key "xpath")
  "C-;" #'evil-normal-state
-)
+ )
 
 ;; NOTE: need to use 'override to make M-y works in evil-ex-map
 (general-define-key
  :keymaps 'override
  "M-y" '(counsel-yank-pop :which-key "counsel-yank-pop")
-)
+ )
 
 ;; (general-define-key
 ;;  :states '(normal ivy-occur-grep-mode-map)
