@@ -392,3 +392,34 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
   (interactive)
   (delete-region (point-min) (point-max))
   (comint-send-input))
+
+;;;###autoload
+(defun me/create-clang-format ()
+  "make a copy of clang-format file"
+  (interactive)
+  (copy-file (format "%s/my.clang-format" +showgood-dir) (format "%s/.clang-format" default-directory))
+  )
+
+;;;###autoload
+(defun me/create-rg-ignore-file ()
+  "make a copy of rg ignore file, syntax refer to https://oremacs.com/2018/03/05/grep-exclude/"
+  (interactive)
+  (copy-file (format "%s/.rg-ignore" +showgood-dir) (format "%s/.ignore" default-directory))
+  )
+
+;;;###autoload
+(defun me/switch-to-project-term ()
+  (interactive)
+  (let ((buf-name (format "%s-term" (+workspace-current-name))))
+    (if (get-buffer buf-name)
+        (switch-to-buffer buf-name)
+      (message "buffer %s not exist!" buf-name)
+      )
+    )
+  )
+
+;;;###autoload
+(defun me/open-module-init ()
+  (interactive)
+  (find-file (format "%s/config.el" +showgood-dir))
+  )

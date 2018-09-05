@@ -346,18 +346,10 @@
 (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
 (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
 
+;; https://oremacs.com/2018/03/05/grep-exclude/
+(setq counsel-git-cmd "rg --files")
+(setq counsel-rg-base-command
+      "rg -i -M 120 --no-heading --line-number --color never %s .")
 
-(defun me/switch-to-project-term ()
-  (interactive)
-  (let ((buf-name (format "%s-term" (+workspace-current-name))))
-    (if (get-buffer buf-name)
-        (switch-to-buffer buf-name)
-      (message "buffer %s not exist!" buf-name)
-      )
-    )
-  )
-
-(defun me/open-module-init ()
-  (interactive)
-  (find-file (format "%s/config.el" +showgood-dir))
-  )
+;; 0.1 is too short which cause lagging in lsp-complete for c++ files
+(setq company-idle-delay 0.5)

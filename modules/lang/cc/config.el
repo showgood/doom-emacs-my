@@ -105,42 +105,11 @@ compilation database is present in the project.")
 (def-package! modern-cpp-font-lock
   :hook (c++-mode . modern-c++-font-lock-mode))
 
-(def-package! irony
-  :after cc-mode
-  :commands irony-install-server
-  :preface (setq irony-server-install-prefix (concat doom-etc-dir "irony-server/"))
-  :init
-  (defun +cc|init-irony-mode ()
-    (when (memq major-mode '(c-mode c++-mode objc-mode))
-      (irony-mode +1)))
-  (add-hook! (c-mode c++-mode objc-mode) #'+cc|init-irony-mode)
-  :config
-  (unless (file-directory-p irony-server-install-prefix)
-    (warn "irony-mode: server isn't installed; run M-x irony-install-server"))
-  ;; Initialize compilation database, if present. Otherwise, fall back on
-  ;; `+cc-default-compiler-options'.
-  (add-hook 'irony-mode-hook #'+cc|irony-init-compile-options))
-
-(def-package! irony-eldoc
-  :after irony
-  :hook (irony-mode . irony-eldoc))
-
-(def-package! flycheck-irony
-  :when (featurep! :feature syntax-checker)
-  :after irony
-  :config
-  (add-hook 'irony-mode-hook #'flycheck-mode)
-  (flycheck-irony-setup))
-
-
-;;
 ;; Tools
 ;;
 
 (def-package! disaster :commands disaster)
 
-
-;;
 ;; Major modes
 ;;
 
@@ -172,14 +141,6 @@ compilation database is present in the project.")
   :when (featurep! :completion company)
   :after cmake-mode)
 
-(def-package! company-irony
-  :when (featurep! :completion company)
-  :after irony)
-
-(def-package! company-irony-c-headers
-  :when (featurep! :completion company)
-  :after company-irony)
-
 (def-package! company-glsl
   :when (featurep! :completion company)
   :after glsl-mode
@@ -187,56 +148,6 @@ compilation database is present in the project.")
   (if (executable-find "glslangValidator")
       (warn "glsl-mode: couldn't find glslangValidator, disabling company-glsl")
     (set! :company-backend 'glsl-mode '(company-glsl))))
-
-
-;;
-;; Rtags Support
-;;
-
-;; (def-package! rtags
-;;   :after cc-mode
-;;   :config
-;;   (setq rtags-autostart-diagnostics t
-;;         rtags-use-bookmarks nil
-;;         rtags-completions-enabled t
-;;         rtags-socket-file (expand-file-name "~/.rdm")
-;;         ;; If not using ivy or helm to view results, use a pop-up window rather
-;;         ;; than displaying it in the current window...
-;;         rtags-results-buffer-other-window t
-;;         ;; ...and don't auto-jump to first match before making a selection.
-;;         rtags-jump-to-first-match nil)
-
-;;   (let ((bins (cl-remove-if-not #'executable-find '("rdm" "rc"))))
-;;     (if (/= (length bins) 2)
-;;         (warn "cc-mode: couldn't find %s, disabling rtags support" bins)
-;;       (add-hook! (c-mode c++-mode) #'rtags-start-process-unless-running)
-;;       (set! :jump '(c-mode c++-mode)
-;;         :definition #'rtags-find-symbol-at-point
-;;         :references #'rtags-find-references-at-point)))
-
-;;   (add-hook 'doom-cleanup-hook #'rtags-cancel-process)
-;;   (add-hook! kill-emacs (ignore-errors (rtags-cancel-process)))
-
-;;   ;; Use rtags-imenu instead of imenu/counsel-imenu
-;;   (map! :map (c-mode-map c++-mode-map) [remap imenu] #'rtags-imenu)
-
-;;   (add-hook 'rtags-jump-hook #'evil-set-jump)
-;;   (add-hook 'rtags-after-find-file-hook #'recenter))
-
-;; (def-package! ivy-rtags
-;;   :when (featurep! :completion ivy)
-;;   :after rtags
-;;   :init
-;;   ;; NOTE Ivy integration breaks when rtags is byte-compiled with Emacs 26 or
-;;   ;; later, so we un-byte-compile it before we load it.
-;;   (eval-when-compile
-;;     (when (>= emacs-major-version 26)
-;;       (when-let* ((elc-file (locate-library "rtags.elc" t doom--package-load-path)))
-;;         (delete-file elc-file))))
-;;   :config (setq rtags-display-result-backend 'ivy))
-
-;; (evil-add-command-properties #'rtags-find-symbol-at-point :jump t)
-;; (evil-add-command-properties #'rtags-find-references-at-point :jump t)
 
 (use-package clang-format
   :ensure t
