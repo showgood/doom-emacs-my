@@ -19,7 +19,6 @@
 ; proper line wrapping
 (global-visual-line-mode 1)
 
-(fset 'evil-visual-update-x-selection 'ignore)
 (evil-add-command-properties #'counsel-imenu :jump t)
 
 ;; ==== frequently used packages {{{ ====
@@ -67,19 +66,19 @@
 
 ;; settings needed for irony-mode, disabled it since it cause slowness
 ;; (setq irony-server-install-prefix "~/tools/irony-server")
-(setq irony-cdb-search-directory-list '("." "src" "build"))
+;; (setq irony-cdb-search-directory-list '("." "src" "build"))
 ;; (setenv "ld_library_path" "/opt/bb/lib/llvm-5.0/lib64")
 
 ;; ==== world clock {{{ ====
 ;; https://en.wikipedia.org/wiki/list_of_tz_database_time_zones
 (setq display-time-world-list
-        '(("America/New_York" "New York")
-          ("Asia/Shanghai" "Shanghai")
-          ("Australia/Sydney" "Sydney")
-          ("Europe/London" "London")
-          ("Europe/Berlin" "Germany")
-          ("Europe/Rome" "Italy")
-          ("Europe/Paris" "Paris")))
+      '(("America/New_York" "New York")
+        ("Asia/Shanghai" "Shanghai")
+        ("Australia/Sydney" "Sydney")
+        ("Europe/London" "London")
+        ("Europe/Berlin" "Germany")
+        ("Europe/Rome" "Italy")
+        ("Europe/Paris" "Paris")))
 
 ;; quick way to dispaly world time clock
 (defalias 'wc 'display-time-world)
@@ -92,23 +91,6 @@
 (setq flycheck-c/c++-clang-executable "/usr/local/opt/llvm/bin/clang++")
 (setq flycheck-clang-args '("-m32" "-Dlint" "-D_REENTRANT"
                             "-D_THREAD_SAFE" "-DBB_THREADED" "-DBSL_OVERRIDES_STD"))
-
-;; (defun my-flycheck-setup ()
-;;   (flycheck-select-checker 'c/c++-clang))
-;; (add-hook 'c-mode-common-hook #'my-flycheck-setup)
-
-                                        ; this does not work, not sure why
-;; (require 'flycheck-rtags)
-;; ;; http://syamajala.github.io/c-ide.html
-;; (add-hook 'c++-mode-hook 'flycheck-mode)
-;; (add-hook 'c-mode-hook 'flycheck-mode)
-
-;; (defun my-flycheck-rtags-setup ()
-;;   (flycheck-select-checker 'rtags)
-;;   (setq-local flycheck-highlighting-mode nil) ;; rtags creates more accurate overlays.
-;;   (setq-local flycheck-check-syntax-automatically nil))
-;; ;; c-mode-common-hook is also called by c++-mode
-;; (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup)
 
 ;; ==== flycheck settings }}} ====
 
@@ -205,8 +187,8 @@
   (setq-default ispell-program-name "hunspell")
   (setq ispell-really-hunspell t))
 
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
+;; (dolist (hook '(text-mode-hook))
+;;   (add-hook hook (lambda () (flyspell-mode 1))))
 
 (require 'langtool)
 (setq langtool-language-tool-jar "/usr/local/Cellar/languagetool/4.1/libexec/languagetool-commandline.jar"
@@ -216,7 +198,9 @@
                                 "COMMA_PARENTHESIS_WHITESPACE"
                                 "EN_QUOTES"))
 
-(require 'org-mac-link)
+(when IS-MAC
+    (require 'org-mac-link)
+)
 
 (require 'ox-latex)
 (setq org-latex-listings 'minted
@@ -253,11 +237,6 @@
 ;; then run: M-x elpamr-create-mirror-for-installed
 (require 'elpa-mirror)
 (setq elpamr-default-output-directory "~/myelpa")
-
-(require 'aggressive-indent)
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'python-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'lisp-mode)
 
 (setq company-lsp-enable-recompletion t)
 
@@ -377,7 +356,6 @@
       )
     )
   )
-
 
 (defun me/open-module-init ()
   (interactive)

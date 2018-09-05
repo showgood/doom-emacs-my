@@ -51,6 +51,9 @@
 ;; no longer using
 ;; (package! paperless)
 
+;; often it messes the existing code
+;; (package! aggressive-indent)
+
 ;; not working for me
 ;; (package! esup)
 ;; (package! ox-clip)
@@ -61,4 +64,3 @@
 ;; (package! wand)
 ;; (package! lentic)
 ;; (package! nov)
-(package! aggressive-indent)
