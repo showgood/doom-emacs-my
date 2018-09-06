@@ -26,7 +26,8 @@ MODES should be one major-mode symbol or a list of them."
   :commands (company-mode global-company-mode company-complete
              company-complete-common company-manual-begin company-grab-line)
   :config
-  (setq company-idle-delay 0.1
+  ;; 0.1 is too short which cause lagging in lsp-complete for c++ files
+  (setq company-idle-delay 0.5
         company-tooltip-limit 10
         company-minimum-prefix-length 3
         company-show-numbers t

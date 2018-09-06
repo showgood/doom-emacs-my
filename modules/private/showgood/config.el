@@ -64,11 +64,6 @@
         (append (list '+showgood-snippets-dir)
                 (delq 'yas-installed-snippets-dir yas-snippet-dirs))))
 
-;; settings needed for irony-mode, disabled it since it cause slowness
-;; (setq irony-server-install-prefix "~/tools/irony-server")
-;; (setq irony-cdb-search-directory-list '("." "src" "build"))
-;; (setenv "ld_library_path" "/opt/bb/lib/llvm-5.0/lib64")
-
 ;; ==== world clock {{{ ====
 ;; https://en.wikipedia.org/wiki/list_of_tz_database_time_zones
 (setq display-time-world-list
@@ -230,8 +225,8 @@
       (expand-file-name "~/tools/plantuml.1.2018.5.jar"))
 
 (require 'ox-reveal)
-(setq Org-Reveal-root "file:///~/reveal.js")
-(setq Org-Reveal-title-slide nil)
+(setq org-reveal-root (format "file://%s/reveal.js" (substitute-in-file-name "$HOME")))
+(setq org-reveal-title-slide nil)
 
 ;; ONLY turn on this when local repository for package needs to be updated
 ;; then run: M-x elpamr-create-mirror-for-installed
@@ -350,6 +345,3 @@
 (setq counsel-git-cmd "rg --files")
 (setq counsel-rg-base-command
       "rg -i -M 120 --no-heading --line-number --color never %s .")
-
-;; 0.1 is too short which cause lagging in lsp-complete for c++ files
-(setq company-idle-delay 0.5)
