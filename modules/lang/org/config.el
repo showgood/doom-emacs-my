@@ -218,7 +218,7 @@ unfold to point on startup."
                                           :background nil t)))
 
   ;; Custom links
-  (when (fboundp org-link-set-parameters)
+  (when (fboundp 'org-link-set-parameters)
     (org-link-set-parameters
      "org"
      :complete (lambda () (+org-link-read-file "org" +org-dir))
@@ -228,7 +228,7 @@ unfold to point on startup."
                      'org-link
                    'error)))
     )
-)
+  )
 
 (defun +org-init-keybinds ()
   "Sets up org-mode and evil keybindings. Tries to fix the idiosyncrasies
