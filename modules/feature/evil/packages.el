@@ -16,7 +16,7 @@
 
 (package! evil-replace-with-register)
 
-(unless (eq doom-mode "minimal")
+(unless (equal doom-mode "minimal")
     (package! evil-vimish-fold)
     (package! evil-mc)
     (package! evil-multiedit)
