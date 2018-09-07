@@ -136,6 +136,4 @@
     (setq ls-lisp-use-insert-directory-program nil)
 )
 
-(unless (equal doom-mode "minimal")
-  (load! +extra)
-)
+(unless MINIMAL-MODE (load! +extra))

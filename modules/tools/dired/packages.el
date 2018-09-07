@@ -6,7 +6,7 @@
 (package! dired+ :recipe (:fetcher github :repo "emacsmirror/dired-plus"))
 (package! dired-hacks-utils)
 
-(unless (equal doom-mode "minimal")
+(unless MINIMAL-MODE
     (package! ranger)
     (package! peep-dired)
     (package! dired-sidebar)

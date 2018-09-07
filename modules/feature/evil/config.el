@@ -233,7 +233,4 @@ the new algorithm is confusing, like in python or ruby."
   :config
   (global-evil-visualstar-mode 1))
 
-(unless (equal doom-mode "minimal")
-  (load! +extra)
-)
-
+(unless MINIMAL-MODE (load! +extra))

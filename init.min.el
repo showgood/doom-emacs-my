@@ -48,7 +48,6 @@
        doom-dashboard            ; a nifty splash screen for Emacs
        doom-modeline             ; a snazzy Atom-inspired mode-line
        doom-quit                 ; DOOM quit-message prompts when you quit Emacs
-       hl-todo                   ; highlight TODO/FIXME/NOTE tags
        (window-select +ace-window)      ; visually switch windows
 
        :tools
@@ -61,7 +60,6 @@
        cc                               ; C/C++/Obj-C madness
        emacs-lisp                       ; drown in parentheses
        javascript                ; all(hope(abandon(ye(who(enter(here))))))
-       lua                       ; one-based indices? one-based indices
        markdown                  ; writing docs for people to ignore
        python                           ; beautiful is better than ugly
 
@@ -70,5 +68,5 @@
        ;; the defaults module. It contains a Spacemacs-inspired keybinding
        ;; scheme and additional ex commands for evil-mode. Use it as a reference
        ;; for your own.
-       ;; :private showgood
+       :private minimal
        )

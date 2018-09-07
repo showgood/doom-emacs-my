@@ -88,6 +88,4 @@
       ("Reformat buffer (eslint_d)"      :exec eslintd-fix :region nil :when (fboundp 'eslintd-fix)))
     :prompt "Refactor: "))
 
-(unless (equal doom-mode "minimal")
-  (load! +extra)
-  )
+(unless MINIMAL-MODE (load! +extra))

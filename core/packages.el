@@ -15,7 +15,7 @@
   (package! nlinum-relative))
 (package! rainbow-delimiters)
 
-(unless (equal doom-mode "minimal")
+(unless MINIMAL-MODE
   (package! highlight-indentation)
   (package! highlight-numbers)
   (package! visual-fill-column)

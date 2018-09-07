@@ -61,8 +61,8 @@ Use this for files that change often, like cache files.")
 melodramatic ex-vimmer disappointed with the text-editor status quo."
   :group 'emacs)
 
+(defconst MINIMAL-MODE   (equal doom-mode "minimal"))
 
-;;;
 ;; UTF-8 as the default coding system
 (when (fboundp 'set-charset-priority)
   (set-charset-priority 'unicode))     ; pretty

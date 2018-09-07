@@ -6,7 +6,7 @@
 (package! js2-mode)
 (package! js2-refactor)
 
-(unless (equal doom-mode "minimal")
+(unless MINIMAL-MODE
     (package! coffee-mode)
     (package! rjsx-mode)
     (package! nodejs-repl)

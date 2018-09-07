@@ -4,13 +4,13 @@
 (package! auto-compile)
 (package! highlight-quoted)
 
-(when (featurep! :feature syntax-checker)
-  (package! flycheck-cask))
-
-(unless (equal doom-mode "minimal")
+(unless MINIMAL-MODE
     (package! macrostep)
     (package! overseer)
     (package! slime)
     (package! lispy)
     (package! lispyville)
+
+    (when (featurep! :feature syntax-checker)
+    (package! flycheck-cask))
 )

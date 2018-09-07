@@ -19,9 +19,12 @@
     #'(;; 3rd-party functionality
        eldoc-mode auto-compile-on-save-mode doom|enable-delete-trailing-whitespace
        ;; fontification
-       rainbow-delimiters-mode highlight-quoted-mode highlight-numbers-mode +emacs-lisp|extra-fontification
+       rainbow-delimiters-mode highlight-quoted-mode  +emacs-lisp|extra-fontification
        ;; initialization
        +emacs-lisp|init-imenu +emacs-lisp|init-flycheck))
+
+  (unless MINIMAL-MODE
+    (add-hook! 'emacs-lisp-mode-hook #'highlight-numbers-mode))
 
   ;;
   (defun +emacs-lisp|extra-fontification ()
@@ -75,6 +78,4 @@
   :modes (emacs-lisp-mode)
   :match "/test[/-].+\\.el$")
 
-(unless (equal doom-mode "minimal")
-  (load! +extra)
-  )
+(unless MINIMAL-MODE (load! +extra))

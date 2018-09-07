@@ -10,7 +10,7 @@
   (package! evil-magit)
   (package! magit)
 
-  (unless (equal doom-mode "minimal")
+  (unless MINIMAL-MODE
     (package! git-gutter-fringe)
     (package! git-link)
     (package! gitconfig-mode)

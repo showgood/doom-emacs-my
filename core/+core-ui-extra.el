@@ -9,7 +9,6 @@
 (def-package! highlight-indentation
   :commands (highlight-indentation-mode highlight-indentation-current-column-mode))
 
-
 ;; For a distractions-free-like UI, that dynamically resizes margets and can
 ;; center a buffer.
 (def-package! visual-fill-column
@@ -21,3 +20,6 @@
    ;; take Emacs 26 line numbers into account
    (+ (if (boundp 'display-line-numbers) 6 0)
       fill-column)))
+
+;; For modes with sub-par number fontification
+(def-package! highlight-numbers :commands highlight-numbers-mode)

@@ -4,10 +4,7 @@
 (package! modern-cpp-font-lock)
 (package! clang-format)
 
-(when (featurep! :feature syntax-checker)
-  (package! flycheck-irony))
-
-(unless (equal doom-mode "minimal")
+(unless MINIMAL-MODE
     (package! cmake-mode)
     (package! demangle-mode)
     (package! disaster)

@@ -170,9 +170,7 @@ fundamental-mode) for performance sake."
              helpful-key helpful-symbol helpful-variable)
 )
 
-(unless (equal doom-mode "minimal")
-  (load! +core-editor-extra)
-  )
+(unless MINIMAL-MODE (load! +core-editor-extra))
 
 (provide 'core-editor)
 ;;; core-editor.el ends here

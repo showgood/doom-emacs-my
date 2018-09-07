@@ -1,5 +1,4 @@
-;;; private/minimal/config.el -*- lexical-binding: t; -*-
-
+;(setq debug-on-error t)
 (general-define-key
  :states '(normal visual insert emacs)
  :keymaps 'override
@@ -134,16 +133,10 @@
  :states '(normal visual)
  "gc" '(evil-commentary :which-key "evil commentary")
  "gx" '(evil-exchange :which-key "evil exchange")
- "gd" '(+jump/definition :which-key "jump to definition")
- "gD" '(+jump/references :which-key "jump to references")
- "gh" '(+jump/documentation :which-key "jump to documentation")
  "gp" '(+evil/reselect-paste :which-key "+evil/reselect-paste")
  "gr" '(+eval:region :which-key "+eval:region")
  "gR" '(+eval/buffer :which-key "+eval/buffer")
-
- ;;  :v  "gR" #'+eval:replace-region
  )
-
 
 ;; NOTE: need to use 'override to make M-y works in evil-ex-map
 (general-define-key
@@ -156,3 +149,5 @@
  :keymaps 'helpful-mode-map
  "q" '(+workspace/close-window-or-workspace :which-key "close window")
  )
+
+;(toggle-frame-maximized)

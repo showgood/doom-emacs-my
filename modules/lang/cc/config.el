@@ -71,7 +71,10 @@ compilation database is present in the project.")
 
 ;;; Better fontification (also see `modern-cpp-font-lock')
   (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode)
-  (add-hook! (c-mode c++-mode) #'highlight-numbers-mode)
+
+  (unless MINIMAL-MODE
+    (add-hook! (c-mode c++-mode) #'highlight-numbers-mode))
+
   (add-hook! (c-mode c++-mode) #'+cc|fontify-constants)
 
   ;; Improve indentation of inline lambdas in C++11
@@ -105,6 +108,4 @@ compilation database is present in the project.")
 (def-package! modern-cpp-font-lock
   :hook (c++-mode . modern-c++-font-lock-mode))
 
-(unless (equal doom-mode "minimal")
-  (load! +extra)
-  )
+(unless MINIMAL-MODE (load! +extra))

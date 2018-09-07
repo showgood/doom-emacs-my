@@ -260,9 +260,6 @@ instead)."
   :commands (hs-minor-mode hs-toggle-hiding hs-already-hidden-p)
   :config (setq hs-hide-comments-when-hiding-all nil))
 
-;; For modes with sub-par number fontification
-(def-package! highlight-numbers :commands highlight-numbers-mode)
-
 ;; Highlights the current line
 (def-package! hl-line ; built-in
   :hook ((prog-mode text-mode conf-mode ranger-mode dired-mode) . hl-line-mode)
@@ -488,9 +485,7 @@ DEFAULT is non-nil, set the default mode-line for all buffers."
       doom-unicode-font (font-spec :family "Fira Code")
       doom-big-font (font-spec :family "Fira Code" :size 19))
 
-(unless (equal doom-mode "minimal")
-  (load! +core-ui-extra)
-  )
+(unless MINIMAL-MODE (load! +core-ui-extra))
 
 (provide 'core-ui)
 ;;; core-ui.el ends here

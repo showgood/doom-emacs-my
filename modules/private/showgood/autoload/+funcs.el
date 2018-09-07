@@ -15,19 +15,6 @@
   (switch-to-buffer-other-window "*run-cmd-anywhere*")
 )
 
-;;soure:https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el
-;; only copy file name (not including path)
-;;;###autoload
-(defun cp-filename-of-current-buffer ()
-  "Copy file name (NOT full path) into the yank ring and OS clipboard"
-  (interactive)
-  (let (filename)
-    (when buffer-file-name
-      ;; (setq filename (file-name-nondirectory buffer-file-name))
-      (setq filename (file-name-nondirectory buffer-file-name))
-      (kill-new filename)
-      (message "filename %s => clipboard & yank ring" filename))))
-
 ;;;###autoload
 (defun get-local-file-name (file-name)
   (interactive)
@@ -137,25 +124,9 @@ Version 2015-06-12"
 )
 
 ;;;###autoload
-(defun +hlissner/yank-buffer-filename ()
-  "Copy the current buffer's path to the kill ring."
-  (interactive)
-  (if-let (filename (or buffer-file-name (bound-and-true-p list-buffers-directory)))
-      (message (kill-new (abbreviate-file-name filename)))
-    (error "Couldn't find filename in current buffer")))
-
-;;;###autoload
 (defun open-scratch()
   (interactive)
   (doom-popup-buffer (get-buffer-create  "*scratch*")))
-
-;; from prelude
-;;;###autoload
-(defun switch-to-previous-buffer ()
-  "Switch to previously open buffer.
-Repeated invocations toggle between the two most recently open buffers."
-  (interactive)
-  (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 ;; https://emacs.stackexchange.com/questions/5371/how-to-change-emacs-windows-from-vertical-split-to-horizontal-split
 ;;;###autoload
