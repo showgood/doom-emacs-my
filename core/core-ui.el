@@ -256,19 +256,9 @@ instead)."
                 all-the-icons-wicon all-the-icons-alltheicon))
     (advice-add fn :around #'doom*disable-all-the-icons-in-tty)))
 
-(def-package! fringe-helper
-  :commands (fringe-helper-define fringe-helper-convert)
-  :init
-  (unless (fboundp 'define-fringe-bitmap)
-    ;; doesn't exist in terminal Emacs; define it to prevent errors
-    (defun define-fringe-bitmap (&rest _))))
-
 (def-package! hideshow ; built-in
   :commands (hs-minor-mode hs-toggle-hiding hs-already-hidden-p)
   :config (setq hs-hide-comments-when-hiding-all nil))
-
-(def-package! highlight-indentation
-  :commands (highlight-indentation-mode highlight-indentation-current-column-mode))
 
 ;; For modes with sub-par number fontification
 (def-package! highlight-numbers :commands highlight-numbers-mode)
@@ -317,19 +307,6 @@ instead)."
 (def-package! rainbow-delimiters
   :hook (lisp-mode . rainbow-delimiters-mode)
   :config (setq rainbow-delimiters-max-face-count 3))
-
-;; For a distractions-free-like UI, that dynamically resizes margets and can
-;; center a buffer.
-(def-package! visual-fill-column
-  :commands visual-fill-column-mode
-  :config
-  (setq-default
-   visual-fill-column-center-text t
-   visual-fill-column-width
-   ;; take Emacs 26 line numbers into account
-   (+ (if (boundp 'display-line-numbers) 6 0)
-      fill-column)))
-
 
 ;;
 ;; Line numbers
@@ -510,6 +487,10 @@ DEFAULT is non-nil, set the default mode-line for all buffers."
       doom-variable-pitch-font (font-spec :family "Fira Code")
       doom-unicode-font (font-spec :family "Fira Code")
       doom-big-font (font-spec :family "Fira Code" :size 19))
+
+(unless (equal doom-mode "minimal")
+  (load! +core-ui-extra)
+  )
 
 (provide 'core-ui)
 ;;; core-ui.el ends here

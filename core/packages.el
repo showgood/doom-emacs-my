@@ -9,15 +9,24 @@
 
 ;; core-ui.el
 (package! all-the-icons)
-(package! fringe-helper)
-(package! highlight-indentation)
-(package! highlight-numbers)
 (unless (boundp 'display-line-numbers)
   (package! nlinum)
   (package! nlinum-hl)
   (package! nlinum-relative))
 (package! rainbow-delimiters)
-(package! visual-fill-column)
+
+(unless (equal doom-mode "minimal")
+  (package! highlight-indentation)
+  (package! highlight-numbers)
+  (package! visual-fill-column)
+  (package! fringe-helper)
+  (package! editorconfig)
+  (package! expand-region)
+  (package! command-log-mode)
+  (package! smart-forward)
+  (package! undo-tree)
+  (package! pcre2el)
+)
 
 ;; core-popups.el
 (package! shackle)
@@ -26,17 +35,11 @@
 (package! ace-link)
 (package! ace-window)
 (package! avy)
-(package! command-log-mode)
-(package! editorconfig)
-(package! expand-region)
 
 ;; (package! help-fns+ :recipe (:fetcher github :repo "emacsmirror/help-fns-plus"))
 (package! bookmark+ :recipe (:fetcher github :repo "emacsmirror/bookmark-plus"))
 
-(package! pcre2el)
-(package! smart-forward)
 (package! smartparens)
-(package! undo-tree)
 (package! wgrep)
 
 ;; core-projects.el
