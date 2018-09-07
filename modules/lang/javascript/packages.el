@@ -6,12 +6,6 @@
 (package! js2-mode)
 (package! js2-refactor)
 
-(when (featurep! :completion company)
-  (package! company-tern))
-
-(when (featurep! :feature jump)
-  (package! xref-js2))
-
 (unless (equal doom-mode "minimal")
     (package! coffee-mode)
     (package! rjsx-mode)
@@ -20,4 +14,10 @@
     (package! skewer-mode)
     (package! eslintd-fix)
     (package! web-beautify)
+
+(when (featurep! :completion company)
+  (package! company-tern))
+
+(when (featurep! :feature jump)
+  (package! xref-js2))
   )

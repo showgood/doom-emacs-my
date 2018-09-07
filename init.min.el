@@ -27,9 +27,9 @@
 ;;
 ;;; License: MIT
 
-(require 'core (concat user-emacs-directory "core/core"))
-
 (defvar doom-mode "minimal")
+
+(require 'core (concat user-emacs-directory "core/core"))
 
 (doom! :feature
        eval                             ; run code, run (also, repls)
