@@ -6,12 +6,14 @@
 
 ;;; +git
 (unless (featurep! -git)
-  (package! git-gutter-fringe)
-  (package! git-link)
   (package! git-timemachine)
-  (package! gitconfig-mode)
-  (package! gitignore-mode)
   (package! evil-magit)
-  (package! magit))
+  (package! magit)
 
-;;; TODO +hg
+  (unless (equal doom-mode "minimal")
+    (package! git-gutter-fringe)
+    (package! git-link)
+    (package! gitconfig-mode)
+    (package! gitignore-mode)
+    )
+  )
