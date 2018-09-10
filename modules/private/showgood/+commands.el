@@ -104,4 +104,4 @@
 (ex! "cap"         #'+org-capture/dwim)
 
 ;; clear the term-mode buffer
-(ex! "cl"          #'me/clear-term)
+(ex! "cl"          #'comint-clear-buffer)

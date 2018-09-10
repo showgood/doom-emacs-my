@@ -359,12 +359,6 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
 
 
 ;;;###autoload
-(defun me/clear-term ()
-  (interactive)
-  (delete-region (point-min) (point-max))
-  (comint-send-input))
-
-;;;###autoload
 (defun me/create-clang-format ()
   "make a copy of clang-format file"
   (interactive)
