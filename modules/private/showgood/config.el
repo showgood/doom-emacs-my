@@ -345,3 +345,22 @@
 (setq counsel-git-cmd "rg --files")
 (setq counsel-rg-base-command
       "rg -i -M 120 --no-heading --line-number --color never %s .")
+
+(defun me/close-helpful-buffer ()
+  "close helpful buffer properly"
+  (interactive)
+  (helpful-kill-buffers)
+  (+workspace/close-window-or-workspace)
+)
+
+(defun me/new-project-term ()
+  "create a term-mode buffer which belongs to current workspace (persp-mode)"
+  (interactive)
+  (+term/open)
+  (let ( (term-name (format "%s-term" (+workspace-current-name)))
+        )
+    (rename-buffer term-name t)
+    (persp-add-buffer
+      (current-buffer) (get-current-persp) t nil)
+  )
+)
