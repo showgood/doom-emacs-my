@@ -128,22 +128,6 @@ Version 2015-06-12"
   (interactive)
   (doom-popup-buffer (get-buffer-create  "*scratch*")))
 
-;; https://emacs.stackexchange.com/questions/5371/how-to-change-emacs-windows-from-vertical-split-to-horizontal-split
-;;;###autoload
-(defun window-split-toggle ()
-  "Toggle between horizontal and vertical split with two windows."
-  (interactive)
-  (if (> (length (window-list)) 2)
-      (error "Can't toggle with more than 2 windows!")
-    (let ((func (if (window-full-height-p)
-                    #'split-window-vertically
-                  #'split-window-horizontally)))
-      (delete-other-windows)
-      (funcall func)
-      (save-selected-window
-        (other-window 1)
-        (switch-to-buffer (other-buffer))))))
-
 ;;;###autoload
 (defun xml-format ()
   (interactive)
@@ -277,22 +261,6 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
     ;; (setq val (replace-regexp-in-string ".*;" "" val))
     (kill-new val)
 (message "%s => kill-ring" val))))
-
-;;;###autoload
-(defun me/create-org-table-from-clipboard ()
-  (interactive)
-  (let* ((buf (current-buffer)))
-    (with-temp-buffer
-      (switch-to-buffer (current-buffer) nil t)
-      (insert (get-kill-ring))
-      (mark-whole-buffer)
-      (org-table-create-or-convert-from-region nil)
-      (org-table-insert-hline)
-      (goto-char (point-min))
-      (open-line 1)
-      (insert "#+tblname:")
-      (append-to-buffer buf (point-min) (point-max))
-      )))
 
 ;;;###autoload
 (defun search-current-line(pattern)
