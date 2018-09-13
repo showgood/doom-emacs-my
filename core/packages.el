@@ -50,3 +50,4 @@
 (package! hydra)
 (package! general)
 (package! helpful)
+(package! ag)
