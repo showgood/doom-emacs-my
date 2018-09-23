@@ -27,7 +27,20 @@
 ;;
 ;;; License: MIT
 
-(defvar doom-mode "minimal")
+;; this is not really working when run command
+;; make install
+;; since we bypass this init file
+;; (defvar doom-mode "minimal")
+
+;; instead define environment varibles for it:
+;; export doom_mode="minimal"
+
+;; define this if want to install package from internet
+;; export doom_package_source="remote"
+
+;; define this to fetch package using http instead of https
+;; export doom_package_fetch_secure="insecure"
+
 
 (require 'core (concat user-emacs-directory "core/core"))
 
