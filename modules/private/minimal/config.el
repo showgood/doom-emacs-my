@@ -150,4 +150,14 @@
  "q" '(+workspace/close-window-or-workspace :which-key "close window")
  )
 
+(evil-set-initial-state 'compilation-mode 'normal)
+(general-define-key
+ :states '(normal)
+ :keymaps 'compilation-mode-map
+ :prefix "SPC"
+ "gg" '(evil-goto-first-line :which-key "go to begining")
+ "gr" '(recompile :which-key "recompile")
+ "go" '(compilation-display-error :which-key "display error")
+ "ep" '(compilation-previous-error :which-key "previous error")
+ "en" '(compilation-next-error :which-key "next error"))
 ;(toggle-frame-maximized)
