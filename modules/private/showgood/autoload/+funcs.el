@@ -160,21 +160,6 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
                 (kill-new (format "/%s" (mapconcat 'identity path "/"))))
           (format "/%s" (mapconcat 'identity path "/")))))))
 
-;;;###autoload
-(defun me/A ()
-  "open the corresponding header/cpp file, like A plugin in vim"
-  (interactive)
-  (split-window-right-and-focus)
-  (ff-find-other-file)
-)
-
-;;;###autoload
-(defun me/a ()
-  "open the corresponding header/cpp file in current buffer"
-  (interactive)
-  (ff-find-other-file)
-)
-
 ;; http://blog.binchen.org/posts/complete-line-with-ivy-mode.html
 ;;;###autoload
 (defun counsel-escape (keyword)
