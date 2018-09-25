@@ -89,6 +89,9 @@ melodramatic ex-vimmer disappointed with the text-editor status quo."
 (defvar doom-package-source "local")
 (set-from-env "doom_package_source" 'doom-package-source)
 
+(defvar doom-package-local-dir "~/myelpa/")
+(set-from-env "doom_package_local_dir" 'doom-package-local-dir)
+
 (defvar doom-package-fetch-secure "secure")
 (set-from-env "doom_package_fetch_secure" 'doom-package-fetch-secure)
 

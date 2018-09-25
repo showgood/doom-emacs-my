@@ -527,7 +527,7 @@ Ensures the scratch (or dashboard) buffers are CDed into the project's root."
     (persp-switch doom-last-selected-workspace)))
 
 ;;;###autoload
-(defun me/new-project-term ()
+(defun me/new-workspace-term ()
   "create a term-mode buffer which belongs to current workspace (persp-mode)"
   (interactive)
   (+term/open)

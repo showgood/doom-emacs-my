@@ -123,7 +123,7 @@ base by `doom!' and for calculating how many packages exist.")
       byte-compile-warnings '(not free-vars unresolved noruntime lexical make-local))
 
 (when (equal doom-package-source "local")
-  (setq package-archives '(("myelpa" . "~/myelpa/")))
+  (setq package-archives '(("myelpa" . doom-package-local-dir)))
   (message "fetching packages using local source.")
 )
 
