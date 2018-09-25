@@ -23,6 +23,7 @@
  "i" '(evil-emacs-state :which-key "insert")
  "a" '(evil-emacs-state :which-key "insert")
  "C-y" '(me/paste-in-term-mode :which-key "paste")
+ "C-z" '(comint-clear-buffer :which-key "clear buffer")
 )
 
 (general-define-key
@@ -30,4 +31,10 @@
  :keymaps 'term-raw-map
  "C-;" '(evil-normal-state :which-key "escape")
  "C-y" '(me/paste-in-term-mode :which-key "paste")
+ "C-k" '(term-send-up :which-key "up")
+ "C-j" '(term-send-down :which-key "<down>")
+ "C-z" '(comint-clear-buffer :which-key "clear buffer")
+ ;; this also works by simulating the key as up/down
+ ;; "C-k" (general-simulate-key "<up>")
+ ;; "C-j" (general-simulate-key "<down>")
 )
