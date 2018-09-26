@@ -1015,7 +1015,10 @@
 
  "l" '(:ignore t :which-key "workspace/layout")
  "ln" '(+workspace/me/new :which-key "New workspace")
+ "ld" '(+workspace/delete :which-key "delete workspace")
  "ll" '(+workspace/switch-to :which-key "switch workspace")
+ "lr" '(+workspace/rename :which-key "rename workspace")
+ "lt" '(me/new-workspace-term :which-key "create a term-mode buffer for workspace")
  "l TAB" '(doom/jump-to-last-workspace :which-key "toggle workspace")
 
  "n" '(:ignore t :which-key "Notes")
@@ -1311,7 +1314,7 @@
 (general-define-key
  :states '(normal)
  :keymaps 'helpful-mode-map
- "q" '(+workspace/close-window-or-workspace :which-key "close window")
+ "q" '(me/close-helpful-buffer :which-key "close window")
  )
 ;; keyboard shortcuts
 ;; (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)

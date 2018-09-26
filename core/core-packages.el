@@ -91,13 +91,10 @@ base by `doom!' and for calculating how many packages exist.")
       package-user-dir (expand-file-name "elpa" doom-packages-dir)
       package-enable-at-startup nil
 
-      ;; turn on this to use local repository
-      package-archives '(("myelpa" . "~/myelpa/"))
-
       ;; use this to install new packages or update packages
-      ;package-archives
-      ;'(("gnu"   . "https://elpa.gnu.org/packages/")
-      ;  ("melpa" . "https://melpa.org/packages/"))
+      package-archives
+      '(("gnu"   . "https://elpa.gnu.org/packages/")
+       ("melpa" . "https://melpa.org/packages/"))
 
       ;; I omit Marmalade because its packages are manually submitted rather
       ;; than pulled, so packages are often out of date with upstream.
@@ -125,19 +122,32 @@ base by `doom!' and for calculating how many packages exist.")
       byte-compile-verbose doom-debug-mode
       byte-compile-warnings '(not free-vars unresolved noruntime lexical make-local))
 
+(when (equal doom-package-source "local")
+  (setq package-archives '(("myelpa" . doom-package-local-dir)))
+  (message "fetching packages using local source.")
+)
+
+(when (and (equal doom-package-source "remote")
+           (equal doom-package-fetch-secure "insecure"))
+  (setq package-archives
+        '(("gnu"   . "http://elpa.gnu.org/packages/")
+         ("melpa" . "http://melpa.org/packages/")))
+
+  (message "fetch package from internet with http")
+)
 
 ;;
 ;; Bootstrap function
 ;;
 
 (defun doom-initialize (&optional force-p)
-  "Initialize installed packages (using package.el) and ensure the core packages
+    "Initialize installed packages (using package.el) and ensure the core packages
 are installed.
 
 If you byte-compile core/core.el, this function will be avoided to speed up
 startup."
   ;; Called early during initialization; only use native (and cl-lib) functions!
-  (when (or force-p (not doom-init-p))
+    (when (or force-p (not doom-init-p))
     ;; Speed things up with a `load-path' for only the bare essentials
     (let ((load-path doom--base-load-path))
       ;; Ensure core folders exist, otherwise we get errors
@@ -160,8 +170,8 @@ startup."
             (let ((inhibit-message t))
               (package-install package))
             (if (package-installed-p package)
-                (message "✓ Installed %s" package)
-              (error "✕ Couldn't install %s" package)))
+    (message "✓ Installed %s" package)
+                (error "✕ Couldn't install %s" package)))
           (message "Installing core packages...done")))
       (setq doom-init-p t))))
 

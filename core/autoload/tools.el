@@ -1,5 +1,3 @@
-;;; private/showgood/autoload/+ediff.el -*- lexical-binding: t; -*-
-
 ;; https://oremacs.com/2017/03/18/dired-ediff/
 ;; -*- lexical-binding: t -*-
 ;;;###autoload

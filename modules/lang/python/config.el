@@ -21,7 +21,8 @@ is loaded.")
         indent-tabs-mode nil
         python-shell-interpreter "python")
   :config
-  (add-hook! 'python-mode-hook #'(flycheck-mode highlight-numbers-mode))
+  (unless MINIMAL-MODE
+    (add-hook! 'python-mode-hook #'(flycheck-mode highlight-numbers-mode)))
 
   (set! :repl 'python-mode #'+python/repl)
   (set! :electric 'python-mode :chars '(?:))

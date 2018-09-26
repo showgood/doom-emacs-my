@@ -61,8 +61,40 @@ Use this for files that change often, like cache files.")
 melodramatic ex-vimmer disappointed with the text-editor status quo."
   :group 'emacs)
 
+(defvar doom-mode "full")
 
-;;;
+(defun set-from-env (env variable)
+  (let ((var-from-env (getenv env)))
+  (unless (null var-from-env)
+    (message "override %s from env: %s" variable var-from-env)
+    (set variable var-from-env)
+    )
+  )
+)
+
+(defmacro my-set-from-env (env variable)
+  `(let ((var-from-env (getenv ,env)))
+        (unless (null var-from-env)
+          (message "override %s from env: %s" ',variable var-from-env)
+          (setq ,variable var-from-env)
+        )
+    )
+)
+
+(set-from-env "doom_mode" 'doom-mode)
+;; (my-set-from-env "doom_mode" doom-mode)
+
+(defconst MINIMAL-MODE   (equal doom-mode "minimal"))
+
+(defvar doom-package-source "local")
+(set-from-env "doom_package_source" 'doom-package-source)
+
+(defvar doom-package-local-dir "~/myelpa/")
+(set-from-env "doom_package_local_dir" 'doom-package-local-dir)
+
+(defvar doom-package-fetch-secure "secure")
+(set-from-env "doom_package_fetch_secure" 'doom-package-fetch-secure)
+
 ;; UTF-8 as the default coding system
 (when (fboundp 'set-charset-priority)
   (set-charset-priority 'unicode))     ; pretty

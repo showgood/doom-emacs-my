@@ -31,3 +31,11 @@ submodule in the format, e.g. ':feature evil')."
       (unless (file-exists-p doc-path)
         (error "There is no documentation for this module"))
       (find-file doc-path))))
+
+;;;###autoload
+(defun me/close-helpful-buffer ()
+  "close helpful buffer properly"
+  (interactive)
+  (helpful-kill-buffers)
+  (+workspace/close-window-or-workspace)
+)

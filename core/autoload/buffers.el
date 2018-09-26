@@ -310,3 +310,49 @@ processes killed."
 `doom-real-buffer-p' for what 'real' means."
   (interactive)
   (doom--cycle-real-buffers -1))
+
+;;soure:https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el
+;; only copy file name (not including path)
+;;;###autoload
+(defun cp-filename-of-current-buffer ()
+  "Copy file name (NOT full path) into the yank ring and OS clipboard"
+  (interactive)
+  (let (filename)
+    (when buffer-file-name
+      ;; (setq filename (file-name-nondirectory buffer-file-name))
+      (setq filename (file-name-nondirectory buffer-file-name))
+      (kill-new filename)
+      (message "filename %s => clipboard & yank ring" filename))))
+
+;;;###autoload
+(defun +hlissner/yank-buffer-filename ()
+  "Copy the current buffer's path to the kill ring."
+  (interactive)
+  (if-let (filename (or buffer-file-name (bound-and-true-p list-buffers-directory)))
+      (message (kill-new (abbreviate-file-name filename)))
+    (error "Couldn't find filename in current buffer")))
+
+;; from prelude
+;;;###autoload
+(defun switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+
+;; https://emacs.stackexchange.com/questions/5371/how-to-change-emacs-windows-from-vertical-split-to-horizontal-split
+;;;###autoload
+(defun window-split-toggle ()
+  "Toggle between horizontal and vertical split with two windows."
+  (interactive)
+  (if (> (length (window-list)) 2)
+      (error "Can't toggle with more than 2 windows!")
+    (let ((func (if (window-full-height-p)
+                    #'split-window-vertically
+                  #'split-window-horizontally)))
+      (delete-other-windows)
+      (funcall func)
+      (save-selected-window
+        (other-window 1)
+        (switch-to-buffer (other-buffer))))))

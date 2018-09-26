@@ -15,19 +15,6 @@
   (switch-to-buffer-other-window "*run-cmd-anywhere*")
 )
 
-;;soure:https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el
-;; only copy file name (not including path)
-;;;###autoload
-(defun cp-filename-of-current-buffer ()
-  "Copy file name (NOT full path) into the yank ring and OS clipboard"
-  (interactive)
-  (let (filename)
-    (when buffer-file-name
-      ;; (setq filename (file-name-nondirectory buffer-file-name))
-      (setq filename (file-name-nondirectory buffer-file-name))
-      (kill-new filename)
-      (message "filename %s => clipboard & yank ring" filename))))
-
 ;;;###autoload
 (defun get-local-file-name (file-name)
   (interactive)
@@ -137,41 +124,9 @@ Version 2015-06-12"
 )
 
 ;;;###autoload
-(defun +hlissner/yank-buffer-filename ()
-  "Copy the current buffer's path to the kill ring."
-  (interactive)
-  (if-let (filename (or buffer-file-name (bound-and-true-p list-buffers-directory)))
-      (message (kill-new (abbreviate-file-name filename)))
-    (error "Couldn't find filename in current buffer")))
-
-;;;###autoload
 (defun open-scratch()
   (interactive)
   (doom-popup-buffer (get-buffer-create  "*scratch*")))
-
-;; from prelude
-;;;###autoload
-(defun switch-to-previous-buffer ()
-  "Switch to previously open buffer.
-Repeated invocations toggle between the two most recently open buffers."
-  (interactive)
-  (switch-to-buffer (other-buffer (current-buffer) 1)))
-
-;; https://emacs.stackexchange.com/questions/5371/how-to-change-emacs-windows-from-vertical-split-to-horizontal-split
-;;;###autoload
-(defun window-split-toggle ()
-  "Toggle between horizontal and vertical split with two windows."
-  (interactive)
-  (if (> (length (window-list)) 2)
-      (error "Can't toggle with more than 2 windows!")
-    (let ((func (if (window-full-height-p)
-                    #'split-window-vertically
-                  #'split-window-horizontally)))
-      (delete-other-windows)
-      (funcall func)
-      (save-selected-window
-        (other-window 1)
-        (switch-to-buffer (other-buffer))))))
 
 ;;;###autoload
 (defun xml-format ()
@@ -204,21 +159,6 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
                 (message "/%s" (mapconcat 'identity path "/"))
                 (kill-new (format "/%s" (mapconcat 'identity path "/"))))
           (format "/%s" (mapconcat 'identity path "/")))))))
-
-;;;###autoload
-(defun me/A ()
-  "open the corresponding header/cpp file, like A plugin in vim"
-  (interactive)
-  (split-window-right-and-focus)
-  (ff-find-other-file)
-)
-
-;;;###autoload
-(defun me/a ()
-  "open the corresponding header/cpp file in current buffer"
-  (interactive)
-  (ff-find-other-file)
-)
 
 ;; http://blog.binchen.org/posts/complete-line-with-ivy-mode.html
 ;;;###autoload
@@ -308,22 +248,6 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
 (message "%s => kill-ring" val))))
 
 ;;;###autoload
-(defun me/create-org-table-from-clipboard ()
-  (interactive)
-  (let* ((buf (current-buffer)))
-    (with-temp-buffer
-      (switch-to-buffer (current-buffer) nil t)
-      (insert (get-kill-ring))
-      (mark-whole-buffer)
-      (org-table-create-or-convert-from-region nil)
-      (org-table-insert-hline)
-      (goto-char (point-min))
-      (open-line 1)
-      (insert "#+tblname:")
-      (append-to-buffer buf (point-min) (point-max))
-      )))
-
-;;;###autoload
 (defun search-current-line(pattern)
   "search current line using pattern, return captured group, should
    be only 1."
@@ -386,12 +310,6 @@ path. from http://www.emacswiki.org/emacs/NxmlMode"
       (append-to-buffer buf (point-min) (point-max))
       )))
 
-
-;;;###autoload
-(defun me/clear-term ()
-  (interactive)
-  (delete-region (point-min) (point-max))
-  (comint-send-input))
 
 ;;;###autoload
 (defun me/create-clang-format ()

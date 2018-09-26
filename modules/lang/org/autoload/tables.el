@@ -106,3 +106,20 @@ re-align the table if necessary. (Necessary because org-mode has a
   (org-table-insert-column)
   (me/org-append-formula "$1" "@#-1")
 )
+
+;;;###autoload
+(defun me/create-org-table-from-clipboard ()
+  "create a table in org mode with content from clipboard"
+  (interactive)
+  (let* ((buf (current-buffer)))
+    (with-temp-buffer
+      (switch-to-buffer (current-buffer) nil t)
+      (insert (get-kill-ring))
+      (mark-whole-buffer)
+      (org-table-create-or-convert-from-region nil)
+      (org-table-insert-hline)
+      (goto-char (point-min))
+      (open-line 1)
+      (insert "#+tblname:")
+      (append-to-buffer buf (point-min) (point-max))
+      )))

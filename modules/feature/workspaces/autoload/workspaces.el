@@ -525,3 +525,16 @@ Ensures the scratch (or dashboard) buffers are CDed into the project's root."
               (gethash doom-last-selected-workspace
                        *persp-hash* 'non-existent))
     (persp-switch doom-last-selected-workspace)))
+
+;;;###autoload
+(defun me/new-workspace-term ()
+  "create a term-mode buffer which belongs to current workspace (persp-mode)"
+  (interactive)
+  (+term/open)
+  (let ( (term-name (format "%s-term" (+workspace-current-name)))
+        )
+    (rename-buffer term-name t)
+    (persp-add-buffer
+      (current-buffer) (get-current-persp) t nil)
+  )
+)

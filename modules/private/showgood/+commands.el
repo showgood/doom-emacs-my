@@ -19,8 +19,8 @@
 (ex! "wi[den]"   #'widen)
 (ex! "fwi[rrow]" #'fancy-widen)
 (ex! "retab"     #'+evil:retab)
-(ex! "a"         #'me/a)
-(ex! "A"         #'me/A)
+(ex! "a"         #'projectile-find-other-file)
+(ex! "A"         #'projectile-find-other-file-other-window)
 
 ;; External resources
 ;; TODO (ex! "db"          #'doom:db)
@@ -104,4 +104,4 @@
 (ex! "cap"         #'+org-capture/dwim)
 
 ;; clear the term-mode buffer
-(ex! "cl"          #'me/clear-term)
+(ex! "cl"          #'comint-clear-buffer)
