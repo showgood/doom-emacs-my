@@ -36,8 +36,10 @@
 (package! ace-window)
 (package! avy)
 
-;; (package! help-fns+ :recipe (:fetcher github :repo "emacsmirror/help-fns-plus"))
-(package! bookmark+ :recipe (:fetcher github :repo "emacsmirror/bookmark-plus"))
+(if DOOM-INSTALL-PACKAGE-FROM-LOCAL
+    (package! bookmark+)
+    (package! bookmark+ :recipe (:fetcher github :repo "emacsmirror/bookmark-plus"))
+)
 
 (package! smartparens)
 (package! wgrep)

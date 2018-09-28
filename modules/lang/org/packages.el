@@ -5,8 +5,12 @@
   ;; We want org 9.1.x, but the org packaged with Emacs 25.x and under is 8.x.
   ;; The only secure (and reasonably trustworthy) source for this is via
   ;; emacsmirror. Emacs 26+ comes with Org 9.1.4.
-  (package! org-plus-contrib
-    :recipe (:fetcher github :repo "emacsmirror/org" :files (:defaults "contrib/lisp/*.el"))))
+  (if DOOM-INSTALL-PACKAGE-FROM-LOCAL
+      (package! org-plus-contrib)
+      (package! org-plus-contrib
+        :recipe (:fetcher github :repo "emacsmirror/org" :files (:defaults "contrib/lisp/*.el")))
+  )
+)
 
 (package! org-bullets)
 (package! toc-org)

@@ -122,10 +122,12 @@ base by `doom!' and for calculating how many packages exist.")
       byte-compile-verbose doom-debug-mode
       byte-compile-warnings '(not free-vars unresolved noruntime lexical make-local))
 
-(when (equal doom-package-source "local")
-  (setq package-archives '(("myelpa" . doom-package-local-dir)))
-  (message "fetching packages using local source.")
-)
+(defconst DOOM-INSTALL-PACKAGE-FROM-LOCAL (equal doom-package-source "local"))
+
+(when DOOM-INSTALL-PACKAGE-FROM-LOCAL
+  (setq package-archives (list (cons "myelpa" doom-package-local-dir)))
+  (message "fetching packages using local source."))
+
 
 (when (and (equal doom-package-source "remote")
            (equal doom-package-fetch-secure "insecure"))
