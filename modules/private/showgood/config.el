@@ -345,3 +345,8 @@
 (setq counsel-git-cmd "rg --files")
 (setq counsel-rg-base-command
       "rg -i -M 120 --no-heading --line-number --color never %s .")
+
+(use-package anki-editor
+  :ensure t)
+
+(setq org-export-allow-bind-keywords t)
