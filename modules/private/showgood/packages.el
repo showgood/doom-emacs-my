@@ -12,8 +12,6 @@
 (package! move-text)
 (package! deft)
 (package! suggest)
-(package! counsel-etags)
-(package! counsel-dash)
 (package! yankpad)
 (package! tldr)
 (package! visual-regexp)

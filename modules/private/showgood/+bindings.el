@@ -987,7 +987,8 @@
  "gf" '(magit-log-trace-definition :which-key "show commits for this function")
  ;; list commits affect current file
  "gl" '(magit-log-buffer-file :which-key "show commits for this file")
- "gg" '(hydra-git/body :which-key "Git gutter")
+ "gg" '(my-goto-git-gutter :which-key "Git gutter")
+ "gG" '(hydra-git/body :which-key "Git gutter hydra")
  "gp" '(magit-push-current :which-key "Git push")
  "gt" '(my-git-timemachine :which-key "Git time machine")
 

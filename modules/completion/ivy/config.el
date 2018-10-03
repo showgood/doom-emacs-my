@@ -18,7 +18,6 @@ immediately runs it on the current candidate (ending the ivy session)."
      (setq ivy-exit 'done)
      (exit-minibuffer)))
 
-
 ;;
 ;; Packages
 ;;
@@ -88,6 +87,11 @@ immediately runs it on the current candidate (ending the ivy session)."
   ;; http://oremacs.com/2017/04/09/ivy-0.9.0/
   (setq counsel-yank-pop-separator "\n-------------------------------------------------------\n")
   (setq counsel-bookmark-avoid-dired nil)
+
+  ;; https://oremacs.com/2018/03/05/grep-exclude/
+  (setq counsel-git-cmd "rg --files")
+  (setq counsel-rg-base-command
+      "rg -i -M 120 --no-heading --line-number --color never %s .")
 
   ;; Configure `counsel-rg', `counsel-ag' & `counsel-pt'
   (set! :popup 'ivy-occur-grep-mode :size (+ 2 ivy-height) :regexp t :autokill t)

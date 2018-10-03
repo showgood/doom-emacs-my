@@ -341,11 +341,6 @@
 (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
 (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
 
-;; https://oremacs.com/2018/03/05/grep-exclude/
-(setq counsel-git-cmd "rg --files")
-(setq counsel-rg-base-command
-      "rg -i -M 120 --no-heading --line-number --color never %s .")
-
 (use-package anki-editor
   :ensure t)
 

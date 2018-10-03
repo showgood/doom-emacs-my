@@ -332,3 +332,10 @@ between the two."
 "ti" '(org-clock-in :which-key "clock in")
 "to" '(org-clock-out :which-key "clock out")
 )
+
+(general-define-key
+:states '(normal)
+:keymaps 'org-mode-map
+:prefix "C-c"
+"l" '(org-store-link :which-key "org-store-link")
+)

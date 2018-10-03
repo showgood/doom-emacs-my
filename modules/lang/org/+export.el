@@ -25,6 +25,8 @@
       '(:border "2" :rules "all" :frame "border")
         org-export-with-toc t
         org-export-with-properties t
+        ;; do not evaulate code during export
+        org-export-babel-evaluate nil
         org-export-with-clocks t
         org-html-validation-link nil
         org-export-with-sub-superscripts '{}
