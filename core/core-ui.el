@@ -480,10 +480,10 @@ DEFAULT is non-nil, set the default mode-line for all buffers."
             (buffer-local-value 'mode-line-format (current-buffer)))
           modeline)))
 
-(setq doom-font (font-spec :family "Fira Code" :size 16)
-      doom-variable-pitch-font (font-spec :family "Fira Code")
-      doom-unicode-font (font-spec :family "Fira Code")
-      doom-big-font (font-spec :family "Fira Code" :size 19))
+(setq doom-font (font-spec :family "SF Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "SF Mono")
+      doom-unicode-font (font-spec :family "SF Mono")
+      doom-big-font (font-spec :family "SF Mono" :size 20))
 
 (unless MINIMAL-MODE (load! +core-ui-extra))
 

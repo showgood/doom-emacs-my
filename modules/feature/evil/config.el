@@ -12,7 +12,6 @@
                       collect `(evil-set-initial-state ',mode ,state)))
       `(evil-set-initial-state ,modes ,state))))
 
-
 ;;
 ;; evil-mode
 ;;
@@ -32,6 +31,10 @@
         evil-ex-substitute-global t
         evil-ex-visual-char-range t  ; column range for ex commands
         evil-insert-skip-empty-lines t
+
+        ;; https://emacsbliss.com/annoyance-with-paste-in-evil-visual-mode/
+        evil-kill-on-visual-paste nil
+
         evil-mode-line-format 'nil
         ;; more vim-like behavior
         evil-symbol-word-search t
