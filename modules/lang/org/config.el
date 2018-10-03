@@ -114,6 +114,7 @@ unfold to point on startup."
   ;; always use relative path link, very important
   ;; https://emacs.stackexchange.com/questions/16652/change-the-behavior-of-org-mode-auto-expand-relative-path-in-link
   (setq org-link-file-path-type 'relative)
+  (setq org-table-convert-region-max-lines 5000)
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/Inbox.org")
   (setq org-archive-location "~/org/logbook.org::* Archived")

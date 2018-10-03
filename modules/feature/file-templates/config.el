@@ -79,7 +79,10 @@
           ("/main\\.java$"                   "__main"           java-mode)
           ("/build\\.gradle$"                "__build.gradle"   android-mode)
           ;; Javascript
-          ("\\.\\(json\\|jshintrc\\)$"       "__"                  json-mode)
+
+          ;; default json file tempalte is not very useful
+          ;; ("\\.\\(json\\|jshintrc\\)$"       "__"                  json-mode)
+
           ("/package\\.json$"                "__package.json"      json-mode)
           ("/bower\\.json$"                  "__bower.json"        json-mode)
           ("/gulpfile\\.js$"                 "__gulpfile.js"       js-mode)
@@ -117,6 +120,9 @@
           ("/normalize\\.scss$"              "__normalize.scss" scss-mode)
           ;; Slim
           ("/\\(index\\|main\\)\\.slim$"     "__"               slim-mode)
+
+          ("\\.feature$"                     "__"            feature-mode)
+
           ;; Shell scripts
           ("\\.z?sh$"                        "__"               sh-mode)
           ("\\.fish$"                        "__"               fish-mode)

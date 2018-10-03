@@ -2,9 +2,10 @@
 # group: file templates
 # contributor: Henrik Lissner
 # --
-#ifndef ${1:__`(upcase (file-name-base buffer-file-name))`_H_$(upcase yas-text)}
+
+#ifndef ${1:INCLUDED_`(upcase (file-name-base buffer-file-name))`}
 #define $1
 
 $0
 
-#endif // $1
+#endif

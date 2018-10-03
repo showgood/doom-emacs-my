@@ -24,6 +24,7 @@
 (package! company-lsp)
 (package! lsp-ui)
 (package! anki-editor)
+(package! feature-mode)
 
 ;; not very useful, buffer disappeared after window close and can't get back
 ;; (package! scratch-el :recipe (:fetcher github :repo "ieure/scratch-el"))

@@ -205,11 +205,6 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-;; prevent elpy because too sluggish
-;; (setq eldoc-idle-delay 2)
-
-(setq org-table-convert-region-max-lines 5000)
-
 (require 'counsel-etags)
 (setq tags-revert-without-query t)
 ;; Don't warn when TAGS files are large
@@ -344,4 +339,5 @@
 (use-package anki-editor
   :ensure t)
 
-(setq org-export-allow-bind-keywords t)
+(require 'feature-mode)
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
