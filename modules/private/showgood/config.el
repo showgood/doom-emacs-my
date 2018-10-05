@@ -193,9 +193,6 @@
                                 "COMMA_PARENTHESIS_WHITESPACE"
                                 "EN_QUOTES"))
 
-(when IS-MAC
-    (require 'org-mac-link)
-)
 
 (require 'ox-latex)
 (setq org-latex-listings 'minted
@@ -342,3 +339,7 @@
 (require 'feature-mode)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 (require 'deadgrep)
+
+(when IS-MAC
+    (require 'org-mac-link)
+)

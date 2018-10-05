@@ -1150,8 +1150,10 @@
 (general-define-key
  :states '(normal visual)
  ;; ga - what-cursor-position
- "gb" '(projectile-find-other-file :which-key "toggle between h/cpp")
- "gB" '(projectile-find-other-file-other-window :which-key "toggle between h/cpp")
+ "ga" '(projectile-find-other-file :which-key "toggle between h/cpp")
+ "gA" '(projectile-find-other-file-other-window :which-key "toggle between h/cpp")
+ "gb" '(+ivy/switch-workspace-buffer :which-key "switch workspace buffer")
+ "gB" '(ivy-switch-buffer :which-key "switch all buffer")
  "gc" '(evil-commentary :which-key "evil commentary")
  "gd" '(+jump/definition :which-key "jump to definition")
  "gD" '(+jump/references :which-key "jump to references")
@@ -1166,6 +1168,7 @@
 
  ;; gj - evil-next-visual-line
  ;; gk - evil-previous-visual-line
+
  ;; gl
 
  "gm" '(delete-other-windows :which-key "maximize current buffer")
@@ -1177,17 +1180,26 @@
  "gp" '(+evil/reselect-paste :which-key "+evil/reselect-paste")
 
  ;; gq - evil-fill-and-move  (re-align text to fill column width)
- "gr" '(+eval:region :which-key "+eval:region")
- "gR" '(+eval/buffer :which-key "+eval/buffer")
- "gs" '(magit-status :which-key "magit status")
+
+ ;; gr -
+
+ ;; "gr" '(+eval:region :which-key "+eval:region")
+ ;; "gR" '(+eval/buffer :which-key "+eval/buffer")
+ "gs" '(evil-window-vsplit :which-key "split window vertically")
+ "gS" '(evil-window-split :which-key "split window horizontally")
+
+ ;; "gs" '(magit-status :which-key "magit status")
 
  "gt" '(doom/jump-to-last-workspace :which-key "toggle workspace")
+ "gT" '(+workspace/switch-to :which-key "list all workspace to switch")
 
  ;; gu - evil-downcase
  ;; gU - evil-upcase
  ;; gv - evil-visual-restore
  ;; gV - evil-visual-restore
  "gw" '(ace-window :which-key "ace window")
+ "gW" '(window-split-toggle :which-key "transpose two windows")
+
  "gx" '(evil-exchange :which-key "evil exchange")
  ;; gy - evil-commentary-yank
 

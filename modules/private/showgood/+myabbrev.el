@@ -17,10 +17,22 @@
   ("8str" "\\([^\"]+?\\)\"")
 
   ("8inf" "∞")
-  ("8luv" "♥")
   ("8smly" "☺")
+  ("8luv" "♥")
+  ("8dia" "♦")
+  ("8spade" "♠")
+  ("8club" "♣")
+  ("8ge" "≥")
+  ("envv" "environment variable")
+  ("eenv" "environment")
+  ("tf" "testing framework")
+  ("retrun" "return")
+  ("reutrn" "return")
+  ("messges" "messages")
+  ("messge" "message")
 
 ))
+
 
 ;; stop asking whether to save newly added abbrev when quitting emacs
 (setq save-abbrevs nil)
