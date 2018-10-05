@@ -1059,6 +1059,18 @@
  "ti" '(highlight-indentation-mode :which-key "highlight-indentation-mode")
  "tI" '(highlight-indentation-current-column-mode :which-key "highlight-indentation-current-column-mode")
 
+ "v"  '(:ignore t :which-key "vimish fold")
+ "vd" '(vimish-fold-delete :which-key "fold delete")
+ "vD" '(vimish-fold-delete-all :which-key "fold delete all")
+ "vf" '(vimish-fold :which-key "fold")
+ "vn" '(vimish-fold-next-fold :which-key "next fold")
+ "vp" '(vimish-fold-previous-fold :which-key "previous fold")
+ ;; seems not useful
+ ;; "vv" '(vimish-fold-toggle :which-key "fold toggle")
+ ;; "vV" '(vimish-fold-toggle-all :which-key "fold toggle all")
+ "vu" '(vimish-fold-unfold :which-key "unfold")
+ "vU" '(vimish-fold-unfold-all :which-key "unfold all")
+
  "w"  '(:ignore t :which-key "Windows")
  "wd" '(delete-window :which-key "delete window")
  "wD" '(ace-delete-window :which-key "ace delete window")
@@ -1168,7 +1180,7 @@
  "gx" '(evil-exchange :which-key "evil exchange")
  "gd" '(+jump/definition :which-key "jump to definition")
  "gD" '(+jump/references :which-key "jump to references")
- "gh" '(+jump/documentation :which-key "jump to documentation")
+ "gh" '(dash-at-point :which-key "jump to Dash")
  "gp" '(+evil/reselect-paste :which-key "+evil/reselect-paste")
  "gr" '(+eval:region :which-key "+eval:region")
  "gR" '(+eval/buffer :which-key "+eval/buffer")
