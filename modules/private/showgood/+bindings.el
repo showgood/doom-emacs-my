@@ -65,15 +65,6 @@
 ;; :nvime "<f11>" #'org-agenda
 ;; :nvime "<f12>" #'org-todo
 
-;;  ;; TODO this one does not seem to work in minifbuffer find out why
-;; :nvime "M-y" #'counsel-yank-pop
-
-;; :nvime "C-c <left>" #'winner-undo
-;; :nvime "C-c <right>" #'winner-redo
-
-;; :nvime "C-c +" #'evil-numbers/inc-at-pt
-;; :nvime "C-c -" #'evil-numbers/dec-at-pt
-
 ;; :nvime "C-x b" #'counsel-bookmark
 ;; :nvime "C-x c" #'cp-filename-of-current-buffer
 ;; :nvime "C-x f" #'counsel-git
@@ -542,24 +533,6 @@
 ;;    :n "C-j" nil
 ;;    :n "C-k" nil)
 
-;;  ;; evil-mc
-;;  (:prefix "gz"
-;;    :nv "m" #'evil-mc-make-all-cursors
-;;    :nv "u" #'evil-mc-undo-all-cursors
-;;    :nv "z" #'+evil/mc-make-cursor-here
-;;    :nv "t" #'+evil/mc-toggle-cursors
-;;    :nv "n" #'evil-mc-make-and-goto-next-cursor
-;;    :nv "p" #'evil-mc-make-and-goto-prev-cursor
-;;    :nv "N" #'evil-mc-make-and-goto-last-cursor
-;;    :nv "P" #'evil-mc-make-and-goto-first-cursor
-;;    :nv "d" #'evil-mc-make-and-goto-next-match
-;;    :nv "D" #'evil-mc-make-and-goto-prev-match)
-;;  (:after evil-mc
-;;    :map evil-mc-key-map
-;;    :nv "C-n" #'evil-mc-make-and-goto-next-cursor
-;;    :nv "C-N" #'evil-mc-make-and-goto-last-cursor
-;;    :nv "C-p" #'evil-mc-make-and-goto-prev-cursor
-;;    :nv "C-P" #'evil-mc-make-and-goto-first-cursor)
 
 ;;  ;; evil-multiedit
 ;;  :v  "R"     #'evil-multiedit-match-all
@@ -1176,16 +1149,70 @@
 
 (general-define-key
  :states '(normal visual)
+ ;; ga - what-cursor-position
+ "gb" '(projectile-find-other-file :which-key "toggle between h/cpp")
+ "gB" '(projectile-find-other-file-other-window :which-key "toggle between h/cpp")
  "gc" '(evil-commentary :which-key "evil commentary")
- "gx" '(evil-exchange :which-key "evil exchange")
  "gd" '(+jump/definition :which-key "jump to definition")
  "gD" '(+jump/references :which-key "jump to references")
+ "ge" '(+eval:region :which-key "+eval:region")
+ "gE" '(+eval/buffer :which-key "+eval/buffer")
+ "gf" '(counsel-projectile-find-file :which-key "projectile file")
+ ;; gF -- maybe code format
+
+ ;; gg - evil-goto-first-line
  "gh" '(dash-at-point :which-key "jump to Dash")
+ "gi" '(counsel-imenu :which-key "counsel imenu")
+
+ ;; gj - evil-next-visual-line
+ ;; gk - evil-previous-visual-line
+ ;; gl
+
+ "gm" '(delete-other-windows :which-key "maximize current buffer")
+ "gM" '(winner-undo :which-key "restore previous window layout")
+
+ ;; gn - evil-next-match
+
+ "go" '(save-buffer :which-key "save buffer")
  "gp" '(+evil/reselect-paste :which-key "+evil/reselect-paste")
+
+ ;; gq - evil-fill-and-move  (re-align text to fill column width)
  "gr" '(+eval:region :which-key "+eval:region")
  "gR" '(+eval/buffer :which-key "+eval/buffer")
+ "gs" '(magit-status :which-key "magit status")
 
- ;;  :v  "gR" #'+eval:replace-region
+ "gt" '(doom/jump-to-last-workspace :which-key "toggle workspace")
+
+ ;; gu - evil-downcase
+ ;; gU - evil-upcase
+ ;; gv - evil-visual-restore
+ ;; gV - evil-visual-restore
+ "gw" '(ace-window :which-key "ace window")
+ "gx" '(evil-exchange :which-key "evil exchange")
+ ;; gy - evil-commentary-yank
+
+ ;; "gz" '(+eval:replace-region :which-key "replace region with eval result")
+
+;;  ;; evil-mc
+;;  (:prefix "gz"
+;;    :nv "m" #'evil-mc-make-all-cursors
+;;    :nv "u" #'evil-mc-undo-all-cursors
+;;    :nv "z" #'+evil/mc-make-cursor-here
+;;    :nv "t" #'+evil/mc-toggle-cursors
+;;    :nv "n" #'evil-mc-make-and-goto-next-cursor
+;;    :nv "p" #'evil-mc-make-and-goto-prev-cursor
+;;    :nv "N" #'evil-mc-make-and-goto-last-cursor
+;;    :nv "P" #'evil-mc-make-and-goto-first-cursor
+;;    :nv "d" #'evil-mc-make-and-goto-next-match
+;;    :nv "D" #'evil-mc-make-and-goto-prev-match)
+;;  (:after evil-mc
+;;    :map evil-mc-key-map
+;;    :nv "C-n" #'evil-mc-make-and-goto-next-cursor
+;;    :nv "C-N" #'evil-mc-make-and-goto-last-cursor
+;;    :nv "C-p" #'evil-mc-make-and-goto-prev-cursor
+;;    :nv "C-P" #'evil-mc-make-and-goto-first-cursor)
+
+ ;; z-
  )
 
 (general-define-key
@@ -1246,8 +1273,8 @@
 (general-define-key
  :states '(insert normal)
  :keymaps 'wgrep-mode-map
- ":" '(evil-ex :which-key "xpath")
- "M-x" '(counsel-M-x :which-key "xpath")
+ ":" '(evil-ex :which-key "evil-ex")
+ "M-x" '(counsel-M-x :which-key "M-x")
  "C-;" #'evil-normal-state
  )
 
@@ -1271,28 +1298,6 @@
 ;;  :keymaps 'occur-edit-mode-map
 ;;  "C-x C-q" '(occur-cease-edit :which-key "quit edit")
 ;;  )
-
-;; (define-key ivy-minibuffer-map (kbd "M-y") 'counsel-yank-pop)
-;; (define-key evil-ex-map "\M-y" #'counsel-yank-pop)
-
-;;  ;; evil-mc
-;;  (:prefix "gz"
-;;    :nv "m" #'evil-mc-make-all-cursors
-;;    :nv "u" #'evil-mc-undo-all-cursors
-;;    :nv "z" #'+evil/mc-make-cursor-here
-;;    :nv "t" #'+evil/mc-toggle-cursors
-;;    :nv "n" #'evil-mc-make-and-goto-next-cursor
-;;    :nv "p" #'evil-mc-make-and-goto-prev-cursor
-;;    :nv "N" #'evil-mc-make-and-goto-last-cursor
-;;    :nv "P" #'evil-mc-make-and-goto-first-cursor
-;;    :nv "d" #'evil-mc-make-and-goto-next-match
-;;    :nv "D" #'evil-mc-make-and-goto-prev-match)
-;;  (:after evil-mc
-;;    :map evil-mc-key-map
-;;    :nv "C-n" #'evil-mc-make-and-goto-next-cursor
-;;    :nv "C-N" #'evil-mc-make-and-goto-last-cursor
-;;    :nv "C-p" #'evil-mc-make-and-goto-prev-cursor
-;;    :nv "C-P" #'evil-mc-make-and-goto-first-cursor)
 
 ;;  ;; evil-multiedit
 ;;  :v  "R"     #'evil-multiedit-match-all
