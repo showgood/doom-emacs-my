@@ -178,21 +178,12 @@
 
 (toggle-frame-maximized)
 
-(when (executable-find "hunspell")
-  (setq-default ispell-program-name "hunspell")
-  (setq ispell-really-hunspell t))
+;; (when (executable-find "hunspell")
+;;   (setq-default ispell-program-name "hunspell")
+;;   (setq ispell-really-hunspell t))
 
 ;; (dolist (hook '(text-mode-hook))
 ;;   (add-hook hook (lambda () (flyspell-mode 1))))
-
-(require 'langtool)
-(setq langtool-language-tool-jar "/usr/local/Cellar/languagetool/4.1/libexec/languagetool-commandline.jar"
-      langtool-mother-tongue "nl"
-      langtool-disabled-rules '("WHITESPACE_RULE"
-                                "EN_UNPAIRED_BRACKETS"
-                                "COMMA_PARENTHESIS_WHITESPACE"
-                                "EN_QUOTES"))
-
 
 (require 'ox-latex)
 (setq org-latex-listings 'minted

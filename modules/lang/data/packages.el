@@ -6,4 +6,5 @@
 (package! toml-mode)
 (package! vimrc-mode)
 (package! yaml-mode)
+(package! json-snatcher)
 

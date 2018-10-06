@@ -9,3 +9,4 @@
       (t
        (package! flyspell-correct-popup)))
 
+(package! langtool)

@@ -3,8 +3,9 @@
 (def-package! flyspell ; built-in
   :commands flyspell-mode
   :config
-  (setq ispell-program-name (executable-find "aspell")
+  (setq ispell-program-name (executable-find "hunspell")
         ispell-list-command "--list"
+        ispell-really-hunspell t
         ispell-extr-args '("--dont-tex-check-comments")))
 
 
@@ -21,3 +22,13 @@
          (setq flyspell-popup-correct-delay 0.8)
          (define-key popup-menu-keymap [escape] #'keyboard-quit))))
 
+
+(def-package! langtool
+  :init
+  (setq langtool-language-tool-jar "/usr/local/Cellar/languagetool/4.1/libexec/languagetool-commandline.jar"
+        langtool-mother-tongue "en"
+        langtool-default-language "en-US"
+        langtool-disabled-rules '("WHITESPACE_RULE"
+                                  "EN_UNPAIRED_BRACKETS"
+                                  "COMMA_PARENTHESIS_WHITESPACE"
+                                  "EN_QUOTES")))
