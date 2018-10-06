@@ -143,12 +143,6 @@
 (add-to-list 'evil-emacs-state-modes 'deft-mode)
 ;; ==== end deft settings }}} ====
 
-(use-package visual-regexp
-  :commands (vr/query-replace))
-
-(use-package visual-regexp-steroids
-  :commands (vr/select-query-replace))
-
 (require 'atomic-chrome)
 (atomic-chrome-start-server)
 

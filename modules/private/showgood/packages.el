@@ -10,8 +10,6 @@
 (package! move-text)
 (package! deft)
 (package! yankpad)
-(package! visual-regexp)
-(package! visual-regexp-steroids)
 (package! atomic-chrome)
 (package! elpa-mirror)
 (package! lsp-mode)
