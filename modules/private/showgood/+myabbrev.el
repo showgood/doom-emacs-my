@@ -30,6 +30,7 @@
   ("reutrn" "return")
   ("messges" "messages")
   ("messge" "message")
+  ("elsip" "elisp")
 
 ))
 

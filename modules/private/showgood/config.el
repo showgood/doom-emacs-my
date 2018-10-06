@@ -115,9 +115,6 @@
 (csetq ediff-diff-options "-w")
 ;; ==== end ediff settings }}} ====
 
-(autoload 'dash-at-point "dash-at-point"
-          "search the word at point with dash." t nil)
-
 ;; ==== beacon settings {{{ ====
 (require 'beacon)
 (beacon-mode 1)
@@ -145,10 +142,6 @@
 (setq deft-text-mode 'org-mode)
 (add-to-list 'evil-emacs-state-modes 'deft-mode)
 ;; ==== end deft settings }}} ====
-
-(use-package tldr
-  :commands (tldr)
-)
 
 (use-package visual-regexp
   :commands (vr/query-replace))
