@@ -43,3 +43,21 @@ selected frame."
       (let ((buffer1 (buffer-name (car (unique-visible-buffers))))
            (buffer2 (buffer-name (car (last (unique-visible-buffers))))))
            (ediff-buffers buffer1 buffer2))))
+
+
+;;;###autoload
+(defun Open ()
+  "Show current file in desktop (OS's file manager).
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2015-06-12"
+  (interactive)
+  (cond
+   ((string-equal system-type "windows-nt")
+    (w32-shell-execute "explore" (replace-regexp-in-string "/" "\\" default-directory t t)))
+   ((string-equal system-type "cygwin")
+    (w32-shell-execute "explore" default-directory ))
+   ((string-equal system-type "darwin") (shell-command "open ."))
+   ((string-equal system-type "gnu/linux")
+    (let ((process-connection-type nil)) (start-process "" nil "xdg-open" "."))
+    ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
+    )))

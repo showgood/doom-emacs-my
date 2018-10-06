@@ -538,3 +538,15 @@ Ensures the scratch (or dashboard) buffers are CDed into the project's root."
       (current-buffer) (get-current-persp) t nil)
   )
 )
+
+;;;###autoload
+(defun me/switch-to-project-term ()
+  "switch to the term-mode buffer for the project"
+  (interactive)
+  (let ((buf-name (format "%s-term" (+workspace-current-name))))
+    (if (get-buffer buf-name)
+        (switch-to-buffer buf-name)
+      (message "buffer %s not exist!" buf-name)
+      )
+    )
+  )

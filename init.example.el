@@ -42,6 +42,7 @@
        syntax-checker    ; tasing you for every semicolon you forget
        version-control   ; remember, remember that commit in November
        workspaces        ; tab emulation, persistence & separate workspaces
+       help              ; help me please
 
        :completion
        company           ; the ultimate code completion backend
