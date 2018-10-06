@@ -98,7 +98,9 @@
        ledger            ; an accounting system in Emacs
        lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
-       ;ocaml             ; an objective camel
+       feature           ; BDD
+       ;ocaml            ; an objective camel
+
        (org              ; organize your plain life in plain text
         +attach          ; custom attachment system
         +babel           ; running code in org

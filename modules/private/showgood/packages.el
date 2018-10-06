@@ -24,7 +24,6 @@
 (package! company-lsp)
 (package! lsp-ui)
 (package! anki-editor)
-(package! feature-mode)
 (package! deadgrep)
 
 ;; not very useful, buffer disappeared after window close and can't get back

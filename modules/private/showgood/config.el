@@ -336,8 +336,6 @@
 (use-package anki-editor
   :ensure t)
 
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 (require 'deadgrep)
 
 (when IS-MAC
