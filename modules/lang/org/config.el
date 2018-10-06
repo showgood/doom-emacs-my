@@ -340,3 +340,7 @@ between the two."
 :prefix "C-c"
 "l" '(org-store-link :which-key "org-store-link")
 )
+
+(when IS-MAC
+    (require 'org-mac-link)
+)

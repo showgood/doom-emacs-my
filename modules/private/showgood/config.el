@@ -337,7 +337,3 @@
   :ensure t)
 
 (require 'deadgrep)
-
-(when IS-MAC
-    (require 'org-mac-link)
-)
