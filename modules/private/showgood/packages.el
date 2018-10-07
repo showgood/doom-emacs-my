@@ -10,7 +10,6 @@
 (package! move-text)
 (package! atomic-chrome)
 (package! elpa-mirror)
-(package! ccls)
 (package! deadgrep)
 
 

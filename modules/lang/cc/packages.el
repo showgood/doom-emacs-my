@@ -4,6 +4,9 @@
 (package! modern-cpp-font-lock)
 (package! clang-format)
 
+(when (featurep! :feature lsp)
+    (package! ccls))
+
 (unless MINIMAL-MODE
     (package! cmake-mode)
     (package! demangle-mode)

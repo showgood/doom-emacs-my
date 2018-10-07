@@ -109,3 +109,6 @@ compilation database is present in the project.")
   :hook (c++-mode . modern-c++-font-lock-mode))
 
 (unless MINIMAL-MODE (load! +extra))
+
+(when (featurep! :feature lsp)
+  (load! +ccls))
