@@ -10,10 +10,7 @@
 (package! move-text)
 (package! atomic-chrome)
 (package! elpa-mirror)
-(package! lsp-mode)
 (package! ccls)
-(package! company-lsp)
-(package! lsp-ui)
 (package! anki-editor)
 (package! deadgrep)
 

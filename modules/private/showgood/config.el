@@ -150,13 +150,6 @@
 
 (toggle-frame-maximized)
 
-;; (when (executable-find "hunspell")
-;;   (setq-default ispell-program-name "hunspell")
-;;   (setq ispell-really-hunspell t))
-
-;; (dolist (hook '(text-mode-hook))
-;;   (add-hook hook (lambda () (flyspell-mode 1))))
-
 (require 'ox-latex)
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
@@ -187,15 +180,6 @@
 ;; then run: M-x elpamr-create-mirror-for-installed
 (require 'elpa-mirror)
 (setq elpamr-default-output-directory "~/myelpa")
-
-(setq company-lsp-enable-recompletion t)
-
-;;; private/my-cc/autoload.el -*- lexical-binding: t; -*-
-(use-package lsp-ui
-  :ensure t
-  :config
-  (setq lsp-ui-sideline-ignore-duplicate t)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 (defun ccls/base () (interactive) (lsp-ui-peek-find-custom 'base "$ccls/base"))
 (defun ccls/callers () (interactive) (lsp-ui-peek-find-custom 'callers "$ccls/callers"))
@@ -290,9 +274,6 @@
       (mapcar (lambda (x) (lsp--symbol-information-to-xref pattern x)) symbols)))
   )
 
-(setq lsp-ui-doc-include-signature nil)  ; don't include type signature in the child frame
-(setq lsp-ui-sideline-show-symbol nil)  ; don't show symbol on the right of info
-
 (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
 (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
 
@@ -304,6 +285,4 @@
 (after! tldr
   (setq tldr-enabled-categories
         (append '("bb" "personal") tldr-enabled-categories))
-  ;; (push  "bb" tldr-enabled-categories)
-  ;; (push  "personal" tldr-enabled-categories)
   )
