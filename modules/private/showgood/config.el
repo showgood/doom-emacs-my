@@ -187,3 +187,6 @@
   (setq tldr-enabled-categories
         (append '("bb" "personal") tldr-enabled-categories))
   )
+
+;; override printer to print json path in the way I want
+(setq jsons-path-printer 'me/jsons-print-path-as-list)
