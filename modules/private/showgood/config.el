@@ -91,10 +91,8 @@
 
 (setq eshell-aliases-file (concat +showgood-dir "eshell_alias"))
 
-;; support large file size
-(require 'tramp)
-(setq tramp-inline-compress-start-size 10000000)
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+(after! tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 ;; http://emacs.stackexchange.com/questions/27/how-can-i-use-my-local-emacs-client-as-the-editor-for-remote-machines-i-access
 ;; (require 'with-editor)
@@ -315,3 +313,10 @@
   :ensure t)
 
 (require 'deadgrep)
+
+(after! tldr
+  (setq tldr-enabled-categories
+        (append '("bb" "personal") tldr-enabled-categories))
+  ;; (push  "bb" tldr-enabled-categories)
+  ;; (push  "personal" tldr-enabled-categories)
+  )

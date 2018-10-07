@@ -140,18 +140,20 @@ melodramatic ex-vimmer disappointed with the text-editor status quo."
  history-length 500
  make-backup-files nil
  ;; files
- abbrev-file-name             (concat doom-local-dir "abbrev.el")
- auto-save-list-file-name     (concat doom-cache-dir "autosave")
- backup-directory-alist       (list (cons "." (concat doom-cache-dir "backup/")))
- pcache-directory             (concat doom-cache-dir "pcache/")
- mc/list-file                 (concat doom-etc-dir "mc-lists.el")
- server-auth-dir              (concat doom-cache-dir "server/")
- shared-game-score-directory  (concat doom-etc-dir "shared-game-score/")
- tramp-auto-save-directory    (concat doom-cache-dir "tramp-auto-save/")
- tramp-backup-directory-alist backup-directory-alist
- tramp-persistency-file-name  (concat doom-cache-dir "tramp-persistency.el")
- url-cache-directory          (concat doom-cache-dir "url/")
- url-configuration-directory  (concat doom-etc-dir "url/"))
+ abbrev-file-name                 (concat doom-local-dir "abbrev.el")
+ auto-save-list-file-name         (concat doom-cache-dir "autosave")
+ backup-directory-alist           (list (cons "." (concat doom-cache-dir "backup/")))
+ pcache-directory                 (concat doom-cache-dir "pcache/")
+ mc/list-file                     (concat doom-etc-dir "mc-lists.el")
+ server-auth-dir                  (concat doom-cache-dir "server/")
+ shared-game-score-directory      (concat doom-etc-dir "shared-game-score/")
+ tramp-auto-save-directory        (concat doom-cache-dir "tramp-auto-save/")
+ tramp-backup-directory-alist     backup-directory-alist
+ ;; support large file size
+ tramp-inline-compress-start-size 10000000
+ tramp-persistency-file-name      (concat doom-cache-dir "tramp-persistency.el")
+ url-cache-directory              (concat doom-cache-dir "url/")
+ url-configuration-directory      (concat doom-etc-dir "url/"))
 
 ;; move custom defs out of init.el
 (setq custom-file (concat doom-etc-dir "custom.el"))
