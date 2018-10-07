@@ -277,9 +277,6 @@
 (define-key evil-normal-state-map (kbd "C-p") 'lsp-ui-peek-jump-forward)
 (define-key evil-normal-state-map (kbd "C-t") 'lsp-ui-peek-jump-backward)
 
-(use-package anki-editor
-  :ensure t)
-
 (require 'deadgrep)
 
 (after! tldr

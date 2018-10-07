@@ -11,7 +11,6 @@
 (package! atomic-chrome)
 (package! elpa-mirror)
 (package! ccls)
-(package! anki-editor)
 (package! deadgrep)
 
 

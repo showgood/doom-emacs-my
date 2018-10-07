@@ -43,6 +43,7 @@
        version-control   ; remember, remember that commit in November
        workspaces        ; tab emulation, persistence & separate workspaces
        help              ; help me please
+       lsp               ; language server protocol to the rescue
 
        :completion
        company           ; the ultimate code completion backend
@@ -131,8 +132,9 @@
        ;; Applications are complex and opinionated modules that transform Emacs
        ;; toward a specific purpose. They may have additional dependencies and
        ;; should be loaded late.
-       ;; :app
-       ;; deft           ; use deft to manage notes
+       :app
+      ;; deft           ; use deft to manage notes
+      anki               ; remember me..
       ;email             ; emacs as an email client
       ;irc               ; how neckbeards socialize
       ;rss               ; emacs as an RSS reader
