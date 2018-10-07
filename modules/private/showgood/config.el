@@ -126,21 +126,6 @@
              fancy-widen)
 )
 
-;; ==== deft settings {{{ ====
-(require 'deft)
-(setq deft-default-extension "org")
-(setq deft-extensions '("org"))
-(setq deft-directory "~/org")
-(setq deft-recursive t)
-(setq deft-use-filename-as-title t)
-(setq deft-use-filter-string-for-filename t)
-(setq deft-file-naming-rules '((noslash . "-")
-                               (nospace . "-")
-                               (case-fn . downcase)))
-(setq deft-text-mode 'org-mode)
-(add-to-list 'evil-emacs-state-modes 'deft-mode)
-;; ==== end deft settings }}} ====
-
 (require 'atomic-chrome)
 (atomic-chrome-start-server)
 

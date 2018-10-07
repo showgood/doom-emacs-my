@@ -8,7 +8,6 @@
 (package! hl-anything)
 (package! origami)
 (package! move-text)
-(package! deft)
 (package! yankpad)
 (package! atomic-chrome)
 (package! elpa-mirror)

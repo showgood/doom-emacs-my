@@ -132,6 +132,7 @@
        ;; toward a specific purpose. They may have additional dependencies and
        ;; should be loaded late.
        ;; :app
+       ;; deft           ; use deft to manage notes
       ;email             ; emacs as an email client
       ;irc               ; how neckbeards socialize
       ;rss               ; emacs as an RSS reader
