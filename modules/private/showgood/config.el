@@ -138,11 +138,13 @@
 ;; (slime-setup '(slime-fancy slime-tramp))
 ;; (slime-require :swank-listener-hooks)
 
-(use-package yankpad
-  :commands (yankpad-expand)
-  :config
-  (setq yankpad-file (concat +showgood-dir "yankpad.org"))
-)
+;; disable it until this issue is solved
+;; https://github.com/Kungsgeten/yankpad/issues/24
+;; (use-package yankpad
+;;   :commands (yankpad-expand)
+;;   :config
+;;   (setq yankpad-file (concat +showgood-dir "yankpad.org"))
+;; )
 
 (load! +bindings) ; my key bindings
 

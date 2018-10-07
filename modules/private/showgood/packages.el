@@ -8,7 +8,6 @@
 (package! hl-anything)
 (package! origami)
 (package! move-text)
-(package! yankpad)
 (package! atomic-chrome)
 (package! elpa-mirror)
 (package! lsp-mode)
@@ -17,6 +16,11 @@
 (package! lsp-ui)
 (package! anki-editor)
 (package! deadgrep)
+
+
+;; disable it until this issue is solved
+;; https://github.com/Kungsgeten/yankpad/issues/24
+;; (package! yankpad)
 
 ;; not very useful, buffer disappeared after window close and can't get back
 ;; (package! scratch-el :recipe (:fetcher github :repo "ieure/scratch-el"))
