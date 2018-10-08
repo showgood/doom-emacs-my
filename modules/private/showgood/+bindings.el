@@ -22,9 +22,6 @@
 ;;  ;; --- Global keybindings ---------------------------
 ;;  ;; very important to me, smoothier workflow
 
-;;  ;; TODO: conflict with term-mode
-;;  :nvime "C-y" #'yank
-
 ;;  :vime "M-SPC"  #'+company/complete
 ;;  :vime "M-/"    #'dabbrev-expand
 ;;  :nvime "<f12>" #'org-todo
@@ -33,8 +30,6 @@
 ;;  :nvime "<f2>"  #'org-clock-goto
 ;;  :nvime "<f3>"  #'org-clock-in
 ;;  :nvime "<f4>"  #'org-clock-out
-;;  ;; :nvime "<f6>"  #'rtags-find-symbol-at-point
-;;  :nvime "C-;"   #'evil-normal-state
 
 ;; :nvime "<f5> a" #'org-archive-subtree
 ;; :nvime "<f5> c" #'calendar
@@ -83,8 +78,6 @@
 ;; :nvime "\C-cl" #'org-store-link
 ;; :nvime "\C-cr" #'org-refile
 ;; ;; "\C-cj" #'org-journal-new-entry
-
-;; :nvime "\C-cs" #'new-shell
 
 ;;  ;; "\C-xp") 'spacemacs/copy-clipboard-to-whole-buffer)
 ;; ;; "\C-xY") 'spacemacs/copy-whole-buffer-to-clipboard)
@@ -153,11 +146,6 @@
 ;;    :desc "Org Capture"             :nv "X"  #'+org-capture/open
 
 ;;    ;; Most commonly used
-;;    :desc "jump char 2"                :n "k"   #'evil-avy-goto-char-2
-;;    :desc "Switch buffer in workspace" :n "q"   #'+ivy/switch-workspace-buffer
-;;    :desc "Switch buffer"              :n "Q"   #'ivy-switch-buffer
-;;    :desc "git grep"                   :n "d"   #'counsel-git-grep
-;;    :desc "execute command"            :n "SPC" #'counsel-M-x
 ;;    :desc "switch to previous buffer"  :n "TAB" #'switch-to-previous-buffer
 ;;    :desc "Switch workspace buffer"    :n ","   #'persp-switch-to-buffer
 ;;    :desc "Browse files"               :n "."   #'find-file
@@ -412,9 +400,6 @@
 ;;  :m  "gD" #'+jump/references
 ;;  :m  "gh" #'+jump/documentation
 ;;  :n  "gp" #'+evil/reselect-paste
-;;  :n  "gr" #'+eval:region
-;;  :n  "gR" #'+eval/buffer
-;;  :v  "gR" #'+eval:replace-region
 ;;  :v  "@"  #'+evil:macro-on-all-lines
 ;;  :n  "g@" #'+evil:macro-on-all-lines
 ;;  ;; repeat in visual mode (FIXME buggy)
@@ -427,7 +412,6 @@
 
 ;;  ;; ----------- rtags bindings ----------------------
 ;;  (:prefix ","
-;;    :n "d" #'deft
 ;;    :n "f" #'deft-find-file
 ;;    :n "s" #'rtags-find-symbol-at-point
 ;;    :n "r" #'rtags-find-references-at-point
@@ -518,20 +502,8 @@
 ;;      "C-SPC"    #'counsel-git-grep-recenter   ; preview
 ;;      "M-RET"    (+ivy-do-action! #'+ivy-git-grep-other-window-action)))
 
-;;  ;; evil-commentary
-;;  :n  "gc"  #'evil-commentary
-
-;;  ;; evil-exchange
-;;  :n  "gx"  #'evil-exchange
-
 ;;  ;; evil-matchit
 ;;  :nv [tab] #'+evil/matchit-or-toggle-fold
-
-;;  ;; evil-magit
-;;  (:after evil-magit
-;;    :map (magit-status-mode-map magit-revision-mode-map)
-;;    :n "C-j" nil
-;;    :n "C-k" nil)
 
 
 ;;  ;; evil-multiedit
@@ -684,21 +656,6 @@
 ;;  :v "C-u" #'undo-tree-undo
 ;;  :v "C-r" #'undo-tree-redo
 
-;;  ;; yasnippet
-;; (:after yasnippet
-;;   (:map yas-keymap
-;;     "C-e"           #'+snippets/goto-end-of-field
-;;     "C-a"           #'+snippets/goto-start-of-field
-;;     "<M-right>"     #'+snippets/goto-end-of-field
-;;     "<M-left>"      #'+snippets/goto-start-of-field
-;;     "<M-backspace>" #'+snippets/delete-to-start-of-field
-;;     [escape]        #'evil-normal-state
-;;     [backspace]     #'+snippets/delete-backward-char
-;;     [delete]        #'+snippets/delete-forward-char-or-field)
-;;   (:map yas-minor-mode-map
-;;     :i "<tab>" yas-maybe-expand
-;;     :v "<tab>" #'+snippets/expand-on-region))
-
 ;;  ;; --- Major mode bindings --------------------------
 ;;  (:after markdown-mode
 ;;    (:map markdown-mode-map
@@ -707,13 +664,6 @@
 ;;      "<M-left>"    nil
 ;;      "<M-right>"   nil))
 
-
-;;  ;; --- Custom evil text-objects ---------------------
-;;  :textobj "a" #'evil-inner-arg                    #'evil-outer-arg
-;;  :textobj "B" #'evil-textobj-anyblock-inner-block #'evil-textobj-anyblock-a-block
-;;  :textobj "i" #'evil-indent-plus-i-indent         #'evil-indent-plus-a-indent
-;;  :textobj "I" #'evil-indent-plus-i-indent-up      #'evil-indent-plus-a-indent-up
-;;  :textobj "J" #'evil-indent-plus-i-indent-up-down #'evil-indent-plus-a-indent-up-down
 
 ;;  ;; --- Built-in plugins -----------------------------
 ;;  (:after comint
@@ -730,24 +680,6 @@
 ;;    :n "e"   #'debugger-eval-expression
 ;;    :n "n"   #'debugger-step-through
 ;;    :n "c"   #'debugger-continue)
-
-;;  (:map help-mode-map
-;;    :n "[["  #'help-go-back
-;;    :n "]]"  #'help-go-forward
-;;    :n "o"   #'ace-link-help
-;;    :n "q"   #'quit-window
-;;    :n "Q"   #'+ivy-quit-and-resume)
-
-;;  (:after vc-annotate
-;;    :map vc-annotate-mode-map
-;;    :n "q"   #'kill-this-buffer
-;;    :n "d"   #'vc-annotate-show-diff-revision-at-line
-;;    :n "D"   #'vc-annotate-show-changeset-diff-revision-at-line
-;;    :n "SPC" #'vc-annotate-show-log-revision-at-line
-;;    :n "]]"  #'vc-annotate-next-revision
-;;    :n "[["  #'vc-annotate-prev-revision
-;;    :n "TAB" #'vc-annotate-toggle-annotation-visibility
-;;    :n "RET" #'vc-annotate-find-revision-at-line))
 
 ;; ;;; ==== END Global keybindings }}} ====
 
@@ -877,12 +809,6 @@
 ;; (evil-define-key 'normal org-mode-map (kbd "<tab>") 'org-cycle
 ;;                                       (kbd "<return>") 'org-open-at-point)
 
-;; (define-key ivy-minibuffer-map (kbd "M-y") 'counsel-yank-pop)
-;; (define-key evil-ex-map "\M-y" #'counsel-yank-pop)
-
-;; (evil-define-key 'insert term-raw-map (kbd "C-c C-d") 'term-send-eof)
-;; (evil-define-key 'insert term-raw-map (kbd "C-c C-z") 'term-stop-subjob)
-
 ;; (eval-after-load 'multi-term
 ;;   '(progn
 ;;      (dolist (p '(("C-p" . term-senjd-up)
@@ -904,7 +830,6 @@
 
 (load! myhydra)
 
-;; (general-override-mode)
 (general-define-key
  :states '(normal visual insert emacs)
  :keymaps 'override
@@ -1248,12 +1173,6 @@
 
 ;; :nvime "\C-cl" #'org-store-link
 ;; :nvime "\C-cr" #'org-refile
-;;    :n "yc" #'yankpad-set-category
-;;    :n "ye" #'yankpad-edit
-;;    :n "yt" #'yankpad-expand
-;;    :n "yi" #'yankpad-insert
-;;    :n "yr" #'yankpad-reload
-
 ;;      :desc "Spelling error"      :nv "s" #'evil-next-flyspell-error
 ;;      :desc "Spelling correction" :n  "S" #'flyspell-correct-word-generic)
 
@@ -1327,12 +1246,6 @@
 ;;      "C-n" #'evil-multiedit-next
 ;;      "C-p" #'evil-multiedit-prev))
 
-;;  ;; --- Custom evil text-objects ---------------------
-;; :textobj "a" #'evil-inner-arg                    #'evil-outer-arg
-;;  :textobj "B" #'evil-textobj-anyblock-inner-block #'evil-textobj-anyblock-a-block
-;;  :textobj "i" #'evil-indent-plus-i-indent         #'evil-indent-plus-a-indent
-;;  :textobj "I" #'evil-indent-plus-i-indent-up      #'evil-indent-plus-a-indent-up
-;;  :textobj "J" #'evil-indent-plus-i-indent-up-down #'evil-indent-plus-a-indent-up-down
 
 (general-define-key
  :states '(normal)
