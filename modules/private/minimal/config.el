@@ -151,13 +151,62 @@
  )
 
 (evil-set-initial-state 'compilation-mode 'normal)
+
 (general-define-key
- :states '(normal)
- :keymaps 'compilation-mode-map
- :prefix "SPC"
- "gg" '(evil-goto-first-line :which-key "go to begining")
- "gr" '(recompile :which-key "recompile")
- "go" '(compilation-display-error :which-key "display error")
- "ep" '(compilation-previous-error :which-key "previous error")
- "en" '(compilation-next-error :which-key "next error"))
+ :states '(normal visual)
+ ;; ga - what-cursor-position
+ "ga" '(projectile-find-other-file :which-key "toggle between h/cpp")
+ "gA" '(projectile-find-other-file-other-window :which-key "toggle between h/cpp")
+ "gb" '(+ivy/switch-workspace-buffer :which-key "switch workspace buffer")
+ "gB" '(ivy-switch-buffer :which-key "switch all buffer")
+ "gc" '(evil-commentary :which-key "evil commentary")
+ "gd" '(+jump/definition :which-key "jump to definition")
+ "gD" '(+jump/references :which-key "jump to references")
+ "ge" '(+eval:region :which-key "+eval:region")
+ "gE" '(+eval/buffer :which-key "+eval/buffer")
+ "gf" '(counsel-projectile-find-file :which-key "projectile file")
+ ;; gF -- maybe code format
+
+ ;; gg - evil-goto-first-line
+ "gh" '(dash-at-point :which-key "jump to Dash")
+ "gi" '(counsel-imenu :which-key "counsel imenu")
+
+ ;; gj - evil-next-visual-line
+ ;; gk - evil-previous-visual-line
+
+ ;; gl
+
+ "gm" '(delete-other-windows :which-key "maximize current buffer")
+ "gM" '(winner-undo :which-key "restore previous window layout")
+
+ ;; gn - evil-next-match
+
+ "go" '(save-buffer :which-key "save buffer")
+ "gp" '(+evil/reselect-paste :which-key "+evil/reselect-paste")
+
+ ;; gq - evil-fill-and-move  (re-align text to fill column width)
+
+ ;; gr -
+
+ ;; "gr" '(+eval:region :which-key "+eval:region")
+ ;; "gR" '(+eval/buffer :which-key "+eval/buffer")
+ "gs" '(evil-window-vsplit :which-key "split window vertically")
+ "gS" '(evil-window-split :which-key "split window horizontally")
+
+ ;; "gs" '(magit-status :which-key "magit status")
+
+ "gt" '(doom/jump-to-last-workspace :which-key "toggle workspace")
+ "gT" '(+workspace/switch-to :which-key "list all workspace to switch")
+
+ ;; gu - evil-downcase
+ ;; gU - evil-upcase
+ ;; gv - evil-visual-restore
+ ;; gV - evil-visual-restore
+ "gw" '(ace-window :which-key "ace window")
+ "gW" '(window-split-toggle :which-key "transpose two windows")
+
+ "gx" '(evil-exchange :which-key "evil exchange")
+ ;; gy - evil-commentary-yank
+
+ ;; "gz" '(+eval:replace-region :which-key "replace region with eval result")
 ;(toggle-frame-maximized)

@@ -51,6 +51,7 @@
        snippets               ; my elves. They type so I don't have to
        version-control        ; remember, remember that commit in November
        workspaces             ; tab emulation, persistence & separate workspaces
+       help                   ; help me please
 
        :completion
        company  ; the ultimate code completion backend
@@ -74,7 +75,8 @@
        emacs-lisp                       ; drown in parentheses
        javascript                ; all(hope(abandon(ye(who(enter(here))))))
        markdown                  ; writing docs for people to ignore
-       python                           ; beautiful is better than ugly
+       python                    ; beautiful is better than ugly
+       feature                   ; BDD
 
        ;; Private modules are where you place your personal configuration files.
        ;; By default, they are not tracked. There is one module included here,
