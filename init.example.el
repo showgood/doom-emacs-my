@@ -80,6 +80,7 @@
        tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
        regex             ; who not need regex?
+       treemacs          ; show me the tree
 
        :lang
        ;assembly          ; assembly for fun or debugging
