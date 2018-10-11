@@ -101,12 +101,15 @@ In that case, insert the number."
   (define-key map (kbd "<return>") nil))
 )
 
-(def-package! company-box
-  :hook (company-mode . company-box-mode))
+;; (def-package! company-box
+;;   :hook (company-mode . company-box-mode))
 
 ;;
 ;; Autoloads
 ;;
+
+;; (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
+;; (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
 
 (autoload 'company-capf "company-capf")
 (autoload 'company-yasnippet "company-yasnippet")

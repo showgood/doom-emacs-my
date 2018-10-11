@@ -165,11 +165,11 @@
 (setq tags-revert-without-query t)
 ;; Don't warn when TAGS files are large
 (setq large-file-warning-threshold nil)
-;; Setup auto update now
-(add-hook 'prog-mode-hook
-  (lambda ()
-    (add-hook 'after-save-hook
-              'counsel-etags-virtual-update-tags 'append 'local)))
+;; disable it since it cause lagging
+;; (add-hook 'prog-mode-hook
+;;   (lambda ()
+;;     (add-hook 'after-save-hook
+;;               'counsel-etags-virtual-update-tags 'append 'local)))
 
 (setq org-ditaa-jar-path "~/tools/ditaa0_9.jar")
 (setq org-plantuml-jar-path

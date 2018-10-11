@@ -8,6 +8,6 @@
   :ensure t
 )
 
-(def-package! poet-theme
-  :ensure t
-)
+;; (def-package! poet-theme
+;;   :ensure t
+;; )

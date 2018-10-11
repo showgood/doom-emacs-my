@@ -31,6 +31,7 @@
   ("messges" "messages")
   ("messge" "message")
   ("elsip" "elisp")
+  ("reciever" "receiver")
 
 ))
 

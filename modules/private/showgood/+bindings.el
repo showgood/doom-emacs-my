@@ -1268,6 +1268,12 @@
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "<C-i>") 'evil-jump-forward))
 
+(general-define-key
+ :states '(normal visual insert emacs)
+ :keymaps 'company-active-map
+ "C-n" 'company-select-next
+ "C-p" 'company-select-previous
+ )
 ;; keyboard shortcuts
 ;; (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
 ;; (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
