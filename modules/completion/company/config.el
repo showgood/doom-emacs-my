@@ -101,6 +101,9 @@ In that case, insert the number."
   (define-key map (kbd "<return>") nil))
 )
 
+(def-package! company-box
+  :hook (company-mode . company-box-mode))
+
 ;;
 ;; Autoloads
 ;;

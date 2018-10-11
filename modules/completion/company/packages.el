@@ -5,3 +5,4 @@
 (package! company-dict)
 (package! company-quickhelp)
 (package! company-statistics)
+(package! company-box)
