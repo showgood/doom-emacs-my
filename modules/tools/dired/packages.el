@@ -4,10 +4,7 @@
 (package! dired-k)
 (package! stripe-buffer)
 
-(if DOOM-INSTALL-PACKAGE-FROM-LOCAL
-    (package! dired+)
-    (package! dired+ :recipe (:fetcher github :repo "emacsmirror/dired-plus"))
-)
+(package! dired+)
 
 (package! dired-hacks-utils)
 

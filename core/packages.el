@@ -36,10 +36,7 @@
 (package! ace-window)
 (package! avy)
 
-(if DOOM-INSTALL-PACKAGE-FROM-LOCAL
-    (package! bookmark+)
-    (package! bookmark+ :recipe (:fetcher github :repo "emacsmirror/bookmark-plus"))
-)
+(package! bookmark+)
 
 (package! smartparens)
 (package! wgrep)

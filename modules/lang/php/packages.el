@@ -2,12 +2,7 @@
 ;;; lang/php/packages.el
 
 (package! php-boris)
-
-(if DOOM-INSTALL-PACKAGE-FROM-LOCAL
-    (package! php-extras)
-    (package! php-extras :recipe (:fetcher github :repo "arnested/php-extras"))
-)
-
+(package! php-extras)
 (package! php-mode)
 (package! php-refactor-mode)
 (package! phpunit)
