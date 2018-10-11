@@ -25,6 +25,9 @@
 
   :config
   (setq yas-verbosity (if doom-debug-mode 3 0)
+        ;; to avoid weird indentation after expansion
+        ;; https://www.reddit.com/r/emacs/comments/6ogn6c/indentation_in_yasnippet/
+        yas-indent-line 'fixed
         yas-also-auto-indent-first-line t
         yas-prompt-functions (delq 'yas-dropdown-prompt yas-prompt-functions)
         ;; Allow nested snippets
