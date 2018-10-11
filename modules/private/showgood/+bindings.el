@@ -907,7 +907,7 @@
  "jb" '(avy-pop-mark :which-key "jump back")
  "jI" '(imenu-anywhere :which-key "Imenu across buffers")
  "jm" '(evil-show-marks :which-key "show marks")
- "jr" '(evil-show-registers :which-key "show registers")
+ "jr" '(counsel-evil-registers :which-key "show registers")
  "jo" '(+jump/online :which-key "online search")
  "js" '(+jump/online-select :which-key "Online providers")
  "jt" '(counsel-etags-find-tag-at-point :which-key "counsel etags")
@@ -1259,6 +1259,15 @@
  :keymaps 'helpful-mode-map
  "q" '(me/close-helpful-buffer :which-key "close window")
  )
+
+;; this two lines are needed to make C-i works for evil-jump-forward
+;; historically C-i and <Tab> has same keycode
+;; https://emacs.stackexchange.com/questions/17509/how-to-distinguish-c-i-from-tab
+;; https://www.reddit.com/r/emacs/comments/80yna2/evil_how_to_have_ci_behave_like_in_vim/
+(define-key input-decode-map "\C-i" [C-i])
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "<C-i>") 'evil-jump-forward))
+
 ;; keyboard shortcuts
 ;; (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
 ;; (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)

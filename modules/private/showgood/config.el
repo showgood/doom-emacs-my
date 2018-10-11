@@ -20,6 +20,9 @@
 (global-visual-line-mode 1)
 
 (evil-add-command-properties #'counsel-imenu :jump t)
+(evil-add-command-properties #'+jump/definition :jump t)
+(evil-add-command-properties #'+jump/references :jump t)
+(evil-add-command-properties #'counsel-etags-find-tag-at-point :jump t)
 
 ;; ==== frequently used packages {{{ ====
 (require 'hl-anything)
