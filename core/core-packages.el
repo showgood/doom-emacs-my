@@ -53,7 +53,9 @@ missing) and shouldn't be deleted.")
       package-gnupghome-dir (expand-file-name "gpg" doom-packages-dir)
       package-enable-at-startup nil
       package-archives
-      '(("gnu"   . "https://elpa.gnu.org/packages/")
+      '(
+        ("myelpa"   . "~/myelpa")
+        ("gnu"   . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
         ("org"   . "https://orgmode.org/elpa/"))
       ;; I omit Marmalade because its packages are manually submitted rather

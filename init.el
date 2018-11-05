@@ -66,8 +66,11 @@ decrease this. If you experience stuttering, increase this.")
 ;; In noninteractive sessions, prioritize non-byte-compiled source files to
 ;; prevent stale, byte-compiled code from running. However, if you're getting
 ;; recursive load errors, it may help to set this to nil.
-(setq load-prefer-newer noninteractive)
+;; (setq load-prefer-newer noninteractive)
 
+;; these two lines below fix the recursive loading issue on alpine linux
+(setq load-prefer-newer nil)
+(setq load-file-rep-suffixes '(""))
 
 ;; Let 'er rip!
 (require 'core (concat user-emacs-directory "core/core"))
