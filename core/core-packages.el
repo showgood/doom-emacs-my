@@ -55,9 +55,10 @@ missing) and shouldn't be deleted.")
       package-archives
       '(
         ("myelpa"   . "~/myelpa")
-        ("gnu"   . "https://elpa.gnu.org/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ("org"   . "https://orgmode.org/elpa/"))
+        ;("gnu"   . "https://elpa.gnu.org/packages/")
+        ;("melpa" . "https://melpa.org/packages/")
+        ;("org"   . "https://orgmode.org/elpa/")
+)
       ;; I omit Marmalade because its packages are manually submitted rather
       ;; than pulled, so packages are often out of date with upstream.
 
