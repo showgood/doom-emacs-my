@@ -17,5 +17,6 @@
   (define-key global-map [remap other-window] #'ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
-        aw-scope 'frame
+        aw-scope 'global
+        aw-ignore-current t
         aw-background t))
