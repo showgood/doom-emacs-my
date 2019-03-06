@@ -346,7 +346,7 @@ read-only or not file-visiting."
 ;;; Third party packages
 
 ;; `avy'
-(setq avy-all-windows nil
+(setq avy-all-windows 'all-frames
       avy-background t)
 
 ;; `all-the-icons'
