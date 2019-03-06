@@ -17,5 +17,6 @@
   (global-set-key [remap other-window] #'ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
-        aw-scope 'frame
+        ;; I want to switch window across frame
+        aw-scope 'global
         aw-background t))
