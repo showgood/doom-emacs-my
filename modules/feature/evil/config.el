@@ -208,7 +208,8 @@ line with a linewise comment.")
   :init
   (setq evil-escape-excluded-states '(normal visual multiedit emacs motion)
         evil-escape-excluded-major-modes '(neotree-mode treemacs-mode term-mode)
-        evil-escape-key-sequence "jk"
+        ;; jf is faster than jk
+        evil-escape-key-sequence "jf"
         evil-escape-delay 0.25)
   (evil-define-key* '(insert replace visual operator) 'global "\C-g" #'evil-escape)
   :config
