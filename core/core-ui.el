@@ -180,7 +180,8 @@ read-only or not file-visiting."
  cursor-in-non-selected-windows nil ; hide cursors in other windows
  custom-theme-directory (expand-file-name "themes/" doom-private-dir)
  display-line-numbers-width 3
- enable-recursive-minibuffers nil
+ ;; allow to select from kill-ring history while in minibuffer
+ enable-recursive-minibuffers t
  frame-inhibit-implied-resize t
  frame-title-format '("%b – Doom Emacs") ; simple name in frame title
  ;; remove continuation arrow on right fringe
