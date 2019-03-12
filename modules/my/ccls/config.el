@@ -1,102 +1,34 @@
-;;; tools/ccls/config.el -*- lexical-binding: t; -*-
-
-(defun ccls/base () (interactive) (lsp-ui-peek-find-custom 'base "$ccls/base"))
-(defun ccls/callers () (interactive) (lsp-ui-peek-find-custom 'callers "$ccls/callers"))
-(defun ccls/vars (kind) (lsp-ui-peek-find-custom 'vars "$ccls/vars" (plist-put (lsp--text-document-position-params) :kind kind)))
-(defun ccls/bases ()
-  (interactive)
-  (lsp-ui-peek-find-custom 'base "$ccls/inheritanceHierarchy"
-                           (append (lsp--text-document-position-params) '(:flat t :level 3))))
-(defun ccls/derived ()
-  (interactive)
-  (lsp-ui-peek-find-custom 'derived "$ccls/inheritanceHierarchy"
-                           (append (lsp--text-document-position-params) '(:flat t :level 3 :derived t))))
-(defun ccls/members ()
-  (interactive)
-  (lsp-ui-peek-find-custom 'base "$ccls/memberHierarchy"
-                           (append (lsp--text-document-position-params) '(:flat t))))
-
-;; The meaning of :role corresponds to https://github.com/maskray/ccls/blob/master/src/symbol.h
-
-;; References w/ Role::Address bit (e.g. variables explicitly being taken addresses)
-(defun ccls/references-address ()
-  (interactive)
-  (lsp-ui-peek-find-custom
-   'address "textDocument/references"
-   (plist-put (lsp--text-document-position-params) :context
-              '(:role 128))))
-
-;; References w/ Role::Dynamic bit (macro expansions)
-(defun ccls/references-macro ()
-  (interactive)
-  (lsp-ui-peek-find-custom
-   'address "textDocument/references"
-   (plist-put (lsp--text-document-position-params) :context
-              '(:role 64))))
-
-;; References w/o Role::Call bit (e.g. where functions are taken addresses)
-(defun ccls/references-not-call ()
-  (interactive)
-  (lsp-ui-peek-find-custom
-   'address "textDocument/references"
-   (plist-put (lsp--text-document-position-params) :context
-              '(:excludeRole 32))))
-
-;; References w/ Role::Read
-(defun ccls/references-read ()
-  (interactive)
-  (lsp-ui-peek-find-custom
-   'read "textDocument/references"
-   (plist-put (lsp--text-document-position-params) :context
-              '(:role 8))))
-
-;; References w/ Role::Write
-(defun ccls/references-write ()
-  (interactive)
-  (lsp-ui-peek-find-custom
-   'write "textDocument/references"
-   (plist-put (lsp--text-document-position-params) :context
-              '(:role 16))))
-
-(defun my/highlight-pattern-in-text (pattern line)
-  (when (> (length pattern) 0)
-    (let ((i 0))
-      (while (string-match pattern line i)
-        (setq i (match-end 0))
-        (add-face-text-property (match-beginning 0) (match-end 0) 'isearch t line)
-        )
-      line)))
-
+;;; my/ccls/config.el -*- lexical-binding: t; -*-
 
 (def-package! ccls
-  :after cc-mode
-  :init (add-hook! (c-mode c++-mode objc-mode) #'+ccls//enable)
+  :defer t
+  :init (add-hook! (c-mode c++-mode cuda-mode objc-mode) #'+ccls//enable)
   :config
   ;; overlay is slow
   ;; Use https://github.com/emacs-mirror/emacs/commits/feature/noverlay
   (setq ccls-sem-highlight-method 'font-lock)
+  (add-hook 'lsp-after-open-hook #'ccls-code-lens-mode)
   (ccls-use-default-rainbow-sem-highlight)
   ;; https://github.com/maskray/ccls/blob/master/src/config.h
-  (setq ccls-extra-init-params
-        '(:completion
-          (
-           :detailedLabel t
-           :includeBlacklist
-           ("^/usr/(local/)?include/c\\+\\+/[0-9\\.]+/(bits|tr1|tr2|profile|ext|debug)/"
-            "^/usr/(local/)?include/c\\+\\+/v1/"
-            ))
-          :diagnostics (:frequencyMs 5000)
-          :index (:reparseForDependency 1)))
+  (setq
+   ccls-initialization-options
+   `(:clang
+     (:excludeArgs
+      ;; Linux's gcc options. See ccls/wiki
+      ["-falign-jumps=1" "-falign-loops=1" "-fconserve-stack" "-fmerge-constants" "-fno-code-hoisting" "-fno-schedule-insns" "-fno-var-tracking-assignments" "-fsched-pressure"
+       "-mhard-float" "-mindirect-branch-register" "-mindirect-branch=thunk-inline" "-mpreferred-stack-boundary=2" "-mpreferred-stack-boundary=3" "-mpreferred-stack-boundary=4" "-mrecord-mcount" "-mindirect-branch=thunk-extern" "-mno-fp-ret-in-387" "-mskip-rax-setup"
+       "--param=allow-store-data-races=0" "-Wa arch/x86/kernel/macros.s" "-Wa -"]
+      :extraArgs ["--gcc-toolchain=/usr"]
+      :pathMappings ,+ccls-path-mappings)
+     :completion
+     (:include
+      (:blacklist
+       ["^/usr/(local/)?include/c\\+\\+/[0-9\\.]+/(bits|tr1|tr2|profile|ext|debug)/"
+        "^/usr/(local/)?include/c\\+\\+/v1/"
+        ]))
+     :index (:initialBlacklist ,+ccls-initial-blacklist :trackDependency 1)))
 
-  (with-eval-after-load 'projectile
-    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache"))
+  (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
 
   (evil-set-initial-state 'ccls-tree-mode 'emacs)
-  (set-company-backend! '(c-mode c++-mode objc-mode) 'company-lsp)
-)
-
-(defun +ccls//enable ()
-  (when buffer-file-name
-    (require 'ccls)
-    (setq-local lsp-ui-sideline-show-symbol nil)
-      (lsp)))
+  )
