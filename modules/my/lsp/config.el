@@ -28,10 +28,15 @@
 )
 
 (def-package! company-lsp
+  :when (featurep! :completion company)
+  :after lsp-mode
   :config
-    (setq company-lsp-enable-recompletion t)
-    (push 'company-lsp company-backends)
-)
+  (set-company-backend! 'lsp-mode 'company-lsp))
+;; (def-package! company-lsp
+;;   :config
+;;     (setq company-lsp-enable-recompletion t)
+;;     (push 'company-lsp company-backends)
+;; )
 
 (defun my-set-projectile-root ()
   (when lsp--cur-workspace

@@ -23,6 +23,11 @@
 
       [remap evil-jump-to-tag] #'projectile-find-tag
       [remap find-tag]         #'projectile-find-tag
+       "C-h"     #'evil-window-left
+       "C-j"     #'evil-window-down
+       "C-k"     #'evil-window-up
+       "C-l"     #'evil-window-right
+       "C-s"     #'swiper
 
       ;; Smart tab
       :i [tab] (general-predicate-dispatch nil ; fall back to nearest keymap
@@ -89,6 +94,9 @@
       :n  "ZX"    #'bury-buffer
       :n  "gp"    #'+evil/reselect-paste
       :n  "g="    #'widen
+      :n  "go"    #'save-buffer
+      :n  "gs"    #'evil-window-vsplit
+      :n  "gS"    #'evil-window-split
       :v  "g="    #'+evil:narrow-buffer
       :nv "g@"    #'+evil:apply-macro
       :nv "gc"    #'evil-commentary
@@ -521,7 +529,8 @@
       (cond ((featurep! :completion ivy)   #'ivy-resume)
             ((featurep! :completion helm)  #'helm-resume))
 
-      :desc "Find file in project"  "SPC"  #'projectile-find-file
+      ;; :desc "Find file in project"  "SPC"  #'projectile-find-file
+      :desc "Find file in project"  "SPC"  #'counsel-M-x
       :desc "Blink cursor line"     "DEL"  #'+nav-flash/blink-cursor
       :desc "Jump to bookmark"      "RET"  #'bookmark-jump
 

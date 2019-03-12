@@ -67,10 +67,6 @@
         )
       line)))
 
-(defun +ccls//enable ()
-  (condition-case nil
-      (lsp-ccls-enable)
-    (user-error nil)))
 
 (def-package! ccls
   :after cc-mode
@@ -96,5 +92,11 @@
     (add-to-list 'projectile-globally-ignored-directories ".ccls-cache"))
 
   (evil-set-initial-state 'ccls-tree-mode 'emacs)
-  (set! :company-backend '(c-mode c++-mode objc-mode) 'company-lsp)
+  (set-company-backend! '(c-mode c++-mode objc-mode) 'company-lsp)
 )
+
+(defun +ccls//enable ()
+  (when buffer-file-name
+    (require 'ccls)
+    (setq-local lsp-ui-sideline-show-symbol nil)
+      (lsp)))
