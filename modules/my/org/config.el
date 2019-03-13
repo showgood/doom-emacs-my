@@ -1,11 +1,12 @@
 ;;; my/org/config.el -*- lexical-binding: t; -*-
 
 
-(load! "ob-diagrams")
+;; (load! "ob-diagrams")
 (setq ob-diagrams-cli-path "~/node_modules/.bin/diagrams")
 
 ;; https://www.reddit.com/r/emacs/comments/8kz8dv/tip_how_i_use_orgjournal_to_improve_my/
 (def-package! org-journal
+  :defer t
   ;; NOTE: :config won't work, need to use :custom
   ;; https://github.com/bastibe/org-journal/issues/9
   :custom
@@ -19,11 +20,11 @@
 )
 
 (def-package! org-noter
-  :no-require t
+  :defer t
 )
 
 (def-package! ox-reveal
-  :no-require t
+  :defer t
   :config
   (setq org-reveal-root (format "file://%s/reveal.js" (substitute-in-file-name "$HOME"))
         org-reveal-title-slide nil )
@@ -51,6 +52,7 @@
     (setq org-html-table-default-attributes '(:border "2" :rules "all" :frame "border"))
 
     (def-package! org-attach-screenshot
+    :defer t
     :commands (org-attach-screenshot)
     :config
     (setq org-attach-screenshot-command-line

@@ -43,3 +43,9 @@
       )
     )
   )
+
+;;;###autoload
+ (defun +workspace/save-name(name frame)
+   (setq doom-last-selected-workspace persp-last-persp-name)
+   (message (format "persp-last: %s" persp-last-persp-name))
+ )
