@@ -4,7 +4,7 @@
 (defun me/create-clang-format-at (dir)
   "make a copy of clang-format file to specified directory"
   (interactive)
-  (copy-file (format "%s/my.clang-format" +showgood-dir) (format "%s/.clang-format" dir))
+  (copy-file (format "%s/resource/my.clang-format" doom-private-dir) (format "%s/.clang-format" dir))
 )
 
 ;;;###autoload
