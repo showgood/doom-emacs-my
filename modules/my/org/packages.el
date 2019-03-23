@@ -5,3 +5,5 @@
 (package! org-journal)
 (package! ox-gfm)
 (package! org-noter)
+(package! jupyter)
+;; org-re-reveal

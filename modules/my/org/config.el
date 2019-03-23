@@ -1,7 +1,13 @@
 ;;; my/org/config.el -*- lexical-binding: t; -*-
 
+(load! "+babel")
 
-;; (load! "ob-diagrams")
+;; these settings is for supporting generating diagrams in org mode
+;; underneath using https://github.com/francoislaberge/diagrams to generate diagrams
+;; buffer-file-name seems to be nil, not sure why
+;; had to hard code the path
+;; (add-to-list 'load-path (file-name-directory buffer-file-name))
+(add-to-list 'load-path "~/.emacs.d/modules/my/org")
 (setq ob-diagrams-cli-path "~/node_modules/.bin/diagrams")
 
 ;; https://www.reddit.com/r/emacs/comments/8kz8dv/tip_how_i_use_orgjournal_to_improve_my/
