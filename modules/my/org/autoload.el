@@ -39,11 +39,25 @@
   )
 
 ;;;###autoload
+(defun me/org-append-formula (cell formula)
+  "build a alist (cell . formula) and append to existing formulas of the table
+   also recalculate the whole table."
+   (setq exist-formulas (org-table-get-stored-formulas))
+   (setq new-formulas (add-to-list 'exist-formulas (cons cell formula)))
+   (org-table-store-formulas new-formulas)
+   ;; need to pass 'all so all rows are recalculated, not just current row
+   (org-table-recalculate 'all)
+)
+
+;;;###autoload
 (defun me/org-add-index-column ()
-  "insert a index column to the table under cursor."
+  "insert a index column to the table under cursor.
+   index starting from 1. Also a hline is expected
+   to exist for table for index to work properly."
   (interactive)
-  (org-table-goto-column 1)
+  (org-table-goto-column 0)
   (org-table-insert-column)
+  (org-table-move-column-left)
   (me/org-append-formula "$1" "@#-1")
 )
 

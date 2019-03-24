@@ -1,6 +1,5 @@
 ;;; my/org/ob-diagrams.el -*- lexical-binding: t; -*-
 
-;;; pretty much copied ob-mermaid
 ;;; ob-diagrams.el --- org-babel support for diagrams evaluation
 
 ;; Copyright (C) 2018 showgood
