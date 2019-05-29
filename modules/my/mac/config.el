@@ -4,5 +4,5 @@
 (load! "emacs-dayone2")
 
 (def-package! emacs-dayone2
-  :no-require t
+  :defer t
 )

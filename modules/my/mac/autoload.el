@@ -47,7 +47,7 @@
   (interactive)
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-	"~/"
+    "~/"
       (file-name-directory filename))))
 
 ;;;###autoload
@@ -64,3 +64,22 @@
     " do shell script \"open -a iTerm\"\n"
     ))
   )
+
+;;;###autoload
+(defun org-export-to-devonthink (arg)
+  "export org file to devonthink in html format."
+  (interactive "P")
+  (let (content)
+    (org-html-export-as-html arg nil nil "*Org HTML Export*")
+    (switch-to-buffer "*Org HTML Export*")
+    (setq content (buffer-string))
+    (kill-buffer "*Org HTML Export*")
+    (setq content (replace-regexp-in-string (regexp-quote "\"") "\\\"" content t t))
+    (do-applescript
+     (concat
+        "tell application \"DEVONthink Pro\"\n"
+        (format
+           "set theRecord to create record with {name:\"%s\", type:html, content:\"%s\", url:\"%s\"} in current group\n"
+           (buffer-file-name) content (buffer-file-name))
+        "end tell\n"
+     ))))
