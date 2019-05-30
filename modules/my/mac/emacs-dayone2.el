@@ -16,7 +16,7 @@
 (defvar emacs-dayone-succes-reg "^Created new entry with uuid:")
 
 ;;;###autoload
-(defun emacs-dayone2/save (&optional b e)
+(defun emacs-dayone2/save (entry-time &optional b e)
   "Save current region to DayOne 2"
   (interactive "r")
   (let* ((start (if mark-active b (point-min)))
@@ -25,7 +25,7 @@
          (tmp-file (make-temp-file "emacs-dayone")))
     (with-temp-file tmp-file (insert contents))
     (message (number-to-string  start))
-    (emacs-dayone2/save-from-file tmp-file)))
+    (emacs-dayone2/save-from-file tmp-file entry-time)))
 
 ;;;###autoload
 (defun emacs-dayone/export-to-md ()
@@ -42,14 +42,45 @@
 )
 
 ;;;###autoload
-(defun emacs-dayone2/save-from-file (tmp-file)
+(defun emacs-dayone2/save-from-file (tmp-file entry-time)
   "Save the content from tmp-file to DayOne"
   (interactive "r")
    (if (string-match emacs-dayone-succes-reg
           (shell-command-to-string
-             (format "%s < %s" emacs-dayone-cmd tmp-file)))
+             (format "%s < %s --date='%s'" emacs-dayone-cmd tmp-file entry-time)))
         (message "Success: contents saved")
       (message "Failed: can't saved"))
     (delete-file tmp-file))
+
+
+;;;###autoload
+(defun emacs-dayone2/org-journal-export-to-dayone2 ()
+  "take an org journal file and export all of the second level headings
+   to DayOne 2 for Mac."
+  (interactive)
+      (org-map-entries
+        (lambda ()
+          (let* ((title (nth 4 (org-heading-components)))
+                (time (substring title 0 5))
+                (date (buffer-name))
+                (entry-time
+                 (format "%s-%s-%s %s:00"
+                         (substring date 0 4)
+                         (substring date 4 6)
+                         (substring date 6 8)
+                         time))
+               (level (car (org-heading-components))))
+            (when (eq level 2)
+              (message "process %s, entry-time: %s" title entry-time)
+              (org-gfm-export-as-markdown nil t)
+              (switch-to-buffer "*Org GFM Export*")
+              (goto-char (point-min))
+              (while (search-forward-regexp "^#" nil t)
+                (replace-match "##"))
+              (goto-char (point-min))
+              (insert (format "# %s\n\n" (substring title 6)))
+              (emacs-dayone2/save entry-time)
+              (kill-buffer "*Org GFM Export*")))
+)))
 
 (provide 'emacs-dayone2)
