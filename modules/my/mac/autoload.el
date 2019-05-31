@@ -70,7 +70,7 @@
   "export org file to devonthink in html format."
   (interactive "P")
   (let (content)
-    (org-html-export-as-html arg nil nil "*Org HTML Export*")
+    (org-html-export-as-html)
     (switch-to-buffer "*Org HTML Export*")
     (setq content (buffer-string))
     (kill-buffer "*Org HTML Export*")
@@ -80,6 +80,35 @@
         "tell application \"DEVONthink Pro\"\n"
         (format
            "set theRecord to create record with {name:\"%s\", type:html, content:\"%s\", url:\"%s\"} in current group\n"
+           (buffer-file-name) content (buffer-file-name))
+        "end tell\n"
+     ))))
+
+
+;;;###autoload
+(defun org-export-md-to-devonthink (arg)
+  "export org file to devonthink in markdown format.
+   also add some css and js to pretty the render of markdown."
+  (interactive "P")
+  (let (content)
+    (org-md-export-as-markdown)
+    (switch-to-buffer "*Org MD Export*")
+    (goto-char (point-min))
+    (insert "<script src=\"x-devonthink-item://2E0ED1DE-314A-4F34-9CF5-15B7A20E383F\"></script>\n")
+    (insert "<script>hljs.initHighlightingOnLoad();</script>\n")
+    (insert "<link type=\"text/css\" rel=\"stylesheet\" href=\"x-devonthink-item://9E6A7780-FE56-4B48-AEA1-F6620D3CAF15\" />\n")
+    (insert "<link type=\"text/css\" rel=\"stylesheet\" href=\"x-devonthink-item://8CDB2C9B-F69B-4059-86AA-5AC1355671CA\" />\n")
+    (insert "<link type=\"text/css\" rel=\"stylesheet\" href=\"x-devonthink-item://2F3BD48C-A7F7-4BA4-8CD3-FB9465BAD4D5\"/>\n")
+    (setq content (buffer-string))
+    (kill-buffer "*Org MD Export*")
+    (setq content (replace-regexp-in-string (regexp-quote "\"") "\\\"" content t t))
+    (setq content (replace-regexp-in-string (regexp-quote "(//") "(x-devonthink-item://" content t t))
+
+    (do-applescript
+     (concat
+        "tell application \"DEVONthink Pro\"\n"
+        (format
+           "set theRecord to create record with {name:\"%s\", type:markdown, content:\"%s\", url:\"%s\"} in current group\n"
            (buffer-file-name) content (buffer-file-name))
         "end tell\n"
      ))))
