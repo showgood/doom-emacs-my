@@ -16,7 +16,7 @@
 (defvar emacs-dayone-succes-reg "^Created new entry with uuid:")
 
 ;;;###autoload
-(defun emacs-dayone2/save (entry-time &optional b e)
+(defun emacs-dayone2/save (entry-time tags &optional b e)
   "Save current region to DayOne 2"
   (interactive "r")
   (let* ((start (if mark-active b (point-min)))
@@ -25,7 +25,7 @@
          (tmp-file (make-temp-file "emacs-dayone")))
     (with-temp-file tmp-file (insert contents))
     (message (number-to-string  start))
-    (emacs-dayone2/save-from-file tmp-file entry-time)))
+    (emacs-dayone2/save-from-file tmp-file entry-time tags)))
 
 ;;;###autoload
 (defun emacs-dayone/export-to-md ()
@@ -42,12 +42,12 @@
 )
 
 ;;;###autoload
-(defun emacs-dayone2/save-from-file (tmp-file entry-time)
+(defun emacs-dayone2/save-from-file (tmp-file entry-time tags)
   "Save the content from tmp-file to DayOne"
   (interactive "r")
    (if (string-match emacs-dayone-succes-reg
           (shell-command-to-string
-             (format "%s < %s --date='%s'" emacs-dayone-cmd tmp-file entry-time)))
+             (format "%s < %s --date='%s' --tags %s" emacs-dayone-cmd tmp-file entry-time tags)))
         (message "Success: contents saved")
       (message "Failed: can't saved"))
     (delete-file tmp-file))
@@ -61,6 +61,7 @@
       (org-map-entries
         (lambda ()
           (let* ((title (nth 4 (org-heading-components)))
+                 (tags (nth 5 (org-heading-components)))
                 (time (substring title 0 5))
                 (date (buffer-name))
                 (entry-time
@@ -83,7 +84,16 @@
                   (replace-match "##"))
                 (goto-char (point-min))
                 (insert (format "# %s\n\n" (substring title 6)))
-                (emacs-dayone2/save entry-time)
+                (if tags
+                    (progn
+                        (setq tags (split-string tags ":" t))
+                        (add-to-list 'tags "org_journal")
+                    )
+                  (setq tags '("org_journal"))
+                )
+
+                (setq tags (mapconcat 'identity tags " "))
+                (emacs-dayone2/save entry-time tags)
                 (kill-buffer "*Org GFM Export*"))))
 )))
 
