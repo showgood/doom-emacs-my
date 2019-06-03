@@ -10,21 +10,6 @@
 (add-to-list 'load-path "~/.emacs.d/modules/my/org")
 (setq ob-diagrams-cli-path "~/node_modules/.bin/diagrams")
 
-;; https://www.reddit.com/r/emacs/comments/8kz8dv/tip_how_i_use_orgjournal_to_improve_my/
-(def-package! org-journal
-  :defer t
-  ;; NOTE: :config won't work, need to use :custom
-  ;; https://github.com/bastibe/org-journal/issues/9
-  :custom
-    (org-journal-dir "~/org/journal/2018/")
-    (org-journal-file-format "%Y%m%d")
-    (org-journal-date-format "%e %b %Y (%A)")
-  ;; TODO: make company-dabbrev available globally
-  :config
-    (set-company-backend! 'org-journal-mode
-        '(company-capf company-yasnippet company-dabbrev))
-)
-
 (def-package! org-noter
   :defer t
 )
@@ -37,6 +22,28 @@
 )
 
 (after! org
+    ;; https://www.reddit.com/r/emacs/comments/8kz8dv/tip_how_i_use_orgjournal_to_improve_my/
+    (def-package! org-journal
+    :defer t
+    ;; NOTE: :config won't work, need to use :custom
+    ;; https://github.com/bastibe/org-journal/issues/9
+    :custom
+    ;; use .org as extension caused some side effects
+    ;; for eg. my org file template kicks in and org jouranl
+    ;; header not populated..
+    ;; however without extension(.journal) caused a bit of
+    ;; difficulties if I want to use `find-lisp-find-files'
+    ;; for batch processing files. So I settled on `.journal'
+    ;; extension for now.
+        (org-journal-file-format "%Y-%m-%d.journal")
+        (org-journal-dir "~/org/journal/2019/")
+        (org-journal-date-format "%e %b %Y (%A)")
+    ;; TODO: make company-dabbrev available globally
+    :config
+        (set-company-backend! 'org-journal-mode
+            '(company-capf company-yasnippet company-dabbrev))
+    )
+
     (setq org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
                                 (sequence "⚑ WAITING(w)" "|")
                                 (sequence "|" "✘ CANCELED(c)")))
