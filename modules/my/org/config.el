@@ -77,7 +77,8 @@
             )
     )
 
-    (when IS-MAC (require 'org-mac-link))
+    (when IS-MAC (load! "+org-mac"))
+
     (require 'ox-gfm nil t)
     (set-company-backend! 'org-mode '(company-dabbrev company-yasnippet company-capf))
 

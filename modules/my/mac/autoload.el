@@ -102,7 +102,8 @@
     (setq content (buffer-string))
     (kill-buffer "*Org MD Export*")
     (setq content (replace-regexp-in-string (regexp-quote "\"") "\\\"" content t t))
-    (setq content (replace-regexp-in-string (regexp-quote "(//") "(x-devonthink-item://" content t t))
+    ;; no longer need this once we define new org link type
+    ;; (setq content (replace-regexp-in-string (regexp-quote "(//") "(x-devonthink-item://" content t t))
 
     (do-applescript
      (concat
