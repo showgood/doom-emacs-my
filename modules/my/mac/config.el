@@ -6,3 +6,5 @@
 (def-package! emacs-dayone2
   :defer t
 )
+
+(load! "org-devon")
