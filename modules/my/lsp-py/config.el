@@ -1,7 +1,7 @@
 ;;; my/lsp-py/config.el -*- lexical-binding: t; -*-
 
 
-(def-package! lsp-python
+(use-package! lsp-python
     :hook (python-mode . lsp-python-enable)
     :config
     (setq python-indent-guess-indent-offset-verbose nil)

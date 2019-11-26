@@ -1,4 +1,4 @@
 ;;; my/anki/config.el -*- lexical-binding: t; -*-
 
-(def-package! anki-editor
+(use-package! anki-editor
   :defer t)

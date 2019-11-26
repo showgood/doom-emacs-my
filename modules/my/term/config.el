@@ -36,5 +36,5 @@
     )
 )
 
-(def-package! isend-mode
+(use-package! isend-mode
   :defer t)

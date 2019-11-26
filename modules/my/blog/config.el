@@ -1,6 +1,6 @@
 ;;; tools/myblog/config.el -*- lexical-binding: t; -*-
 
-(def-package! ox-hugo
+(use-package! ox-hugo
   :config
   (setq org-hugo-export-with-section-numbers nil)
   :after ox)

@@ -1,6 +1,6 @@
 ;;; my/ccls/config.el -*- lexical-binding: t; -*-
 
-(def-package! ccls
+(use-package! ccls
   :defer t
   :init (add-hook! (c-mode c++-mode cuda-mode objc-mode) #'+ccls//enable)
   :config

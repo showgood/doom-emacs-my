@@ -6,7 +6,7 @@
   ;;   :init (add-hook 'c-mode-hook #'cquery//enable)
   ;;         (add-hook 'c++-mode-hook #'cquery//enable))
 
-(def-package! cquery
+(use-package! cquery
   :commands lsp-cquery-enable
   :init (add-hook 'c-mode-common-hook #'cquery//enable)
   :config

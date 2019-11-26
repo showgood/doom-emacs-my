@@ -10,11 +10,11 @@
 (add-to-list 'load-path "~/.emacs.d/modules/my/org")
 (setq ob-diagrams-cli-path "~/node_modules/.bin/diagrams")
 
-(def-package! org-noter
+(use-package! org-noter
   :defer t
 )
 
-(def-package! ox-reveal
+(use-package! ox-reveal
   :defer t
   :config
   (setq org-reveal-root (format "file://%s/reveal.js" (substitute-in-file-name "$HOME"))
@@ -23,7 +23,7 @@
 
 (after! org
     ;; https://www.reddit.com/r/emacs/comments/8kz8dv/tip_how_i_use_orgjournal_to_improve_my/
-    (def-package! org-journal
+    (use-package! org-journal
     :defer t
     ;; NOTE: :config won't work, need to use :custom
     ;; https://github.com/bastibe/org-journal/issues/9
@@ -64,7 +64,7 @@
     ;; prettify the exported table in HTML, add border and column divider etc
     (setq org-html-table-default-attributes '(:border "2" :rules "all" :frame "border"))
 
-    (def-package! org-attach-screenshot
+    (use-package! org-attach-screenshot
     :defer t
     :commands (org-attach-screenshot)
     :config

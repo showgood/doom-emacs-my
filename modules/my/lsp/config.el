@@ -1,12 +1,12 @@
 ;;; my/lsp/config.el -*- lexical-binding: t; -*-
 
-(def-package! lsp-mode
+(use-package! lsp-mode
   :commands (lsp-mode)
   :config
   (setq lsp-response-timeout 30)
 )
 
-(def-package! lsp-ui
+(use-package! lsp-ui
 :hook (lsp-mode . lsp-ui-mode)
 :config
 (setq
@@ -27,12 +27,12 @@
 (define-key lsp-ui-mode-map (kbd "C-o") 'lsp-ui-peek-jump-backward)
 )
 
-(def-package! company-lsp
+(use-package! company-lsp
   :when (featurep! :completion company)
   :after lsp-mode
   :config
   (set-company-backend! 'lsp-mode 'company-lsp))
-;; (def-package! company-lsp
+;; (use-package! company-lsp
 ;;   :config
 ;;     (setq company-lsp-enable-recompletion t)
 ;;     (push 'company-lsp company-backends)

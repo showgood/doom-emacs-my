@@ -10,7 +10,7 @@
 ;;  pip install importmagic
 ;;  pip install autopep8
 ;;  pip install yapf
-(def-package! elpy
+(use-package! elpy
   :after python
   :config
   (elpy-enable)

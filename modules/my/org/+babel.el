@@ -75,7 +75,7 @@ the first function to return non-nil.")
              if (funcall fn (eq (car p) key))
              collect p)))
 
-(def-package! jupyter
+(use-package! jupyter
   :defer t
   :init
   (after! ob-async

@@ -1,6 +1,6 @@
 ;;; my/diff/config.el -*- lexical-binding: t; -*-
 
-(def-package! ztree
+(use-package! ztree
   :defer t
 )
 
