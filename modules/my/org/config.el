@@ -3,23 +3,21 @@
 (load! "+babel")
 
 ;; these settings is for supporting generating diagrams in org mode
-;; underneath using https://github.com/francoislaberge/diagrams to generate diagrams
-;; buffer-file-name seems to be nil, not sure why
-;; had to hard code the path
-;; (add-to-list 'load-path (file-name-directory buffer-file-name))
-(add-to-list 'load-path "~/.emacs.d/modules/my/org")
-(setq ob-diagrams-cli-path "~/node_modules/.bin/diagrams")
+(use-package! ob-diagrams
+  :defer t
+  :config
+  (setq ob-diagrams-cli-path "~/node_modules/.bin/diagrams")
+  )
 
 (use-package! org-noter
   :defer t
 )
 
-(use-package! ox-reveal
-  :defer t
+(use-package! org-re-reveal
+  :after ox
   :config
-  (setq org-reveal-root (format "file://%s/reveal.js" (substitute-in-file-name "$HOME"))
-        org-reveal-title-slide nil )
-)
+  (setq org-re-reveal-root (format "file://%s/reveal.js" (substitute-in-file-name "$HOME"))
+        org-re-reveal-title-slide nil))
 
 (after! org
     ;; https://www.reddit.com/r/emacs/comments/8kz8dv/tip_how_i_use_orgjournal_to_improve_my/

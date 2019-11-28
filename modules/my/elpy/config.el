@@ -14,7 +14,7 @@
   :after python
   :config
   (elpy-enable)
-  (setq elpy-rpc-python-command "~/.pyenv/shims/python")
+  (setq elpy-rpc-python-command "python")
   ;; prevent elpy because too sluggish
   (setq eldoc-idle-delay 2)
 

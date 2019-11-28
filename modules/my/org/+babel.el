@@ -39,7 +39,8 @@ the first function to return non-nil.")
     '((emacs-lisp . t)
       (python . t)
       ;; must put jupyter at last
-      (jupyter . t)))
+      ;; (jupyter . t)
+      ))
 
   (setq org-src-fontify-natively t      ; make code pretty
         org-src-preserve-indentation t  ; use native major-mode indentation
