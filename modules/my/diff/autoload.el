@@ -45,3 +45,18 @@ selected frame."
       (let ((buffer1 (buffer-name (car (unique-visible-buffers))))
            (buffer2 (buffer-name (car (last (unique-visible-buffers))))))
            (ediff-buffers buffer1 buffer2))))
+
+;;;###autoload
+;; http://mbork.pl/2019-11-17_Diffing_buffer_fragments%2c_continued
+(defun diff-last-two-kills ()
+  "Put the last two kills to temporary buffers and diff them."
+  (interactive)
+  (let ((old (generate-new-buffer "old"))
+	(new (generate-new-buffer "new")))
+    (set-buffer old)
+    (insert (current-kill 0 t))
+    (set-buffer new)
+    (insert (current-kill 1 t))
+    (diff old new)
+    (kill-buffer old)
+    (kill-buffer new)))
