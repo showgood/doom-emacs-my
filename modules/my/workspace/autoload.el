@@ -22,7 +22,10 @@
   "create a term-mode buffer which belongs to current workspace (persp-mode)
    return the newly created buffer name"
   (interactive)
-  (+term/here)
+  (if (featurep! :term vterm)
+      (+vterm/here nil)
+      (+term/here))
+
   (let ( (term-name (format "%s-term" (+workspace-current-name)))
         )
     (rename-buffer term-name t)
