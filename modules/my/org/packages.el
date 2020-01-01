@@ -5,6 +5,7 @@
 (package! ox-gfm)
 (package! org-noter)
 (package! jupyter)
+(package! org-journal)
 
 ;; depends on  https://github.com/francoislaberge/diagrams to generate diagrams
 (package! ob-diagrams :recipe (:host github :repo "showgood/ob-diagrams"))
