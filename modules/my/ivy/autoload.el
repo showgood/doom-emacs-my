@@ -76,3 +76,12 @@ repository, then the corresponding root is used instead."
 ;;   (interactive)
 ;;   (ivy-set-display-transformer 'me/test-ivy 'me/ivy-transform-with-separator)
 ;;   (me/ivy-from-file "~/.doom.d/test.txt"))
+
+;;;###autoload
+(defun me/ivy-menu (file)
+  "nested ivy case. the file would act as menu where key is menu entry name and value is the target file.
+  Then upon select one entry from menu, it will call `me/ivy-from-file' to read that file and present all choices"
+  (interactive)
+  (ivy-read "options: " (me/read-lines file)
+            :action '(1
+                      ("o" (lambda (x) (me/ivy-from-file (me/get-value x me/ivy-separator)) "open file")))))
