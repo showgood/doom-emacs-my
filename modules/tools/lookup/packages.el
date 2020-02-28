@@ -22,11 +22,8 @@
     (package! counsel-dash :pin "370d5f6f14")))
 
 (when (featurep! +dictionary)
-  (if IS-MAC
-      (package! osx-dictionary :pin "1b79ff64c7")
-    (package! define-word :pin "d8c76d503b")
+    (package! sdcv :recipe (:host github :repo "manateelazycat/sdcv"))
     (package! powerthesaurus :pin "81a262ec0c")
     (package! request)
     (when (featurep! +offline)
-      (package! wordnut :pin "feac531404")
-      (package! synosaurus :pin "14d34fc92a"))))
+      (package! synosaurus :pin "14d34fc92a")))

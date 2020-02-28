@@ -182,21 +182,33 @@ See https://github.com/magit/ghub/issues/81"
 ;;
 ;;; Dictionary integration
 
-(use-package! define-word
-  :when (featurep! +dictionary)
-  :unless IS-MAC
-  :defer t
-  :config
-  (setq define-word-displayfn-alist
-        (cl-loop for (service . _) in define-word-services
-                 collect (cons service #'+eval-display-results-in-popup))))
-
-
 (when (featurep! +dictionary)
   (define-key! text-mode-map
     [remap +lookup/definition] #'+lookup/dictionary-definition
     [remap +lookup/references] #'+lookup/synonyms))
 
-
 ;;;###package synosaurus
 (setq synosaurus-choose-method 'default) ; use ivy/helm instead of ido
+
+(use-package! sdcv
+  :when (featurep! +dictionary)
+  :config
+  (setq sdcv-say-word-p t)               ;say word after translation
+  (setq sdcv-dictionary-data-dir "/Users/showgood/dict") ;setup directory of stardict dictionary
+  (setq sdcv-dictionary-simple-list    ;setup dictionary list for simple search
+      '("简明英汉字典增强版"
+        "懒虫简明汉英词典"))
+  (setq sdcv-dictionary-complete-list     ;setup dictionary list for complete search
+      '(
+        "简明英汉字典增强版"
+        "牛津英语习语词典"
+        "牛津短语动词词典"
+        "牛津同义词词词典"
+        "牛津英语搭配词典"
+        "懒虫简明汉英词典"
+        "牛津英汉双解美化版"
+        "21世纪英汉汉英双向词典"
+        "American_Idioms 2nd Ed"
+        "American Heritage Dictionary 4th Ed. (En-En)"
+        ))
+  )
