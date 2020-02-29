@@ -46,20 +46,21 @@
         ;; messages for every word when checking the entire buffer
         flyspell-issue-message-flag nil)
 
-  (add-hook! '(org-mode-hook
-               markdown-mode-hook
-               TeX-mode-hook
-               rst-mode-hook
-               mu4e-compose-mode-hook
-               message-mode-hook
-               git-commit-mode-hook)
-             #'flyspell-mode)
+  ;; showgood: disable flyspell by default, enable it manually
+  ;; (add-hook! '(org-mode-hook
+  ;;              markdown-mode-hook
+  ;;              TeX-mode-hook
+  ;;              rst-mode-hook
+  ;;              mu4e-compose-mode-hook
+  ;;              message-mode-hook
+  ;;              git-commit-mode-hook)
+  ;;            #'flyspell-mode)
 
-  (when (featurep! +everywhere)
-    (add-hook! '(yaml-mode-hook
-                 conf-mode-hook
-                 prog-mode-hook)
-               #'flyspell-prog-mode))
+  ;; (when (featurep! +everywhere)
+  ;;   (add-hook! '(yaml-mode-hook
+  ;;                conf-mode-hook
+  ;;                prog-mode-hook)
+  ;;              #'flyspell-prog-mode))
 
   (add-hook! 'flyspell-mode-hook
     (defun +spell-inhibit-duplicate-detection-maybe-h ()
