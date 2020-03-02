@@ -29,6 +29,9 @@ This can be a single company backend or a list thereof. It can be anything
   :config
   (when (and lsp-auto-configure lsp-auto-require-clients)
     (require 'lsp-clients))
+  (setq lsp-clients-clangd-args '("-j=4" "--background-index" "--log=error"))
+  (setq lsp-idle-delay 1.0)
+  (setq lsp-prefer-capf t)
 
   (set-lookup-handlers! 'lsp-mode :async t
     :documentation 'lsp-describe-thing-at-point
@@ -107,39 +110,39 @@ This also logs the resolved project root, if found, so we know where we are."
   (add-hook! 'kill-emacs-hook (setq lsp-restart 'ignore)))
 
 
-(use-package! lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :init
-  (add-hook! 'lsp-ui-mode-hook
-    (defun +lsp-init-ui-flycheck-or-flymake-h ()
-      "Sets up flymake-mode or flycheck-mode, depending on `lsp-prefer-flymake'."
-      (cond ((eq :none lsp-prefer-flymake))
-            (lsp-prefer-flymake
-             (lsp--flymake-setup))
-            ((require 'flycheck nil t)
-             (require 'lsp-ui-flycheck)
-             (let ((old-checker flycheck-checker))
-               (lsp-ui-flycheck-enable t)
-               (when old-checker
-                 (setq-local flycheck-checker old-checker)
-                 (kill-local-variable 'flycheck-check-syntax-automatically)))))))
+;; (use-package! lsp-ui
+;;   :hook (lsp-mode . lsp-ui-mode)
+;;   :init
+;;   (add-hook! 'lsp-ui-mode-hook
+;;     (defun +lsp-init-ui-flycheck-or-flymake-h ()
+;;       "Sets up flymake-mode or flycheck-mode, depending on `lsp-prefer-flymake'."
+;;       (cond ((eq :none lsp-prefer-flymake))
+;;             (lsp-prefer-flymake
+;;              (lsp--flymake-setup))
+;;             ((require 'flycheck nil t)
+;;              (require 'lsp-ui-flycheck)
+;;              (let ((old-checker flycheck-checker))
+;;                (lsp-ui-flycheck-enable t)
+;;                (when old-checker
+;;                  (setq-local flycheck-checker old-checker)
+;;                  (kill-local-variable 'flycheck-check-syntax-automatically)))))))
 
-  :config
-  (setq lsp-prefer-flymake nil
-        lsp-ui-doc-max-height 8
-        lsp-ui-doc-max-width 35
-        lsp-ui-sideline-ignore-duplicate t
-        ;; lsp-ui-doc is redundant with and more invasive than
-        ;; `+lookup/documentation'
-        lsp-ui-doc-enable nil
-        ;; Don't show symbol definitions in the sideline. They are pretty noisy,
-        ;; and there is a bug preventing Flycheck errors from being shown (the
-        ;; errors flash briefly and then disappear).
-        lsp-ui-sideline-show-hover nil)
+;;   :config
+;;   (setq lsp-prefer-flymake nil
+;;         lsp-ui-doc-max-height 8
+;;         lsp-ui-doc-max-width 35
+;;         lsp-ui-sideline-ignore-duplicate t
+;;         ;; lsp-ui-doc is redundant with and more invasive than
+;;         ;; `+lookup/documentation'
+;;         lsp-ui-doc-enable nil
+;;         ;; Don't show symbol definitions in the sideline. They are pretty noisy,
+;;         ;; and there is a bug preventing Flycheck errors from being shown (the
+;;         ;; errors flash briefly and then disappear).
+;;         lsp-ui-sideline-show-hover nil)
 
-  (set-lookup-handlers! 'lsp-ui-mode :async t
-    :definition 'lsp-ui-peek-find-definitions
-    :references 'lsp-ui-peek-find-references))
+;;   (set-lookup-handlers! 'lsp-ui-mode :async t
+;;     :definition 'lsp-ui-peek-find-definitions
+;;     :references 'lsp-ui-peek-find-references))
 
 
 (use-package! company-lsp

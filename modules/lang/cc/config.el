@@ -245,17 +245,17 @@ This is ignored by ccls.")
 
 
 (use-package! ccls
-  :when (featurep! +lsp)
-  :after lsp
-  :init
-  (after! projectile
-    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
-    (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
-    (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json"))
-  :config
-  (when IS-MAC
-    (setq ccls-initialization-options
-          `(:clang ,(list :extraArgs ["-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
-                                      "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
-                                      "-isystem/usr/local/include"]
-                          :resourceDir (string-trim (shell-command-to-string "clang -print-resource-dir")))))))
+:when (featurep! +lsp)
+:after lsp
+:init
+(after! projectile
+  (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
+  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
+  (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json"))
+:config
+(when IS-MAC
+  (setq ccls-initialization-options
+        `(:clang ,(list :extraArgs ["-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
+                                    "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+                                    "-isystem/usr/local/include"]
+                        :resourceDir (string-trim (shell-command-to-string "clang -print-resource-dir")))))))

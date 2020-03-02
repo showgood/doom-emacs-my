@@ -51,3 +51,4 @@
     (doom-initialize-packages)
   (doom-initialize-core)
   (doom-initialize-modules))
+(put 'narrow-to-region 'disabled nil)
