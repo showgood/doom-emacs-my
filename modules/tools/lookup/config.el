@@ -192,7 +192,43 @@ See https://github.com/magit/ghub/issues/81"
 
 (use-package! sdcv
   :when (featurep! +dictionary)
+  :custom-face (sdcv-tooltip-face ((t (:foreground "black" :background "gainsboro"))))
+  :custom-face (internal-border ((t (:background "LightGrey"))))
+  :bind (("C-c D" . sdcv-search-pointer)
+         ("C-c d" . sdcv-search-pointer+))
+  :bind (:map sdcv-mode-map
+              ("s" . outline-show-entry)
+              ("h" . outline-hide-entry)
+              ("n" . sdcv-next-dictionary)
+              ("p" . sdcv-previous-dictionary)
+              ("l" . recenter-top-bottom)
+              ("<tab>" . cyf-toggle-sdcv-entry)
+              ("<S-iso-lefttab>" . cyf-toggle-sdcv-all) ;; <S-tab>
+              )
+  :hook (sdcv-mode . visual-line-mode)
   :config
+  ;; Helper for toggling entry
+  (defun cyf-toggle-sdcv-entry ()
+    "Toggle entry for sdcv-mode."
+    (interactive)
+    (if (get 'cyf-toggle-sdcv-entry 'state)
+        (progn
+          (outline-hide-entry)
+          (put 'cyf-toggle-sdcv-entry 'state nil))
+      (progn
+        (outline-show-entry)
+        (put 'cyf-toggle-sdcv-entry 'state t))))
+  ;; Helper for toggling all trees
+  (defun cyf-toggle-sdcv-all ()
+    "Toggle entry for sdcv-mode."
+    (interactive)
+    (if (get 'cyf-toggle-sdcv-all 'state)
+        (progn
+          (outline-hide-body)
+          (put 'cyf-toggle-sdcv-all 'state nil))
+      (progn
+        (outline-show-all)
+        (put 'cyf-toggle-sdcv-all 'state t))))
   (setq sdcv-say-word-p t)               ;say word after translation
   (setq sdcv-dictionary-data-dir "/Users/showgood/dict") ;setup directory of stardict dictionary
   (setq sdcv-dictionary-simple-list    ;setup dictionary list for simple search
@@ -212,3 +248,66 @@ See https://github.com/magit/ghub/issues/81"
         "American Heritage Dictionary 4th Ed. (En-En)"
         ))
   )
+
+;; (use-package sdcv
+;;   ;; Download from https://github.com/manateelazycat/sdcv (Not pluskid's sdcv-mode.el)
+;;   ;; Dictionaries downloaded from http://download.huzheng.org/zh_CN/
+;;   ;; See also https://wiki.archlinux.org/index.php/Sdcv
+;;   :straight (:host github :repo "manateelazycat/sdcv"
+;;                    :fork (:host github :repo "yiufung/sdcv"))
+;;   :straight posframe
+;;   :load-path (lambda () (expand-file-name "elisp" my-emacs-conf-directory))
+;;   :commands (sdcv-search-pointer sdcv-search-pointer+ sdcv-search-input sdcv-search-input+)
+;;   :custom-face (sdcv-tooltip-face ((t (:foreground "black" :background "gainsboro"))))
+;;   :custom-face (internal-border ((t (:background "LightGrey"))))
+;;   :bind (("C-c D" . sdcv-search-pointer)
+;;          ("C-c d" . sdcv-search-pointer+))
+;;   :bind (:map sdcv-mode-map
+;;               ("s" . outline-show-entry)
+;;               ("h" . outline-hide-entry)
+;;               ("n" . sdcv-next-dictionary)
+;;               ("p" . sdcv-previous-dictionary)
+;;               ("l" . recenter-top-bottom)
+;;               ("<tab>" . cyf-toggle-sdcv-entry)
+;;               ("<S-iso-lefttab>" . cyf-toggle-sdcv-all) ;; <S-tab>
+;;               )
+;;   :hook (sdcv-mode . visual-line-mode)
+;;   :config
+;;   ;; Helper for toggling entry
+;;   (defun cyf-toggle-sdcv-entry ()
+;;     "Toggle entry for sdcv-mode."
+;;     (interactive)
+;;     (if (get 'cyf-toggle-sdcv-entry 'state)
+;;         (progn
+;;           (outline-hide-entry)
+;;           (put 'cyf-toggle-sdcv-entry 'state nil))
+;;       (progn
+;;         (outline-show-entry)
+;;         (put 'cyf-toggle-sdcv-entry 'state t))))
+;;   ;; Helper for toggling all trees
+;;   (defun cyf-toggle-sdcv-all ()
+;;     "Toggle entry for sdcv-mode."
+;;     (interactive)
+;;     (if (get 'cyf-toggle-sdcv-all 'state)
+;;         (progn
+;;           (outline-hide-body)
+;;           (put 'cyf-toggle-sdcv-all 'state nil))
+;;       (progn
+;;         (outline-show-all)
+;;         (put 'cyf-toggle-sdcv-all 'state t))))
+;;   ;; set dictionary path
+;;   (setq sdcv-dictionary-simple-list '("懒虫简明英汉词典")
+;;         sdcv-dictionary-complete-list '(
+;;                                         "Roget's II The New Thesaurus 3th Ed. (En-En)"
+;;                                         "Webster's Revised Unabridged Dictionary (1913)"
+;;                                         "牛津高阶英汉双解"
+;;                                         "Oxford Advanced Learner's Dictionary"
+;;                                         "牛津现代英汉双解词典"
+;;                                         "懒虫简明英汉词典"
+;;                                         "jmdict-ja-en"
+;;                                         "WordNet"
+;;                                         )
+;;         sdcv-tooltip-border-width 5
+;;         sdcv-tooltip-timeout 5
+;;         sdcv-dictionary-data-dir (expand-file-name "stardict" my-private-conf-directory))
+;;   )
