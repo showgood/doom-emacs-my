@@ -2,5 +2,9 @@
 # name: Org template
 # --
 #+TITLE: ${1:`(file-name-base buffer-file-name)`}
+#+DATE:  `(format-time-string "%Y-%m-%d")`
+#+OPTIONS: num:nil toc:nil
+#+OPTIONS: ^:nil
+
 
 $0
