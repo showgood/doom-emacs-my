@@ -513,8 +513,10 @@ files, so we replace calls to `pp' with the much faster `prin1'."
               ws-butler-mode
               auto-composition-mode
               undo-tree-mode
-              highlight-indent-guides-mode
-              hl-fill-column-mode))
+              highlight-indent-guides-mode))
+              ;; I dislike the hl-fill-column-mode since with my theme
+              ;; the fill indicator makes it not be able to see that character
+              ;; hl-fill-column-mode))
   (defun doom-buffer-has-long-lines-p ()
     ;; HACK Fix #2183: `so-long-detected-long-line-p' tries to parse comment
     ;;      syntax, but in some buffers comment state isn't initialized, leading
