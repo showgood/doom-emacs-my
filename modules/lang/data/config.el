@@ -2,9 +2,9 @@
 
 (use-package! nxml-mode
   :mode "\\.p\\(?:list\\|om\\)\\'" ; plist, pom
-  :mode "\\.xs\\(?:d\\|lt\\)\\'"   ; xslt, xsd
+  ;; :mode "\\.xs\\(?:d\\|lt\\)\\'"   ; xslt, xsd
   :mode "\\.rss\\'"
-  :magic "<\\?xml"
+  ;; :magic "<\\?xml"
   :config
   (setq nxml-slash-auto-complete-flag t
         nxml-auto-insert-xml-declaration-flag t)
