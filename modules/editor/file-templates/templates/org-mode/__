@@ -17,4 +17,8 @@
           )) " " )
 `}
 
+#+DATE:  `(format-time-string "%Y-%m-%d")`
+#+OPTIONS: num:nil toc:nil
+#+OPTIONS: ^:nil
+
 $0
