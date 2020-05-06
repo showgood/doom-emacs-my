@@ -898,8 +898,9 @@ compelling reason, so..."
         :m "]c"  #'org-babel-next-src-block
         :m "[c"  #'org-babel-previous-src-block
         :n "gQ"  #'org-fill-paragraph
-        :n "gr"  #'org-ctrl-c-ctrl-c
-        :n "gR"  #'org-babel-execute-buffer
+        ;; disable for evil-replace-with-register
+        ;; :n "gr"  #'org-ctrl-c-ctrl-c
+        ;; :n "gR"  #'org-babel-execute-buffer
         ;; sensible vim-esque folding keybinds
         :n "za"  #'+org/toggle-fold
         :n "zA"  #'org-shifttab
